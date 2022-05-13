@@ -57,8 +57,9 @@
                             <th class="text-center">#</th>
                             <th class="text-center">Brand Name</th>
                             <th class="text-center">Brand Image</th>
-                            
+                            <th class="text-center">Creator</th>
                             <th class="text-center">Status</th>
+                            <th class="text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -78,7 +79,6 @@
                                         <div class="badge badge-danger">Inactive</div>
                                     @endif
                                 </td>
-                                <td class="text-center"></td>
                                 <td class="text-center">
                                     <a href="{{route('admin.brands.edit', $brand->id)}}" class="btn btn-info btn-sm">
                                         <i class="fas fa-edit"></i>
