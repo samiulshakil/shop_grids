@@ -15,6 +15,7 @@ use App\Http\Controllers\PagesController;
 use App\Http\Controllers\Backend\MenuController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\BrandController;
+use App\Http\Controllers\Backend\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -117,8 +118,9 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
             Route::name('admin.')->group(function () {
                 Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
-                //roles and users
+                //Backend route
                 Route::resource('brands', BrandController::class);
+                Route::resource('categories', CategoryController::class);
                                 
         });
     });

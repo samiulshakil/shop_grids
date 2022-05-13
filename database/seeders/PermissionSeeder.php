@@ -174,7 +174,7 @@ class PermissionSeeder extends Seeder
             'slug' => 'admin.settings.index',
         ]);
 
-        //Page Management
+        //Brand Management
         $moduleBrands = Module::create(['name'=> 'Brand Management']);
 
         Permission::create([
@@ -199,6 +199,33 @@ class PermissionSeeder extends Seeder
             'module_id' => $moduleBrands->id,
             'name' => 'Delete Brand',
             'slug' => 'admin.brands.destroy',
+        ]);
+
+        //Category Management
+        $moduleCategories = Module::create(['name'=> 'Category Management']);
+
+        Permission::create([
+            'module_id' => $moduleCategories->id,
+            'name' => 'Access Category',
+            'slug' => 'admin.categories.index',
+        ]);
+
+        Permission::create([
+            'module_id' => $moduleCategories->id,
+            'name' => 'Create Category',
+            'slug' => 'admin.categories.create',
+        ]);
+
+        Permission::create([
+            'module_id' => $moduleCategories->id,
+            'name' => 'Edit Category',
+            'slug' => 'admin.categories.edit',
+        ]);
+
+        Permission::create([
+            'module_id' => $moduleCategories->id,
+            'name' => 'Delete Category',
+            'slug' => 'admin.categories.destroy',
         ]);
     }
 }

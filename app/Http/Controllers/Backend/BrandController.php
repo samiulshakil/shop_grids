@@ -140,7 +140,7 @@ class BrandController extends Controller
                 unlink($image);
             }
             $brand->delete();
-            Toastr::success('Successfully Role Deleted', '', ["positionClass" => "toast-top-right"]);
+            Toastr::success('Successfully Brand Deleted', '', ["positionClass" => "toast-top-right"]);
         }else{
             Toastr::warning('No Row Found on database', '', ["positionClass" => "toast-top-right"]);
         }
