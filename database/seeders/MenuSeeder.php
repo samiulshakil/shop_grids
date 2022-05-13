@@ -110,5 +110,24 @@ class MenuSeeder extends Seeder
             'url' => "/admin/settings/general", 
             'icon_class' => 'pe-7s-settings'
         ]);
+
+        
+        MenuItem::updateOrCreate([
+            'menu_id' => $menu->id, 
+            'type' => 'divider', 
+            'parent_id' => null, 
+            'order' => 11, 
+            'divider_title' => 'Backend'
+        ]);
+
+        MenuItem::updateOrCreate([
+            'menu_id' => $menu->id, 
+            'type' => 'item', 
+            'parent_id' => null, 
+            'order' => 12, 
+            'title' => 'Brands', 
+            'icon_class' => 'pe-7s-box1',
+            'url' => "/admin/brands", 
+        ]);
     }
 }

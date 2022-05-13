@@ -173,5 +173,32 @@ class PermissionSeeder extends Seeder
             'name' => 'Access Setting',
             'slug' => 'admin.settings.index',
         ]);
+
+        //Page Management
+        $moduleBrands = Module::create(['name'=> 'Brand Management']);
+
+        Permission::create([
+            'module_id' => $moduleBrands->id,
+            'name' => 'Access Brand',
+            'slug' => 'admin.brands.index',
+        ]);
+
+        Permission::create([
+            'module_id' => $moduleBrands->id,
+            'name' => 'Create Brand',
+            'slug' => 'admin.brands.create',
+        ]);
+
+        Permission::create([
+            'module_id' => $moduleBrands->id,
+            'name' => 'Edit Brand',
+            'slug' => 'admin.brands.edit',
+        ]);
+
+        Permission::create([
+            'module_id' => $moduleBrands->id,
+            'name' => 'Delete Brand',
+            'slug' => 'admin.brands.destroy',
+        ]);
     }
 }

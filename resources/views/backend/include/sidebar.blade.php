@@ -29,9 +29,9 @@
             </button>
         </span>
     </div>    
-    <div class="scrollbar-sidebar">
+    <div class="scrollbar-sidebar overflow-auto">
         <div class="app-sidebar__inner">
-            <ul class="vertical-nav-menu">
+            <ul class="vertical-nav-menu"> 
                 <x-backend-sidebar/>
             </ul>
         </div>
