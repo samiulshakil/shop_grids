@@ -139,5 +139,15 @@ class MenuSeeder extends Seeder
             'icon_class' => 'pe-7s-box2',
             'url' => "/admin/categories", 
         ]);
+
+        MenuItem::updateOrCreate([
+            'menu_id' => $menu->id, 
+            'type' => 'item', 
+            'parent_id' => null, 
+            'order' => 14, 
+            'title' => 'Sub Category', 
+            'icon_class' => 'pe-7s-box2',
+            'url' => "/admin/subcategories", 
+        ]);
     }
 }

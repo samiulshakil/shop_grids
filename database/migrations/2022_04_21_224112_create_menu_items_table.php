@@ -26,8 +26,7 @@ return new class extends Migration
             $table->string('icon_class')->nullable();
             $table->foreign('menu_id')
                 ->references('id')
-                ->on('menus')
-                ->onDelete('cascade');
+                ->on('menus');
             $table->timestamps();
         });
     }

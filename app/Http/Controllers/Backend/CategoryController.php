@@ -100,7 +100,7 @@ class CategoryController extends Controller
      */
     public function update(CategoryUpdateFormRequest $request, $id)
     {
-        $category = Category::find($id);
+        $category = Category::findOrFail($id);
         if ($request->hasfile('category_image')) {
             if ($category->category_image != NULL) {
                 unlink($category->category_image);
@@ -131,7 +131,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::find($id);
+        $category = Category::findOrFail($id);
         if ($category) {
             $image = $category->category_image;
             if ($image != NULL) {

@@ -3,7 +3,6 @@
 @section('title', 'Categories')
 
 @push('css')
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css" rel="stylesheet" />
     <style>
         .dropify-wrapper .dropify-message p {
@@ -93,13 +92,10 @@
 @endsection
 
 @push('js')
-
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"></script>
 <script>
     $(document).ready(function() {
         $('.dropify').dropify();
-        $('.js-example-basic-single').select2();
     });
 </script>
 

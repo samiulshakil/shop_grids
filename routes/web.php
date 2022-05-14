@@ -16,6 +16,7 @@ use App\Http\Controllers\Backend\MenuController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\SubCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -121,6 +122,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
                 //Backend route
                 Route::resource('brands', BrandController::class);
                 Route::resource('categories', CategoryController::class);
+                Route::resource('subcategories', SubCategoryController::class);
                                 
         });
     });

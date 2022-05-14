@@ -227,5 +227,35 @@ class PermissionSeeder extends Seeder
             'name' => 'Delete Category',
             'slug' => 'admin.categories.destroy',
         ]);
+
+                //Sub Category Management
+                $moduleSubCategories = Module::create(['name'=> 'Sub Category Management']);
+
+                Permission::create([
+                    'module_id' => $moduleSubCategories->id,
+                    'name' => 'Access Sub Category',
+                    'slug' => 'admin.subcategories.index',
+                ]);
+        
+                Permission::create([
+                    'module_id' => $moduleSubCategories->id,
+                    'name' => 'Create Sub Category',
+                    'slug' => 'admin.subcategories.create',
+                ]);
+        
+                Permission::create([
+                    'module_id' => $moduleSubCategories->id,
+                    'name' => 'Edit Sub Category',
+                    'slug' => 'admin.subcategories.edit',
+                ]);
+        
+                Permission::create([
+                    'module_id' => $moduleSubCategories->id,
+                    'name' => 'Delete Sub Category',
+                    'slug' => 'admin.subcategories.destroy',
+                ]);
+
+
+
     }
 }
