@@ -99,8 +99,8 @@ class SubCategoryController extends Controller
             'category_id' => $request->category_id,
             'sub_category_name' => $request->sub_category_name,
             'sub_category_slug' => Str::slug($request->sub_category_name),
-            'sub_category_creator' =>Auth::user()->role->name,
-            'sub_category_status' =>$request->filled('sub_category_status'),
+            'sub_category_creator' => Auth::user()->role->name,
+            'sub_category_status' => $request->filled('sub_category_status'),
         ]);
 
         Toastr::success('Successfully Sub Category Updated', '', ["positionClass" => "toast-top-right"]);
@@ -115,6 +115,7 @@ class SubCategoryController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('admin.subcategories.destroy');
         $sub_category = SubCategory::findOrFail($id);
         if ($sub_category) {
             $sub_category->delete();

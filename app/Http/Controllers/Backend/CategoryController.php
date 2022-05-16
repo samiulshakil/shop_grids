@@ -131,6 +131,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('admin.categories.destroy');
         $category = Category::findOrFail($id);
         if ($category) {
             $image = $category->category_image;

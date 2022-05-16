@@ -17,6 +17,7 @@ use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
+use App\Http\Controllers\Backend\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -123,6 +124,16 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
                 Route::resource('brands', BrandController::class);
                 Route::resource('categories', CategoryController::class);
                 Route::resource('subcategories', SubCategoryController::class);
+
+                //Products Route
+                Route::get('products', [ProductController::class, 'index'])->name('products.index');
+                Route::get('products/create', [ProductController::class, 'create'])->name('products.create');
+                Route::post('products/store', [ProductController::class, 'store'])->name('products.store');
+                Route::get('products/show/{id}', [ProductController::class, 'show'])->name('products.show');
+                Route::get('products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
+                Route::post('products/update/{id}', [ProductController::class, 'update'])->name('products.update');
+                Route::post('products/destroy/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+                Route::post('products/subcategory/list', [ProductController::class, 'subCategoryList'])->name('subcategory.list');
                                 
         });
     });

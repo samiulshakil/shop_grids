@@ -133,6 +133,7 @@ class BrandController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('admin.brands.destroy');
         $brand = Brand::find($id);
         if ($brand) {
             $image = $brand->brand_image;

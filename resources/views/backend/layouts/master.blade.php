@@ -43,5 +43,8 @@
     <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
     {!! Toastr::message() !!}
     @stack('js')
+    <script>
+        let _token = "{{csrf_token()}}";
+   </script>
 </body>
 </html>

@@ -255,6 +255,33 @@ class PermissionSeeder extends Seeder
                     'slug' => 'admin.subcategories.destroy',
                 ]);
 
+                //Products Management
+                $moduleProducts = Module::create(['name'=> 'Product Management']);
+
+                Permission::create([
+                    'module_id' => $moduleProducts->id,
+                    'name' => 'Access Product',
+                    'slug' => 'admin.products.index',
+                ]);
+        
+                Permission::create([
+                    'module_id' => $moduleProducts->id,
+                    'name' => 'Create Product',
+                    'slug' => 'admin.products.create',
+                ]);
+        
+                Permission::create([
+                    'module_id' => $moduleProducts->id,
+                    'name' => 'Edit Product',
+                    'slug' => 'admin.products.edit',
+                ]);
+        
+                Permission::create([
+                    'module_id' => $moduleProducts->id,
+                    'name' => 'Delete Product',
+                    'slug' => 'admin.products.destroy',
+                ]);
+
 
 
     }

@@ -46,7 +46,7 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             </p>
-                        @enderror
+                            @enderror
                             <div class="form-group">
                               <label for="sub_category_name">Sub Category Name</label>
                               <input type="text" id="sub_category_name" name="sub_category_name" placeholder="Sub Category Name" class="form-control 
