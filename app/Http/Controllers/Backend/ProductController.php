@@ -40,9 +40,8 @@ class ProductController extends Controller
     {
         Gate::authorize('admin.products.create');
         $categories = Category::all();
-        $sub_categories = SubCategory::all();
         $brands = Brand::all();
-        return view('backend.pages.products.create', compact('categories', 'sub_categories', 'brands'));   
+        return view('backend.pages.products.create', compact('categories','brands'));   
     }
 
     /**
@@ -128,9 +127,13 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+        Gate::authorize('admin.products.edit');
+        $categories = Category::all();
+        $brands = Brand::all();
+        $product = Product::where('product_slug', $slug)->firstOrFail();
+        return view('backend.pages.products.edit', compact('categories','brands', 'product'));
     }
 
     /**
@@ -140,9 +143,50 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateFormRequest $request)
     {
-        //
+        $id = $request->id;
+        $old_img = $request->old_img;
+
+        Product::where('id', $id)->update([
+            'brand_id' => $request->brand_id,
+            'category_id' => $request->category_id,
+            'subcategory_id' => $request->subcategory_id,
+            'user_id' => Auth::id(),
+            'product_name' => $request->product_name,
+            'product_slug' => Str::slug($request->product_name),
+            'product_code' => $request->product_code,
+            'product_qty' => $request->product_qty,
+            'product_tags' => $request->product_tags,
+            'product_size' => $request->product_size,
+            'product_color' => $request->product_color,
+            'selling_price' => $request->selling_price,
+            'discount_price' => $request->discount_price, 
+            'short_description' => $request->short_description,
+            'long_description'=> $request->long_description,
+            'key_features' => $request->key_features,
+            'specifications' => $request->specifications,
+            'hot_deals' => $request->filled('hot_deals'),
+            'featured' => $request->filled('featured'),
+            'special_offer' => $request->filled('special_offer'),
+            'special_deals' => $request->filled('special_deals'),
+            'product_creator' => Auth::user()->role->name,
+            'product_status' => $request->filled('product_status'),
+            'updated_at' => Carbon::now(),
+        ]);
+
+        if ($request->hasfile('product_thumbnail')) {
+            $image = $request->file('product_thumbnail');
+            $fileName = 'products-'. rand() .'.' .$image->extension('product_thumbnail');
+            $upload_path = 'uploads/products/thumbnail/';
+            $img_url = $upload_path.$fileName;
+            $image->move($upload_path, $fileName);
+            $product->product_thumbnail = $img_url;
+            $product->save();
+        }
+
+        Toastr::success('Successfully Product Updated', '', ["positionClass" => "toast-top-right"]);
+        return redirect()->route('admin.products.index');
     }
 
     /**
@@ -153,7 +197,16 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Gate::authorize('admin.products.destroy');
+        $product = Product::findOrFail($id);
+        if ($product) {
+            $product->images()->delete();
+            $product->delete();
+            Toastr::success('Successfully Product Deleted', '', ["positionClass" => "toast-top-right"]);
+        }else{
+            Toastr::warning('No Row Found on database', '', ["positionClass" => "toast-top-right"]);
+        }
+        return redirect()->route('admin.products.index');
     }
 
     public function subCategoryList(Request $request)

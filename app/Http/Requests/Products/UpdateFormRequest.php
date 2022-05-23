@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Products;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class UpdateFormRequest extends FormRequest
 {
@@ -13,7 +14,8 @@ class UpdateFormRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        Gate::authorize('admin.products.edit');
+        return true;
     }
 
     /**
@@ -24,7 +26,20 @@ class UpdateFormRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'category_id'=>'required',
+            'product_name'=>'required',
+            'product_code'=>'required',
+            'product_qty'=>'required',
+            'product_tags'=>'required',
+            'product_color'=>'required',
+            'product_thumbnail'=>'nullable',
+            'multi_image'=>'nullable',
+            'selling_price'=>'required',
+            'discount_price'=>'required',
+            'short_description'=>'required',
+            'long_description'=>'required',
+            'key_features'=>'required',
+            'specifications'=>'required',
         ];
     }
 }

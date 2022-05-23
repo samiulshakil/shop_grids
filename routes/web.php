@@ -129,10 +129,10 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
                 Route::get('products', [ProductController::class, 'index'])->name('products.index');
                 Route::get('products/create', [ProductController::class, 'create'])->name('products.create');
                 Route::post('products/store', [ProductController::class, 'store'])->name('products.store');
-                Route::get('products/show/{id}', [ProductController::class, 'show'])->name('products.show');
-                Route::get('products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
-                Route::post('products/update/{id}', [ProductController::class, 'update'])->name('products.update');
-                Route::post('products/destroy/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+                Route::get('products/show/{slug}', [ProductController::class, 'show'])->name('products.show');
+                Route::get('products/{slug}/edit', [ProductController::class, 'edit'])->name('products.edit');
+                Route::post('products/update', [ProductController::class, 'update'])->name('products.update');
+                Route::delete('products/destroy/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
                 Route::post('products/subcategory/list', [ProductController::class, 'subCategoryList'])->name('subcategory.list');
                                 
         });
