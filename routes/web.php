@@ -18,6 +18,7 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\CouponController;
 
 /*
 |--------------------------------------------------------------------------
@@ -134,6 +135,15 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
                 Route::post('products/update', [ProductController::class, 'update'])->name('products.update');
                 Route::delete('products/destroy/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
                 Route::post('products/subcategory/list', [ProductController::class, 'subCategoryList'])->name('subcategory.list');
+
+                //Coupons Route
+                Route::get('coupons', [CouponController::class, 'index'])->name('coupons.index');
+                Route::get('coupons/create', [CouponController::class, 'create'])->name('coupons.create');
+                Route::post('coupons/store', [CouponController::class, 'store'])->name('coupons.store');
+                Route::get('coupons/show/{slug}', [CouponController::class, 'show'])->name('coupons.show');
+                Route::get('coupons/{slug}/edit', [CouponController::class, 'edit'])->name('coupons.edit');
+                Route::post('coupons/update', [CouponController::class, 'update'])->name('coupons.update');
+                Route::delete('coupons/destroy/{id}', [CouponController::class, 'destroy'])->name('coupons.destroy');
                                 
         });
     });

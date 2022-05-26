@@ -282,6 +282,33 @@ class PermissionSeeder extends Seeder
                     'slug' => 'admin.products.destroy',
                 ]);
 
+                //Coupons Management
+                $moduleCoupons = Module::create(['name'=> 'Coupon Management']);
+
+                Permission::create([
+                    'module_id' => $moduleCoupons->id,
+                    'name' => 'Access Coupon',
+                    'slug' => 'admin.coupons.index',
+                ]);
+        
+                Permission::create([
+                    'module_id' => $moduleCoupons->id,
+                    'name' => 'Create Coupon',
+                    'slug' => 'admin.coupons.create',
+                ]);
+        
+                Permission::create([
+                    'module_id' => $moduleCoupons->id,
+                    'name' => 'Edit Coupon',
+                    'slug' => 'admin.coupons.edit',
+                ]);
+        
+                Permission::create([
+                    'module_id' => $moduleCoupons->id,
+                    'name' => 'Delete Coupon',
+                    'slug' => 'admin.coupons.destroy',
+                ]);
+
 
 
     }

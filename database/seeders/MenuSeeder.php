@@ -159,5 +159,15 @@ class MenuSeeder extends Seeder
             'icon_class' => 'pe-7s-graph2',
             'url' => "/admin/products", 
         ]);
+
+        MenuItem::updateOrCreate([
+            'menu_id' => $menu->id, 
+            'type' => 'item', 
+            'parent_id' => null, 
+            'order' => 16, 
+            'title' => 'Coupon', 
+            'icon_class' => 'pe-7s-arc',
+            'url' => "/admin/coupons", 
+        ]);
     }
 }
