@@ -4,6 +4,7 @@ namespace App\Http\Requests\Products;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\Rule;
 
 class UpdateFormRequest extends FormRequest
 {
@@ -25,15 +26,18 @@ class UpdateFormRequest extends FormRequest
      */
     public function rules()
     {
+        $name = $this->request->get('product_name');
         return [
             'category_id'=>'required',
-            'product_name'=>'required',
+            'product_name'=>['required', Rule::unique('products')->ignore($name,'product_name')],
             'product_code'=>'required',
             'product_qty'=>'required',
             'product_tags'=>'required',
             'product_color'=>'required',
             'product_thumbnail'=>'nullable',
-            'multi_image'=>'nullable',
+            'image_one'=>'nullable',
+            'image_two'=>'nullable',
+            'image_three'=>'nullable',
             'selling_price'=>'required',
             'discount_price'=>'required',
             'short_description'=>'required',

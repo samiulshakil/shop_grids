@@ -58,7 +58,6 @@
                             <th class="text-center">Name</th>
                             <th class="text-center">Brand</th>
                             <th class="text-center">Category</th>
-                            <th class="text-center">User</th>
                             <th class="text-center">Quantity</th>
                             <th class="text-center">Price</th>
                             <th class="text-center">Thumbnail</th>
@@ -73,7 +72,6 @@
                                 <td class="text-center text-muted">{{ $product->product_name }}</td>
                                 <td class="text-center">{{ $product->brand->brand_name }}</td>
                                 <td class="text-center">{{ $product->category->category_name }}</td>
-                                <td class="text-center">{{ $product->user->name }}</td>
                                 <td class="text-center">{{ $product->product_qty }}</td>
                                 <td class="text-center">{{ $product->discount_price }}</td>
                                 <td class="text-center">

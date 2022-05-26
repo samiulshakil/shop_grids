@@ -66,7 +66,10 @@ class ProductController extends Controller
             'product_color' => $request->product_color,
             'selling_price' => $request->selling_price,
             'discount_price' => $request->discount_price,
-            'product_thambnail' => $request->product_thumbnail, 
+            'product_thumbnail' => $request->product_thumbnail,
+            'image_one' => $request->image_one,
+            'image_two' => $request->image_two,
+            'image_three' => $request->image_three,
             'short_description' => $request->short_description,
             'long_description'=> $request->long_description,
             'key_features' => $request->key_features,
@@ -90,21 +93,36 @@ class ProductController extends Controller
             $product->save();
         }
 
-        $images = $request->file('multi_image');
-
-        foreach ($images as $image) {
-            $fileName = 'products-'. rand() .'.' .$image->extension('product_thumbnail');
-            $upload_path = 'uploads/products/multi_image';
+        if ($request->hasfile('image_one')) {
+            $image_one = $request->file('image_one');
+            $fileName = 'products-'. rand() .'.' .$image_one->extension('image_one');
+            $upload_path = 'uploads/products/thumbnail/';
             $img_url = $upload_path.$fileName;
-            $image->move($upload_path, $fileName);
-    
-            MultiImage::create([
-                'product_id' => $product->id,
-                'product_slug' => $product->product_slug, 
-                'photo_name' => $img_url,
-                'created_at' => Carbon::now(),
-            ]);
+            $image_one->move($upload_path, $fileName);
+            $product->image_one = $img_url;
+            $product->save();
         }
+
+        if ($request->hasfile('image_two')) {
+            $image_two = $request->file('image_two');
+            $fileName = 'products-'. rand() .'.' .$image_two->extension('product_thumbnail');
+            $upload_path = 'uploads/products/thumbnail/';
+            $img_url = $upload_path.$fileName;
+            $image_two->move($upload_path, $fileName);
+            $product->image_two = $img_url;
+            $product->save();
+        }
+
+        if ($request->hasfile('image_three')) {
+            $image_three = $request->file('image_three');
+            $fileName = 'products-'. rand() .'.' .$image_three->extension('image_three');
+            $upload_path = 'uploads/products/thumbnail/';
+            $img_url = $upload_path.$fileName;
+            $image_three->move($upload_path, $fileName);
+            $product->image_three = $img_url;
+            $product->save();
+        }
+
 
         Toastr::success('Successfully Product Created', '', ["positionClass" => "toast-top-right"]);
         return redirect()->route('admin.products.index');
@@ -147,8 +165,12 @@ class ProductController extends Controller
     {
         $id = $request->id;
         $old_img = $request->old_img;
+        $old_one = $request->old_one;
+        $old_two = $request->old_two;
+        $old_three = $request->old_three;
+        $product = Product::where('id', $id)->firstOrFail();
 
-        Product::where('id', $id)->update([
+        $product->update([
             'brand_id' => $request->brand_id,
             'category_id' => $request->category_id,
             'subcategory_id' => $request->subcategory_id,
@@ -176,12 +198,46 @@ class ProductController extends Controller
         ]);
 
         if ($request->hasfile('product_thumbnail')) {
+            unlink($old_img);
             $image = $request->file('product_thumbnail');
             $fileName = 'products-'. rand() .'.' .$image->extension('product_thumbnail');
             $upload_path = 'uploads/products/thumbnail/';
             $img_url = $upload_path.$fileName;
             $image->move($upload_path, $fileName);
             $product->product_thumbnail = $img_url;
+            $product->save();
+        }
+
+        if ($request->hasfile('image_one')) {
+            unlink($old_one);
+            $image_one = $request->file('image_one');
+            $fileName = 'products-'. rand() .'.' .$image_one->extension('image_one');
+            $upload_path = 'uploads/products/thumbnail/';
+            $img_url = $upload_path.$fileName;
+            $image_one->move($upload_path, $fileName);
+            $product->image_one = $img_url;
+            $product->save();
+        }
+
+        if ($request->hasfile('image_two')) {
+            unlink($old_two);
+            $image_two = $request->file('image_two');
+            $fileName = 'products-'. rand() .'.' .$image_two->extension('image_two');
+            $upload_path = 'uploads/products/thumbnail/';
+            $img_url = $upload_path.$fileName;
+            $image_two->move($upload_path, $fileName);
+            $product->image_two = $img_url;
+            $product->save();
+        }
+
+        if ($request->hasfile('image_three')) {
+            unlink($old_three);
+            $image_three = $request->file('image_three');
+            $fileName = 'products-'. rand() .'.' .$image_three->extension('image_three');
+            $upload_path = 'uploads/products/thumbnail/';
+            $img_url = $upload_path.$fileName;
+            $image_three->move($upload_path, $fileName);
+            $product->image_three = $img_url;
             $product->save();
         }
 
@@ -199,8 +255,16 @@ class ProductController extends Controller
     {
         Gate::authorize('admin.products.destroy');
         $product = Product::findOrFail($id);
+        $thumbnail = $product->product_thumbnail;
+        $one = $product->image_one;
+        $two = $product->image_two;
+        $three = $product->image_three;
+
         if ($product) {
-            $product->images()->delete();
+            unlink($thumbnail);
+            unlink($one);
+            unlink($two);
+            unlink($three);
             $product->delete();
             Toastr::success('Successfully Product Deleted', '', ["positionClass" => "toast-top-right"]);
         }else{

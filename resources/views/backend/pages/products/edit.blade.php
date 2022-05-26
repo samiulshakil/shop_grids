@@ -66,6 +66,10 @@
             @csrf
             <input type="hidden" name="id" value="{{$product->id}}">
             <input type="hidden" name="old_img" value="{{$product->product_thumbnail}}">
+            <input type="hidden" name="old_one" value="{{$product->image_one}}">
+            <input type="hidden" name="old_two" value="{{$product->image_two}}">
+            <input type="hidden" name="old_three" value="{{$product->image_three}}">
+            <input type="hidden" name="slug" value="{{$product->product_slug}}">
             <div class="row">
                 <div class="col-md-12">
                     <div class="main-card mb-3 card">
@@ -269,12 +273,44 @@
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
-                                        <label for="multi_image">Select Multiple Image<span class="require_star"> *</span></label>
-                                        <input type="file" id="multi_image" data-show-errors="true" data-errors-position="outside"
+                                        <label for="image_one">Select Image One<span class="require_star"> *</span></label>
+                                        <input type="file" id="image_one" data-show-errors="true" data-errors-position="outside"
                                         data-allowed-file-extensions="jpg jpeg png svg webp gif" class="form-control dropi
-                                         @error('multi_image') is-invalid @enderror" name="multi_image[]" id="multi_image" multiple>
+                                         @error('image_one') is-invalid @enderror" name="image_one" data-default-file="{{asset($product->image_one)}}">
                                     </div>
-                                    @error('multi_image')
+                                    @error('image_one')
+                                    <p>
+                                        <span class="text-danger" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    </p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="image_two">Select Image Two<span class="require_star"> *</span></label>
+                                        <input type="file" id="image_two" data-show-errors="true" data-errors-position="outside"
+                                        data-allowed-file-extensions="jpg jpeg png svg webp gif" class="dropify form-control
+                                         @error('image_two') is-invalid @enderror" name="image_two" data-default-file="{{asset($product->image_two)}}">
+                                    </div>
+                                    @error('image_two')
+                                    <p>
+                                        <span class="text-danger" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    </p>
+                                    @enderror
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="image_three">Select Image Three<span class="require_star"> *</span></label>
+                                        <input type="file" id="image_three" data-show-errors="true" data-errors-position="outside"
+                                        data-allowed-file-extensions="jpg jpeg png svg webp gif" class="form-control
+                                         @error('image_three') is-invalid @enderror" name="image_three" data-default-file="{{asset($product->image_three)}}">
+                                    </div>
+                                    @error('image_three')
                                     <p>
                                         <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -421,7 +457,9 @@
     $(document).ready(function() {
         $('.dropify').dropify();
 
-        $('.dropi').dropify();
+        $('#image_one').dropify();
+        $('#image_two').dropify();
+        $('#image_three').dropify();
 
       });
 

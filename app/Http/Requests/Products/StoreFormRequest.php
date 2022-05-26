@@ -27,13 +27,15 @@ class StoreFormRequest extends FormRequest
     {
         return [
             'category_id'=>'required',
-            'product_name'=>'required',
+            'product_name'=>'required|unique:products',
             'product_code'=>'required',
             'product_qty'=>'required',
             'product_tags'=>'required',
             'product_color'=>'required',
             'product_thumbnail'=>'required',
-            'multi_image'=>'required',
+            'image_one'=>'required',
+            'image_two'=>'required',
+            'image_three'=>'required',
             'selling_price'=>'required',
             'discount_price'=>'required',
             'short_description'=>'required',

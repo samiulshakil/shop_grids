@@ -23,7 +23,7 @@ return new class extends Migration
             $table->foreign('category_id')->references('id')->on('categories');
             $table->foreign('subcategory_id')->references('id')->on('sub_categories');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('product_name',50)->unique(); 
+            $table->string('product_name',50); 
             $table->string('product_slug',50);
             $table->string('product_code',100);
             $table->string('product_qty');
@@ -32,7 +32,10 @@ return new class extends Migration
             $table->string('product_color',100);
             $table->string('selling_price');
             $table->string('discount_price');
-            $table->string('product_thumbnail',50)->nullable();
+            $table->string('product_thumbnail');
+            $table->string('image_one');
+            $table->string('image_two');
+            $table->string('image_three');
             $table->longText('short_description');
             $table->longText('long_description')->nullable();
             $table->longText('key_features');
