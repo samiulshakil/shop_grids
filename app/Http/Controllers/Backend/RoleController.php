@@ -22,7 +22,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-
+        Gate::authorize('admin.roles.index');
         $roles = Role::all();
         return view('backend.pages.roles.index', compact('roles'));
     }

@@ -91,6 +91,7 @@ class LoginController extends Controller
                 'role_id' => Role::where('slug','user')->first()->id,
                 'name' => $user->getName(),
                 'email' => $user->getEmail(),
+                'email_verified_at' => now(),
                 'status' => true
             ]);
             // upload images

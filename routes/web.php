@@ -63,7 +63,7 @@ Route::get('/login/{provider}', [LoginController::class, 'redirectToProvider'])-
 Route::get('/login/{provider}/callback', [LoginController::class, 'handleProviderCallback'])->name('login.callback');
 
 
-Route::middleware(['auth', 'isAdmin', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('admin')->group(function () {
             Route::name('admin.')->group(function () {
                 Route::get('/dashboard', DashboardController::class)->name('dashboard');
@@ -94,7 +94,7 @@ Route::middleware(['auth', 'isAdmin', 'verified'])->group(function () {
 });
 
 //Menu Route Group
-Route::middleware(['auth', 'isAdmin'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::prefix('admin/menus/{id}')->group(function () {
             Route::name('admin.menus.')->group(function () {
                  Route::get('builder', [MenuBuilderController::class, 'index'])->name('builder');
@@ -117,7 +117,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
 });
 
 //Route for Settings
-Route::middleware(['auth', 'isAdmin'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::prefix('admin/settings')->group(function () {
             Route::name('admin.settings.')->group(function () {
                  Route::get('general', [SettingController::class, 'general'])->name('general');
@@ -135,7 +135,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
 
 
 //Backend Route Group
-Route::middleware(['auth', 'isAdmin'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::prefix('admin')->group(function () {
             Route::name('admin.')->group(function () {
                 Route::get('/dashboard', DashboardController::class)->name('dashboard');

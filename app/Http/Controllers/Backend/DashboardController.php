@@ -15,7 +15,7 @@ class DashboardController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['auth', 'isAdmin', 'verified']);
+        $this->middleware(['auth', 'verified']);
     }
     /**
      * Handle the incoming request.
