@@ -21,6 +21,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\CouponController;
+use App\Http\Controllers\Frontend\WebsiteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,10 +34,11 @@ use App\Http\Controllers\Backend\CouponController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Frontend Routes Start
+Route::get('/', [WebsiteController::class, 'index'])->name('website.home');
 
+
+//email verified route start
 Route::get('/email/verify', function () {
     return view('auth.verify');
 })->middleware('auth')->name('verification.notice');
@@ -58,11 +60,12 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//laravel socialite
+//laravel socialite route
 Route::get('/login/{provider}', [LoginController::class, 'redirectToProvider'])->name('login.provider');
 Route::get('/login/{provider}/callback', [LoginController::class, 'handleProviderCallback'])->name('login.callback');
 
 
+// Backend Routes Start
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('admin')->group(function () {
             Route::name('admin.')->group(function () {
