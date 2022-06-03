@@ -102,6 +102,10 @@
                                             class="btn btn-info btn-sm">
                                             <i class="fas fa-edit"></i>
                                         </a>
+                                        <a href="{{ route('admin.products.show', $product->product_slug) }}"
+                                            class="btn btn-secondary btn-sm">
+                                            <i class="fas fa-eye" aria-hidden="true"></i>
+                                        </a>
                                         <button type="button" class="btn btn-danger btn-sm"
                                             onclick="deleteData({{ $product->id }})">
                                             <i class="fas fa-trash-alt"></i>

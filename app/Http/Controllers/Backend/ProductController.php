@@ -134,9 +134,11 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        Gate::authorize('admin.products.index');
+        $product = Product::with(['brand', 'category', 'subcategory'])->where('product_slug', $slug)->firstOrFail();
+        return view('backend.pages.products.show', compact('product'));
     }
 
     /**
@@ -274,6 +276,7 @@ class ProductController extends Controller
     }
 
     public function active($slug){
+        Gate::authorize('admin.products.edit');
         $product = Product::where('product_slug', $slug)->firstOrFail();
         $product->update([
             'product_status' => 1,
@@ -283,6 +286,7 @@ class ProductController extends Controller
     }
 
     public function inactive($slug){
+        Gate::authorize('admin.products.edit');
         $product = Product::where('product_slug', $slug)->firstOrFail();
         $product->update([
             'product_status' => 0,
