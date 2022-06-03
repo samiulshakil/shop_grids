@@ -273,6 +273,24 @@ class ProductController extends Controller
         return redirect()->route('admin.products.index');
     }
 
+    public function active($slug){
+        $product = Product::where('product_slug', $slug)->firstOrFail();
+        $product->update([
+            'product_status' => 1,
+        ]);
+        Toastr::success('Successfully Product Active', '', ["positionClass" => "toast-top-right"]);
+        return redirect()->route('admin.products.index');
+    }
+
+    public function inactive($slug){
+        $product = Product::where('product_slug', $slug)->firstOrFail();
+        $product->update([
+            'product_status' => 0,
+        ]);
+        Toastr::success('Successfully Product Inactive', '', ["positionClass" => "toast-top-right"]);
+        return redirect()->route('admin.products.index');
+    }
+
     public function subCategoryList(Request $request)
     {
         if ($request->ajax()) {

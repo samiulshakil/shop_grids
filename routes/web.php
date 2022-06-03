@@ -157,6 +157,8 @@ Route::middleware(['auth'])->group(function () {
                 Route::post('products/update', [ProductController::class, 'update'])->name('products.update');
                 Route::delete('products/destroy/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
                 Route::post('products/subcategory/list', [ProductController::class, 'subCategoryList'])->name('subcategory.list');
+                Route::get('products/active/{slug}', [ProductController::class, 'active'])->name('products.active');
+                Route::get('products/inactive/{slug}', [ProductController::class, 'inactive'])->name('products.inactive');
 
                 //Coupons Route
                 Route::get('coupons', [CouponController::class, 'index'])->name('coupons.index');
