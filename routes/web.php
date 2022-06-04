@@ -21,6 +21,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\CouponController;
+use App\Http\Controllers\Backend\SocialMediaController;
 use App\Http\Controllers\Frontend\WebsiteController;
 
 /*
@@ -131,7 +132,20 @@ Route::middleware(['auth'])->group(function () {
 
                  Route::get('mail', [SettingController::class, 'mail'])->name('mail');
                  Route::put('mail', [SettingController::class, 'mailUpdate'])->name('mail.update');
-                                
+
+                 //website setting start
+                 Route::get('website', [SettingController::class, 'website'])->name('website');
+                 Route::put('website', [SettingController::class, 'websiteUpdate'])->name('website.update');
+
+                //website social media
+                Route::get('socialmedias', [SocialMediaController::class, 'index'])->name('socialmedias.index');
+                Route::get('socialmedias/create', [SocialMediaController::class, 'create'])->name('socialmedias.create');
+                Route::post('socialmedias/store', [SocialMediaController::class, 'store'])->name('socialmedias.store');
+                Route::get('socialmedias/edit/{id}', [SocialMediaController::class, 'edit'])->name('socialmedias.edit');
+                Route::post('socialmedias/update/{id}', [SocialMediaController::class, 'update'])->name('socialmedias.update');
+                Route::get('socialmedias/active/{id}', [SocialMediaController::class, 'active'])->name('socialmedias.active');
+                Route::get('socialmedias/inactive/{id}', [SocialMediaController::class, 'inactive'])->name('socialmedias.inactive');   
+
         });
     });
 });

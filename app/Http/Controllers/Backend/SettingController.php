@@ -25,8 +25,6 @@ class SettingController extends Controller
         ]);
 
         Setting::updateOrCreate(['name' => 'site_title'], ['value' => $request->get('site_title')]);
-        //update .env
-        // Artisan::call("env:set APP_NAME = '" . $request->get('site_title')."'");
         Setting::updateOrCreate(['name' => 'site_description'], ['value' => $request->get('site_description')]);
         Setting::updateOrCreate(['name' => 'site_address'], ['value' => $request->get('site_address')]);
         Toastr::success('Successfully General Settings Updated', '', ["positionClass" => "toast-top-right"]);
@@ -111,6 +109,39 @@ class SettingController extends Controller
 
     }
 
+    //Website Settings Start 
+
+    public function website(){
+        Gate::authorize('admin.settings.index');
+        return view('backend.pages.settings.website');
+    }
+
+    public function websiteUpdate(Request $request){
+        $request->validate([
+            'website_logo' => 'nullable',
+            'website_title' => 'required|string|min:2|max:255',
+            'site_phone_num' => 'required',
+            'site_email' => 'required|string|email|max:255',
+            'site_footer_text' => 'required|string|max:255',
+        ]);
+
+        if($request->hasFile('website_logo')){
+            Setting::updateOrCreate(
+                ['name' => 'website_logo'], 
+                [
+                    'value' => Storage::disk('public')->put('logos', $request->file('website_logo'))
+                ]
+            );
+        }
+
+        Setting::updateOrCreate(['name' => 'website_logo'], ['value' => $request->get('website_logo')]);
+        Setting::updateOrCreate(['name' => 'website_title'], ['value' => $request->get('website_title')]);
+        Setting::updateOrCreate(['name' => 'site_phone_num'], ['value' => $request->get('site_phone_num')]);
+        Setting::updateOrCreate(['name' => 'site_email'], ['value' => $request->get('site_email')]);
+        Setting::updateOrCreate(['name' => 'site_footer_text'], ['value' => $request->get('site_footer_text')]);
+        Toastr::success('Successfully Website Settings Updated', '', ["positionClass" => "toast-top-right"]);
+        return back();
+    }
 
     protected function changeEnvData(array $data)
     {

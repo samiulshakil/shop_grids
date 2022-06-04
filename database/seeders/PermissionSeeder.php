@@ -16,298 +16,322 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
-        $moduleDashboard = Module::create(['name'=> 'Admin Dashboard']);
+        $moduleDashboard = Module::updateOrCreate(['name'=> 'Admin Dashboard']);
 
-        Permission::create([
+        Permission::updateOrCreate([
             'module_id' => $moduleDashboard->id,
             'name' => 'Access Dashboard',
             'slug' => 'admin.dashboard',
         ]);
 
         //Role Management
-        $moduleRole = Module::create(['name'=> 'Role Management']);
+        $moduleRole = Module::updateOrCreate(['name'=> 'Role Management']);
 
-        Permission::create([
+        Permission::updateOrCreate([
             'module_id' => $moduleRole->id,
             'name' => 'Access Role',
             'slug' => 'admin.roles.index',
         ]);
 
-        Permission::create([
+        Permission::updateOrCreate([
             'module_id' => $moduleRole->id,
             'name' => 'Create Role',
             'slug' => 'admin.roles.create',
         ]);
 
-        Permission::create([
+        Permission::updateOrCreate([
             'module_id' => $moduleRole->id,
             'name' => 'Edit Role',
             'slug' => 'admin.roles.edit',
         ]);
 
-        Permission::create([
+        Permission::updateOrCreate([
             'module_id' => $moduleRole->id,
             'name' => 'Delete Role',
             'slug' => 'admin.roles.destroy',
         ]);
 
         //User Management
-        $moduleUser = Module::create(['name'=> 'User Management']);
+        $moduleUser = Module::updateOrCreate(['name'=> 'User Management']);
 
-        Permission::create([
+        Permission::updateOrCreate([
             'module_id' => $moduleUser->id,
             'name' => 'Access User',
             'slug' => 'admin.users.index',
         ]);
 
-        Permission::create([
+        Permission::updateOrCreate([
             'module_id' => $moduleUser->id,
             'name' => 'Create User',
             'slug' => 'admin.users.create',
         ]);
 
-        Permission::create([
+        Permission::updateOrCreate([
             'module_id' => $moduleUser->id,
             'name' => 'Edit User',
             'slug' => 'admin.users.edit',
         ]);
 
-        Permission::create([
+        Permission::updateOrCreate([
             'module_id' => $moduleUser->id,
             'name' => 'Delete User',
             'slug' => 'admin.users.destroy',
         ]);
 
         //Backup Management
-        $moduleBackups = Module::create(['name'=> 'Backup Management']);
+        $moduleBackups = Module::updateOrCreate(['name'=> 'Backup Management']);
 
-        Permission::create([
+        Permission::updateOrCreate([
             'module_id' => $moduleBackups->id,
             'name' => 'Access Backup',
             'slug' => 'admin.backups.index',
         ]);
 
-        Permission::create([
+        Permission::updateOrCreate([
             'module_id' => $moduleBackups->id,
             'name' => 'Create Backup',
             'slug' => 'admin.backups.create',
         ]);
 
-        Permission::create([
+        Permission::updateOrCreate([
             'module_id' => $moduleBackups->id,
             'name' => 'Download Backup',
             'slug' => 'admin.backups.download',
         ]);
 
-        Permission::create([
+        Permission::updateOrCreate([
             'module_id' => $moduleBackups->id,
             'name' => 'Delete Backup',
             'slug' => 'admin.backups.destroy',
         ]);
 
         //Page Management
-        $modulePages = Module::create(['name'=> 'Page Management']);
+        $modulePages = Module::updateOrCreate(['name'=> 'Page Management']);
 
-        Permission::create([
+        Permission::updateOrCreate([
             'module_id' => $modulePages->id,
             'name' => 'Access Page',
             'slug' => 'admin.pages.index',
         ]);
 
-        Permission::create([
+        Permission::updateOrCreate([
             'module_id' => $modulePages->id,
             'name' => 'Create Page',
             'slug' => 'admin.pages.create',
         ]);
 
-        Permission::create([
+        Permission::updateOrCreate([
             'module_id' => $modulePages->id,
             'name' => 'Edit Page',
             'slug' => 'admin.pages.edit',
         ]);
 
-        Permission::create([
+        Permission::updateOrCreate([
             'module_id' => $modulePages->id,
             'name' => 'Delete Page',
             'slug' => 'admin.pages.destroy',
         ]);
 
          //Menu Management
-         $moduleMenu = Module::create(['name'=> 'Menu Management']);
+         $moduleMenu = Module::updateOrCreate(['name'=> 'Menu Management']);
 
-         Permission::create([
+         Permission::updateOrCreate([
              'module_id' => $moduleMenu->id,
              'name' => 'Access Menu',
              'slug' => 'admin.menus.index',
          ]);
 
-         Permission::create([
+         Permission::updateOrCreate([
              'module_id' => $moduleMenu->id,
              'name' => 'Access Menu Builder',
              'slug' => 'admin.menus.builder',
          ]);
  
-         Permission::create([
+         Permission::updateOrCreate([
              'module_id' => $moduleMenu->id,
              'name' => 'Create Menu',
              'slug' => 'admin.menus.create',
          ]); 
  
-         Permission::create([
+         Permission::updateOrCreate([
              'module_id' => $moduleMenu->id,
              'name' => 'Edit Menu',
              'slug' => 'admin.menus.edit',
          ]);
  
-         Permission::create([
+         Permission::updateOrCreate([
              'module_id' => $moduleMenu->id,
              'name' => 'Delete Menu',
              'slug' => 'admin.menus.destroy',
          ]);
 
           //Menu Management
-          $moduleSetting = Module::create(['name'=> 'Setting Management']);
+          $moduleSetting = Module::updateOrCreate(['name'=> 'Setting Management']);
 
-          Permission::create([
+          Permission::updateOrCreate([
             'module_id' => $moduleSetting->id,
             'name' => 'Access Setting',
             'slug' => 'admin.settings.index',
         ]);
 
         //Brand Management
-        $moduleBrands = Module::create(['name'=> 'Brand Management']);
+        $moduleBrands = Module::updateOrCreate(['name'=> 'Brand Management']);
 
-        Permission::create([
+        Permission::updateOrCreate([
             'module_id' => $moduleBrands->id,
             'name' => 'Access Brand',
             'slug' => 'admin.brands.index',
         ]);
 
-        Permission::create([
+        Permission::updateOrCreate([
             'module_id' => $moduleBrands->id,
             'name' => 'Create Brand',
             'slug' => 'admin.brands.create',
         ]);
 
-        Permission::create([
+        Permission::updateOrCreate([
             'module_id' => $moduleBrands->id,
             'name' => 'Edit Brand',
             'slug' => 'admin.brands.edit',
         ]);
 
-        Permission::create([
+        Permission::updateOrCreate([
             'module_id' => $moduleBrands->id,
             'name' => 'Delete Brand',
             'slug' => 'admin.brands.destroy',
         ]);
 
         //Category Management
-        $moduleCategories = Module::create(['name'=> 'Category Management']);
+        $moduleCategories = Module::updateOrCreate(['name'=> 'Category Management']);
 
-        Permission::create([
+        Permission::updateOrCreate([
             'module_id' => $moduleCategories->id,
             'name' => 'Access Category',
             'slug' => 'admin.categories.index',
         ]);
 
-        Permission::create([
+        Permission::updateOrCreate([
             'module_id' => $moduleCategories->id,
             'name' => 'Create Category',
             'slug' => 'admin.categories.create',
         ]);
 
-        Permission::create([
+        Permission::updateOrCreate([
             'module_id' => $moduleCategories->id,
             'name' => 'Edit Category',
             'slug' => 'admin.categories.edit',
         ]);
 
-        Permission::create([
+        Permission::updateOrCreate([
             'module_id' => $moduleCategories->id,
             'name' => 'Delete Category',
             'slug' => 'admin.categories.destroy',
         ]);
 
                 //Sub Category Management
-                $moduleSubCategories = Module::create(['name'=> 'Sub Category Management']);
+                $moduleSubCategories = Module::updateOrCreate(['name'=> 'Sub Category Management']);
 
-                Permission::create([
+                Permission::updateOrCreate([
                     'module_id' => $moduleSubCategories->id,
                     'name' => 'Access Sub Category',
                     'slug' => 'admin.subcategories.index',
                 ]);
         
-                Permission::create([
+                Permission::updateOrCreate([
                     'module_id' => $moduleSubCategories->id,
                     'name' => 'Create Sub Category',
                     'slug' => 'admin.subcategories.create',
                 ]);
         
-                Permission::create([
+                Permission::updateOrCreate([
                     'module_id' => $moduleSubCategories->id,
                     'name' => 'Edit Sub Category',
                     'slug' => 'admin.subcategories.edit',
                 ]);
         
-                Permission::create([
+                Permission::updateOrCreate([
                     'module_id' => $moduleSubCategories->id,
                     'name' => 'Delete Sub Category',
                     'slug' => 'admin.subcategories.destroy',
                 ]);
 
                 //Products Management
-                $moduleProducts = Module::create(['name'=> 'Product Management']);
+                $moduleProducts = Module::updateOrCreate(['name'=> 'Product Management']);
 
-                Permission::create([
+                Permission::updateOrCreate([
                     'module_id' => $moduleProducts->id,
                     'name' => 'Access Product',
                     'slug' => 'admin.products.index',
                 ]);
         
-                Permission::create([
+                Permission::updateOrCreate([
                     'module_id' => $moduleProducts->id,
                     'name' => 'Create Product',
                     'slug' => 'admin.products.create',
                 ]);
         
-                Permission::create([
+                Permission::updateOrCreate([
                     'module_id' => $moduleProducts->id,
                     'name' => 'Edit Product',
                     'slug' => 'admin.products.edit',
                 ]);
         
-                Permission::create([
+                Permission::updateOrCreate([
                     'module_id' => $moduleProducts->id,
                     'name' => 'Delete Product',
                     'slug' => 'admin.products.destroy',
                 ]);
 
                 //Coupons Management
-                $moduleCoupons = Module::create(['name'=> 'Coupon Management']);
+                $moduleCoupons = Module::updateOrCreate(['name'=> 'Coupon Management']);
 
-                Permission::create([
+                Permission::updateOrCreate([
                     'module_id' => $moduleCoupons->id,
                     'name' => 'Access Coupon',
                     'slug' => 'admin.coupons.index',
                 ]);
         
-                Permission::create([
+                Permission::updateOrCreate([
                     'module_id' => $moduleCoupons->id,
                     'name' => 'Create Coupon',
                     'slug' => 'admin.coupons.create',
                 ]);
         
-                Permission::create([
+                Permission::updateOrCreate([
                     'module_id' => $moduleCoupons->id,
                     'name' => 'Edit Coupon',
                     'slug' => 'admin.coupons.edit',
                 ]);
         
-                Permission::create([
+                Permission::updateOrCreate([
                     'module_id' => $moduleCoupons->id,
                     'name' => 'Delete Coupon',
                     'slug' => 'admin.coupons.destroy',
                 ]);
+
+                //Website Social Media Management
+                $moduleSocialMedias = Module::updateOrCreate(['name'=> 'SocialMedias Management']);
+
+                Permission::updateOrCreate([
+                    'module_id' => $moduleSocialMedias->id,
+                    'name' => 'Access SocialMedia',
+                    'slug' => 'admin.settings.socialmedias.index',
+                ]);
+        
+                Permission::updateOrCreate([
+                    'module_id' => $moduleSocialMedias->id,
+                    'name' => 'Create SocialMedia',
+                    'slug' => 'admin.settings.socialmedias.create',
+                ]);
+        
+                Permission::updateOrCreate([
+                    'module_id' => $moduleSocialMedias->id,
+                    'name' => 'Edit SocialMedia',
+                    'slug' => 'admin.settings.socialmedias.edit',
+                ]);
+        
+
+
 
 
 

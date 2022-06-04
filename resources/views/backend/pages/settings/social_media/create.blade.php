@@ -1,6 +1,6 @@
 @extends('backend.layouts.master')
 
-@section('title', 'General Setting')
+@section('title', 'Create Social Media')
 
 @section('content')
     <div class="app-page-title">
@@ -10,7 +10,7 @@
                     <i class="pe-7s-settings icon-gradient bg-mean-fruit">
                     </i>
                 </div>
-                <div>General Settings</div>
+                <div>Create Social Media</div>
             </div>
             <div class="page-title-actions">
                 <a href="{{ route('admin.dashboard') }}" class="mr-3 btn btn-primary">
@@ -31,24 +31,22 @@
             {{-- how to use callout --}}
             <div class="main-card mb-3 card">
                 <div class="card-body">
-                    <h5 class="card-title">How To Use:</h5>
-                    <p>You can get the value of each setting anywhere on your site by calling <code>setting('key')</code>
+                    <h5 class="card-title">Social Media Create</h5>
                     </p>
                 </div>
             </div>
-            <form action="{{ route('admin.settings.general.update') }}" method="post">
+            <form action="{{ route('admin.settings.socialmedias.store') }}" method="post">
                 @csrf
-                @method('put')
                 <div class="main-card mb-3 card">
                     <div class="card-body">
                         <h5 class="card-title text-center">Basic Info</h5>
                         <div class="form-group">
-                            <label for="site_title">Site Title <code>{ key: site_title }</code></label>
-                            <input type="text" id="site_title" name="site_title" placeholder="Site Title"
-                                class="form-control @error('site_title') is-invalid @enderror"
-                                value="{{ setting('site_title') }}" required>
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" placeholder="Social Media Name"
+                                class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}"
+                                required>
                         </div>
-                        @error('site_title')
+                        @error('name')
                             <p>
                                 <span class="text-danger" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -57,12 +55,12 @@
                         @enderror
 
                         <div class="form-group">
-                            <label for="site_description">Site Description <code>{ key: site_description }</code></label>
-                            <input type="text" id="site_description" name="site_description" placeholder="Site Description"
-                                class="form-control @error('site_description') is-invalid @enderror"
-                                value="{{ setting('site_description') }}">
+                            <label for="url">Url</label>
+                            <input type="text" id="url" name="url" placeholder="Social Media URL"
+                                class="form-control @error('url') is-invalid @enderror" value="{{ old('url') }}"
+                                required>
                         </div>
-                        @error('site_description')
+                        @error('url')
                             <p>
                                 <span class="text-danger" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -71,12 +69,29 @@
                         @enderror
 
                         <div class="form-group">
-                            <label for="site_address">Site Description <code>{ key: site_address }</code></label>
-                            <input type="text" id="site_address" name="site_address" placeholder="Site Address"
-                                class="form-control @error('site_address') is-invalid @enderror"
-                                value="{{ setting('site_address') }}">
+                            <label for="icon">Icon <a class="d-inline" target="_blank"
+                                    href="https://lineicons.com/icons">Click Here
+                                    For Icon</a></label>
+                            <input type="text" id="icon" name="icon" placeholder="Social Media icon"
+                                class="form-control @error('icon') is-invalid @enderror" value="{{ old('icon') }}"
+                                required>
                         </div>
-                        @error('site_address')
+                        @error('icon')
+                            <p>
+                                <span class="text-danger" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            </p>
+                        @enderror
+
+                        <div class="form-group mt-4">
+                            <label for="status">Status</label>
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" name="status" class="custom-control-input mt-2" id="status">
+                                <label class="custom-control-label" for="status">Status</label>
+                            </div>
+                        </div>
+                        @error('status')
                             <p>
                                 <span class="text-danger" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -85,7 +100,7 @@
                         @enderror
 
                         <button type="submit" class="btn btn-primary mb-2">
-                            <span>Update</span>
+                            <span>Create</span>
                         </button>
                     </div>
                 </div>
