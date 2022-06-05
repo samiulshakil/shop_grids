@@ -7,4 +7,8 @@
         class="list-group-item list-group-item-action {{ Route::is('admin.settings.socialmedias.index') ? 'active' : '' }}">
         Social Media
     </a>
+    <a href="{{ route('admin.settings.banners.index') }}"
+        class="list-group-item list-group-item-action {{ Route::is('admin.settings.banners.index') ? 'active' : '' }}">
+        Banner
+    </a>
 </div>

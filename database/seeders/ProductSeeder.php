@@ -15,7 +15,7 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        Product::updateOrCreate([
+        Product::create([
             'brand_id' => 1, 
             'category_id' => 1, 
             'subcategory_id' => 1, 

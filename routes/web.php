@@ -22,6 +22,7 @@ use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\SocialMediaController;
+use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\Frontend\WebsiteController;
 
 /*
@@ -145,6 +146,15 @@ Route::middleware(['auth'])->group(function () {
                 Route::post('socialmedias/update/{id}', [SocialMediaController::class, 'update'])->name('socialmedias.update');
                 Route::get('socialmedias/active/{id}', [SocialMediaController::class, 'active'])->name('socialmedias.active');
                 Route::get('socialmedias/inactive/{id}', [SocialMediaController::class, 'inactive'])->name('socialmedias.inactive');   
+                
+                //website Banner or hero are all routes
+                Route::get('banners', [BannerController::class, 'index'])->name('banners.index');
+                Route::get('banners/create', [BannerController::class, 'create'])->name('banners.create');
+                Route::post('banners/store', [BannerController::class, 'store'])->name('banners.store');
+                Route::get('banners/edit/{id}', [BannerController::class, 'edit'])->name('banners.edit');
+                Route::post('banners/update/{id}', [BannerController::class, 'update'])->name('banners.update');
+                Route::get('banners/active/{id}', [BannerController::class, 'active'])->name('banners.active');
+                Route::get('banners/inactive/{id}', [BannerController::class, 'inactive'])->name('banners.inactive');   
 
         });
     });

@@ -329,6 +329,28 @@ class PermissionSeeder extends Seeder
                     'name' => 'Edit SocialMedia',
                     'slug' => 'admin.settings.socialmedias.edit',
                 ]);
+
+                //Website Menu Management
+                $moduleBanners = Module::updateOrCreate(['name'=> 'Banners Management']);
+
+                Permission::updateOrCreate([
+                    'module_id' => $moduleBanners->id,
+                    'name' => 'Access Banner',
+                    'slug' => 'admin.settings.banners.index',
+                ]);
+        
+                Permission::updateOrCreate([
+                    'module_id' => $moduleBanners->id,
+                    'name' => 'Create Banner',
+                    'slug' => 'admin.settings.banners.create',
+                ]);
+        
+                Permission::updateOrCreate([
+                    'module_id' => $moduleBanners->id,
+                    'name' => 'Edit Banner',
+                    'slug' => 'admin.settings.banners.edit',
+                ]);
+        
         
 
 

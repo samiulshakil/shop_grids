@@ -2,7 +2,7 @@
     <div class="app-header__logo">
         {{-- <div class="logo-src"></div> --}}
         <div class="navbar-brand">
-            {{setting('site_title')}}
+            {{ setting('site_title') }}
         </div>
         <div class="header__pane ml-auto">
             <div>
@@ -31,7 +31,8 @@
                 </span>
             </button>
         </span>
-    </div>    <div class="app-header__content">
+    </div>
+    <div class="app-header__content">
         <div class="app-header-left">
             <div class="search-wrapper">
                 <div class="input-holder">
@@ -42,28 +43,34 @@
             </div>
             <ul class="header-menu nav">
                 <li class="dropdown nav-item">
-                    <a href="javascript:void(0);" class="nav-link">
+                    <a href="{{ route('website.home') }}" class="nav-link" target="_blank">
                         <i class="nav-link-icon fa fa-cog"></i>
                         View Site
                     </a>
                 </li>
-            </ul>        </div>
+            </ul>
+        </div>
         <div class="app-header-right">
             <div class="header-btn-lg pr-0">
                 <div class="widget-content p-0">
                     <div class="widget-content-wrapper">
                         <div class="widget-content-left">
                             <div class="btn-group">
-                                <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
-                                    <img width="40" height="40" class="rounded-circle" src="{{Auth::user()->getFirstMediaUrl('avatar')}}" alt="">
+                                <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                    class="p-0 btn">
+                                    <img width="40" height="40" class="rounded-circle"
+                                        src="{{ Auth::user()->getFirstMediaUrl('avatar') }}" alt="">
                                 </a>
-                                <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
-                                    <a href="{{route('admin.profile.edit')}}" tabindex="0" class="dropdown-item">Profile</a>
-                                    <a href="{{route('admin.password.edit')}}" tabindex="0" class="dropdown-item">Change Password</a>
+                                <div tabindex="-1" role="menu" aria-hidden="true"
+                                    class="dropdown-menu dropdown-menu-right">
+                                    <a href="{{ route('admin.profile.edit') }}" tabindex="0"
+                                        class="dropdown-item">Profile</a>
+                                    <a href="{{ route('admin.password.edit') }}" tabindex="0"
+                                        class="dropdown-item">Change Password</a>
                                     <a href="" tabindex="0" class="dropdown-item">Settings</a>
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
-                                        <a href="{{route('logout')}}" onclick="event.preventDefault();
+                                        <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                         this.closest('form').submit();" tabindex="0" class="dropdown-item">Log Out</a>
                                     </form>
                                 </div>
@@ -79,7 +86,7 @@
                         </div>
                     </div>
                 </div>
-            </div>        
+            </div>
         </div>
     </div>
-</div>  
+</div>

@@ -121,8 +121,8 @@ class SocialMediaController extends Controller
 
     public function inactive($id){
         Gate::authorize('admin.settings.socialmedias.edit');
-        $product = SocialMedia::where('id', $id)->firstOrFail();
-        $product->update([
+        $social = SocialMedia::where('id', $id)->firstOrFail();
+        $social->update([
             'status' => 0,
         ]);
         Toastr::success('Successfully Social Inactive', '', ["positionClass" => "toast-top-right"]);
