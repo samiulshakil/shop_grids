@@ -156,6 +156,10 @@ Route::middleware(['auth'])->group(function () {
                 Route::get('banners/active/{id}', [BannerController::class, 'active'])->name('banners.active');
                 Route::get('banners/inactive/{id}', [BannerController::class, 'inactive'])->name('banners.inactive');   
 
+                 //others website setting start
+                 Route::get('otherbanner', [SettingController::class, 'otherBanner'])->name('otherbanner');
+                 Route::put('otherbanner', [SettingController::class, 'otherBannerUpdate'])->name('otherbanner.update');
+
         });
     });
 });

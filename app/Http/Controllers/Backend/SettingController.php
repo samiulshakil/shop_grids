@@ -119,10 +119,10 @@ class SettingController extends Controller
     public function websiteUpdate(Request $request){
         $request->validate([
             'website_logo' => 'nullable',
-            'website_title' => 'required|string|min:2|max:255',
+            'website_title' => 'nullable|string|min:2|max:255',
             'site_phone_num' => 'required',
-            'site_email' => 'required|string|email|max:255',
-            'site_footer_text' => 'required|string|max:255',
+            'site_email' => 'nullable|string|email|max:255',
+            'site_footer_text' => 'nullable|string|max:255',
         ]);
 
         if($request->hasFile('website_logo')){
@@ -139,7 +139,74 @@ class SettingController extends Controller
         Setting::updateOrCreate(['name' => 'site_phone_num'], ['value' => $request->get('site_phone_num')]);
         Setting::updateOrCreate(['name' => 'site_email'], ['value' => $request->get('site_email')]);
         Setting::updateOrCreate(['name' => 'site_footer_text'], ['value' => $request->get('site_footer_text')]);
+
         Toastr::success('Successfully Website Settings Updated', '', ["positionClass" => "toast-top-right"]);
+        return back();
+    }
+
+    public function otherBanner(){
+        Gate::authorize('admin.settings.index');
+        return view('backend.pages.settings.other_banners');
+    }
+
+    public function otherBannerUpdate(Request $request){
+        $request->validate([
+            'banner_two_title' => 'nullable|string',
+            'banner_two_sub_title' => 'nullable|string',
+            'banner_two_button_text' => 'nullable|string',
+            'banner_two_image' => 'nullable|image',
+            'banner_three_title' => 'nullable|string',
+            'banner_three_sub_title' => 'nullable|string',
+            'banner_three_button_text' => 'nullable|string',
+            'banner_three_image' => 'nullable|image',
+            'banner_four_title' => 'nullable|string',
+            'banner_four_sub_title' => 'nullable|string',
+            'banner_four_price' => 'nullable|string',
+            'banner_four_button_text' => 'nullable|string',
+            'banner_four_image' => 'nullable|image',
+        ]);
+
+        Setting::updateOrCreate(['name' => 'banner_two_title'], ['value' => $request->get('banner_two_title')]);
+        Setting::updateOrCreate(['name' => 'banner_two_sub_title'], ['value' => $request->get('banner_two_sub_title')]);
+        Setting::updateOrCreate(['name' => 'banner_two_button_text'], ['value' => $request->get('banner_two_button_text')]);
+        
+        if($request->hasFile('banner_two_image')){
+            Setting::updateOrCreate(
+                ['name' => 'banner_two_image'], 
+                [
+                    'value' => Storage::disk('public')->put('banners', $request->file('banner_two_image'))
+                ]
+            );
+        }
+
+        Setting::updateOrCreate(['name' => 'banner_three_title'], ['value' => $request->get('banner_three_title')]);
+        Setting::updateOrCreate(['name' => 'banner_three_sub_title'], ['value' => $request->get('banner_three_sub_title')]);
+        Setting::updateOrCreate(['name' => 'banner_three_button_text'], ['value' => $request->get('banner_three_button_text')]);
+        
+        if($request->hasFile('banner_three_image')){
+            Setting::updateOrCreate(
+                ['name' => 'banner_three_image'], 
+                [
+                    'value' => Storage::disk('public')->put('banners', $request->file('banner_three_image'))
+                ]
+            );
+        }
+
+        Setting::updateOrCreate(['name' => 'banner_four_title'], ['value' => $request->get('banner_four_title')]);
+        Setting::updateOrCreate(['name' => 'banner_four_sub_title'], ['value' => $request->get('banner_four_sub_title')]);
+        Setting::updateOrCreate(['name' => 'banner_four_price'], ['value' => $request->get('banner_four_price')]);
+        Setting::updateOrCreate(['name' => 'banner_four_button_text'], ['value' => $request->get('banner_four_button_text')]);
+        
+        if($request->hasFile('banner_four_image')){
+            Setting::updateOrCreate(
+                ['name' => 'banner_four_image'], 
+                [
+                    'value' => Storage::disk('public')->put('banners', $request->file('banner_four_image'))
+                ]
+            );
+        }
+
+        Toastr::success('Successfully Others Banner Updated', '', ["positionClass" => "toast-top-right"]);
         return back();
     }
 

@@ -11,4 +11,8 @@
         class="list-group-item list-group-item-action {{ Route::is('admin.settings.banners.index') ? 'active' : '' }}">
         Banner
     </a>
+    <a href="{{ route('admin.settings.otherbanner') }}"
+        class="list-group-item list-group-item-action {{ Route::is('admin.settings.otherbanner') ? 'active' : '' }}">
+        Other Banners
+    </a>
 </div>
