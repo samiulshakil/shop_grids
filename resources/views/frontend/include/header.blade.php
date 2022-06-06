@@ -51,10 +51,10 @@
                         </div>
                         <ul class="user-login">
                             <li>
-                                <a href="login.html">Sign In</a>
+                                <a href="{{ route('login') }}">Sign In</a>
                             </li>
                             <li>
-                                <a href="register.html">Register</a>
+                                <a href="{{ route('register') }}">Register</a>
                             </li>
                         </ul>
                     </div>
@@ -70,7 +70,7 @@
                 <div class="col-lg-3 col-md-3 col-7">
 
                     <a class="navbar-brand" href="index.html">
-                        <img src="{{asset('frontend/assets/images/logo/logo.svg')}}" alt="Logo">
+                        <img src="{{ asset('frontend/assets/images/logo/logo.svg') }}" alt="Logo">
                     </a>
 
                 </div>
@@ -82,12 +82,12 @@
                             <div class="search-select">
                                 <div class="select-position">
                                     <select id="select1">
-                                        <option selected>All</option>
-                                        <option value="1">option 01</option>
-                                        <option value="2">option 02</option>
-                                        <option value="3">option 03</option>
-                                        <option value="4">option 04</option>
-                                        <option value="5">option 05</option>
+                                        <option value="" selected>Select Brand</option>
+                                        @forelse (brands() as $brand)
+                                            <option value="{{ $brand->id }}">{{ $brand->brand_name }}
+                                            </option>
+                                        @empty
+                                        @endforelse
                                     </select>
                                 </div>
                             </div>
@@ -130,28 +130,32 @@
                                     </div>
                                     <ul class="shopping-list">
                                         <li>
-                                            <a href="javascript:void(0)" class="remove" title="Remove this item"><i
-                                                    class="lni lni-close"></i></a>
+                                            <a href="javascript:void(0)" class="remove"
+                                                title="Remove this item"><i class="lni lni-close"></i></a>
                                             <div class="cart-img-head">
                                                 <a class="cart-img" href="product-details.html"><img
-                                                        src="{{asset('frontend/assets/images/header/cart-items/item1.jpg')}}" alt="#"></a>
+                                                        src="{{ asset('frontend/assets/images/header/cart-items/item1.jpg') }}"
+                                                        alt="#"></a>
                                             </div>
                                             <div class="content">
                                                 <h4><a href="product-details.html">
                                                         Apple Watch Series 6</a></h4>
-                                                <p class="quantity">1x - <span class="amount">$99.00</span></p>
+                                                <p class="quantity">1x - <span
+                                                        class="amount">$99.00</span></p>
                                             </div>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(0)" class="remove" title="Remove this item"><i
-                                                    class="lni lni-close"></i></a>
+                                            <a href="javascript:void(0)" class="remove"
+                                                title="Remove this item"><i class="lni lni-close"></i></a>
                                             <div class="cart-img-head">
                                                 <a class="cart-img" href="product-details.html"><img
-                                                        src="{{asset('frontend/assets/images/header/cart-items/item2.jpg')}}" alt="#"></a>
+                                                        src="{{ asset('frontend/assets/images/header/cart-items/item2.jpg') }}"
+                                                        alt="#"></a>
                                             </div>
                                             <div class="content">
                                                 <h4><a href="product-details.html">Wi-Fi Smart Camera</a></h4>
-                                                <p class="quantity">1x - <span class="amount">$35.00</span></p>
+                                                <p class="quantity">1x - <span
+                                                        class="amount">$35.00</span></p>
                                             </div>
                                         </li>
                                     </ul>
@@ -183,31 +187,18 @@
                     <div class="mega-category-menu">
                         <span class="cat-button"><i class="lni lni-menu"></i>All Categories</span>
                         <ul class="sub-category">
-                            <li><a href="product-grids.html">Electronics <i class="lni lni-chevron-right"></i></a>
-                                <ul class="inner-sub-category">
-                                    <li><a href="product-grids.html">Digital Cameras</a></li>
-                                    <li><a href="product-grids.html">Camcorders</a></li>
-                                    <li><a href="product-grids.html">Camera Drones</a></li>
-                                    <li><a href="product-grids.html">Smart Watches</a></li>
-                                    <li><a href="product-grids.html">Headphones</a></li>
-                                    <li><a href="product-grids.html">MP3 Players</a></li>
-                                    <li><a href="product-grids.html">Microphones</a></li>
-                                    <li><a href="product-grids.html">Chargers</a></li>
-                                    <li><a href="product-grids.html">Batteries</a></li>
-                                    <li><a href="product-grids.html">Cables & Adapters</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="product-grids.html">accessories</a></li>
-                            <li><a href="product-grids.html">Televisions</a></li>
-                            <li><a href="product-grids.html">best selling</a></li>
-                            <li><a href="product-grids.html">top 100 offer</a></li>
-                            <li><a href="product-grids.html">sunglass</a></li>
-                            <li><a href="product-grids.html">watch</a></li>
-                            <li><a href="product-grids.html">man’s product</a></li>
-                            <li><a href="product-grids.html">Home Audio & Theater</a></li>
-                            <li><a href="product-grids.html">Computers & Tablets </a></li>
-                            <li><a href="product-grids.html">Video Games </a></li>
-                            <li><a href="product-grids.html">Home Appliances </a></li>
+                            @forelse (categories() as $category)
+                                <li><a href="!#">{{ $category->category_name }}</a>
+
+                                    <ul class="inner-sub-category">
+                                        @foreach ($category->subCategories as $subcategory)
+                                            <li><a href="product-grids.html">{{ $subcategory->sub_category_name }}</a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </li>
+                            @empty
+                            @endforelse
                         </ul>
                     </div>
 
@@ -242,20 +233,14 @@
                                     <a class="dd-menu collapsed" href="javascript:void(0)" data-bs-toggle="collapse"
                                         data-bs-target="#submenu-1-3" aria-controls="navbarSupportedContent"
                                         aria-expanded="false" aria-label="Toggle navigation">Shop</a>
-                                    <ul class="sub-menu collapse" id="submenu-1-3">
-                                        <li class="nav-item"><a href="product-grids.html">Shop Grid</a></li>
-                                        <li class="nav-item"><a href="product-list.html">Shop List</a></li>
-                                        <li class="nav-item"><a href="product-details.html">shop Single</a></li>
-                                        <li class="nav-item"><a href="cart.html">Cart</a></li>
-                                        <li class="nav-item"><a href="checkout.html">Checkout</a></li>
-                                    </ul>
                                 </li>
                                 <li class="nav-item">
                                     <a class="dd-menu collapsed" href="javascript:void(0)" data-bs-toggle="collapse"
                                         data-bs-target="#submenu-1-4" aria-controls="navbarSupportedContent"
                                         aria-expanded="false" aria-label="Toggle navigation">Blog</a>
                                     <ul class="sub-menu collapse" id="submenu-1-4">
-                                        <li class="nav-item"><a href="blog-grid-sidebar.html">Blog Grid Sidebar</a>
+                                        <li class="nav-item"><a href="blog-grid-sidebar.html">Blog Grid
+                                                Sidebar</a>
                                         </li>
                                         <li class="nav-item"><a href="blog-single.html">Blog Single</a></li>
                                         <li class="nav-item"><a href="blog-single-sidebar.html">Blog Single
