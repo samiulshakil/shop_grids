@@ -70,7 +70,7 @@
                 <div class="col-lg-3 col-md-3 col-7">
 
                     <a class="navbar-brand" href="index.html">
-                        <img src="{{ asset('frontend/assets/images/logo/logo.svg') }}" alt="Logo">
+                        <img src="{{ Storage::url(setting('website_logo')) }}" alt="Logo">
                     </a>
 
                 </div>
@@ -107,7 +107,7 @@
                         <div class="nav-hotline">
                             <i class="lni lni-phone"></i>
                             <h3>Hotline:
-                                <span>(+100) 123 456 7890</span>
+                                <span>{{ setting('site_phone_num') }}</span>
                             </h3>
                         </div>
                         <div class="navbar-cart">

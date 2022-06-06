@@ -43,7 +43,6 @@ class BannerController extends Controller
         Gate::authorize('admin.settings.banners.create');
         $request->validate([
             'banner_image' => 'required',
-            'banner_image_two' => 'required',
             'banner_title' => 'required|string',
             'banner_sub_title' => 'required|string',
             'banner_description' => 'required|string',
@@ -69,16 +68,6 @@ class BannerController extends Controller
             $img_url = $upload_path.$fileName;
             $image->move($upload_path, $fileName);
             $banner->banner_image = $img_url;
-            $banner->save();
-        }
-
-        if ($request->hasfile('banner_image_two')) {
-            $image = $request->file('banner_image_two');
-            $fileName = 'banners-'. rand() .'.' .$image->extension('banner_image_two');
-            $upload_path = 'uploads/banners/';
-            $img_url = $upload_path.$fileName;
-            $image->move($upload_path, $fileName);
-            $banner->banner_image_two = $img_url;
             $banner->save();
         }
 
@@ -122,7 +111,6 @@ class BannerController extends Controller
         Gate::authorize('admin.settings.banners.edit');
         $request->validate([
             'banner_image' => 'nullable',
-            'banner_image_two' => 'nullable',
             'banner_title' => 'required|string',
             'banner_sub_title' => 'required|string',
             'banner_description' => 'required|string',
@@ -148,16 +136,6 @@ class BannerController extends Controller
             $img_url = $upload_path.$fileName;
             $image->move($upload_path, $fileName);
             $banner->banner_image = $img_url;
-            $banner->save();
-        }
-
-        if ($request->hasfile('banner_image_two')) {
-            $image = $request->file('banner_image_two');
-            $fileName = 'banners-'. rand() .'.' .$image->extension('banner_image_two');
-            $upload_path = 'uploads/banners/';
-            $img_url = $upload_path.$fileName;
-            $image->move($upload_path, $fileName);
-            $banner->banner_image_two = $img_url;
             $banner->save();
         }
 

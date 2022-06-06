@@ -16,9 +16,10 @@
 
                         <div class="single-product">
                             <div class="product-image">
-                                <img src="{{asset('frontend/assets/images/products/product-3.jpg')}}" alt="#">
+                                <img src="{{ asset('frontend/assets/images/products/product-3.jpg') }}" alt="#">
                                 <div class="button">
-                                    <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to
+                                    <a href="product-details.html" class="btn"><i class="lni lni-cart"></i>
+                                        Add to
                                         Cart</a>
                                 </div>
                             </div>
@@ -46,9 +47,10 @@
 
                         <div class="single-product">
                             <div class="product-image">
-                                <img src="{{asset('frontend/assets/images/products/product-8.jpg')}}" alt="#">
+                                <img src="{{ asset('frontend/assets/images/products/product-8.jpg') }}" alt="#">
                                 <div class="button">
-                                    <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to
+                                    <a href="product-details.html" class="btn"><i class="lni lni-cart"></i>
+                                        Add to
                                         Cart</a>
                                 </div>
                             </div>
@@ -76,9 +78,10 @@
 
                         <div class="single-product">
                             <div class="product-image">
-                                <img src="{{asset('frontend/assets/images/products/product-6.jpg')}}" alt="#">
+                                <img src="{{ asset('frontend/assets/images/products/product-6.jpg') }}" alt="#">
                                 <div class="button">
-                                    <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to
+                                    <a href="product-details.html" class="btn"><i class="lni lni-cart"></i>
+                                        Add to
                                         Cart</a>
                                 </div>
                             </div>
@@ -105,7 +108,7 @@
                 </div>
 
                 <div class="single-banner right"
-                    style="background-image:url('{{asset('frontend/assets/images/banner/banner-3-bg.jpg')}}');margin-top: 30px;">
+                    style="background-image:url('{{ asset(setting('banner_four_image') != null ? Storage::url(setting('banner_four_image')) : '') }}');margin-top: 30px;">
                     <div class="content">
                         <h2>Samsung Notebook 9 </h2>
                         <p>Lorem ipsum dolor sit amet, <br>eiusmod tempor
@@ -123,7 +126,7 @@
             <div class="col-lg-4 col-md-12 col-12">
                 <div class="offer-content">
                     <div class="image">
-                        <img src="{{asset('frontend/assets/images/offer/offer-image.jpg')}}" alt="#">
+                        <img src="{{ asset('frontend/assets/images/offer/offer-image.jpg') }}" alt="#">
                         <span class="sale-tag">-50%</span>
                     </div>
                     <div class="text">

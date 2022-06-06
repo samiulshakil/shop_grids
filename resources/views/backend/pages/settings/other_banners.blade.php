@@ -8,7 +8,6 @@
         .dropify-wrapper .dropify-message p {
             font-size: initial;
         }
-
     </style>
 @endpush
 
@@ -49,6 +48,72 @@
             <form action="{{ route('admin.settings.otherbanner.update') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('put')
+                <div class="main-card mb-3 card">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Hero Area Right Side Small Banner</h5>
+
+                        <div class="form-group">
+                            <label for="hero_title">Hero Banner Title <code>{ key: hero_title }</code></label>
+                            <input type="text" id="hero_title" name="hero_title" placeholder="Hero Title"
+                                class="form-control @error('hero_title') is-invalid @enderror"
+                                value="{{ setting('hero_title') }}">
+                        </div>
+                        @error('hero_title')
+                            <p>
+                                <span class="text-danger" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            </p>
+                        @enderror
+
+                        <div class="form-group">
+                            <label for="hero_sub_title">Hero Sub Title <code>{ key:hero_sub_title
+                                    }</code></label>
+                            <input type="text" id="hero_sub_title" name="hero_sub_title" placeholder="Hero Sub Title"
+                                class="form-control @error('hero_sub_title') is-invalid @enderror"
+                                value="{{ setting('hero_sub_title') }}">
+                        </div>
+                        @error('hero_sub_title')
+                            <p>
+                                <span class="text-danger" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            </p>
+                        @enderror
+
+                        <div class="form-group">
+                            <label for="hero_price">Hero Area Price <code>{ key: hero_price
+                                    }</code></label>
+                            <input type="number" id="hero_price" name="hero_price" placeholder="Hero Price"
+                                class="form-control @error('hero_price') is-invalid @enderror"
+                                value="{{ setting('hero_price') }}">
+                        </div>
+                        @error('hero_price')
+                            <p>
+                                <span class="text-danger" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            </p>
+                        @enderror
+
+                        <div class="form-group">
+                            <label for="hero_image">Select Image Size Should be (370*250) <code>key
+                                    {hero_image}</code></label>
+                            <input type="file" id="hero_image" data-show-errors="true" data-errors-position="outside"
+                                data-allowed-file-extensions="jpg jpeg png svg webp gif"
+                                data-default-file="{{ setting('hero_image') != null ? Storage::url(setting('hero_image')) : '' }}"
+                                class="dropify3 form-control @error('hero_image') is-invalid @enderror" name="hero_image"
+                                id="hero_image">
+                        </div>
+                        @error('hero_image')
+                            <p>
+                                <span class="text-danger" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            </p>
+                        @enderror
+                    </div>
+                </div>
                 <div class="main-card mb-3 card">
                     <div class="card-body">
                         <h5 class="card-title text-center">Banner Two</h5>
@@ -102,7 +167,7 @@
                         <div class="form-group">
                             <label for="banner_two_image">Banner Two Image <code>{ key:
                                     banner_two_image
-                                    }</code></label>
+                                    }</code> (620x340)</label>
                             <input type="file" data-allowed-file-extensions="jpg jpeg png svg webp gif"
                                 class="dropify form-control @error('banner_two_image') is-invalid @enderror"
                                 name="banner_two_image"
@@ -174,7 +239,7 @@
                         <div class="form-group">
                             <label for="banner_three_image">Banner Three Image <code>{ key:
                                     banner_three_image
-                                    }</code></label>
+                                    }</code> (620x340)</label>
                             <input type="file" data-allowed-file-extensions="jpg jpeg png svg webp gif"
                                 class="dropify form-control @error('banner_three_image') is-invalid @enderror"
                                 name="banner_three_image"
@@ -263,7 +328,7 @@
                         <div class="form-group">
                             <label for="banner_four_image">Banner Four Image <code>{ key:
                                     banner_four_image
-                                    }</code></label>
+                                    }</code> (736x308)</label>
                             <input type="file" data-allowed-file-extensions="jpg jpeg png svg webp gif"
                                 class="dropify form-control @error('banner_four_image') is-invalid @enderror"
                                 name="banner_four_image"
@@ -293,6 +358,7 @@
     <script>
         $(document).ready(function() {
             $('.dropify').dropify();
+            $('.dropify3').dropify();
         });
     </script>
 @endpush

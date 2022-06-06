@@ -120,7 +120,7 @@ class SettingController extends Controller
         $request->validate([
             'website_logo' => 'nullable',
             'website_title' => 'nullable|string|min:2|max:255',
-            'site_phone_num' => 'required',
+            'site_phone_num' => 'nullable',
             'site_email' => 'nullable|string|email|max:255',
             'site_footer_text' => 'nullable|string|max:255',
         ]);
@@ -134,7 +134,6 @@ class SettingController extends Controller
             );
         }
 
-        Setting::updateOrCreate(['name' => 'website_logo'], ['value' => $request->get('website_logo')]);
         Setting::updateOrCreate(['name' => 'website_title'], ['value' => $request->get('website_title')]);
         Setting::updateOrCreate(['name' => 'site_phone_num'], ['value' => $request->get('site_phone_num')]);
         Setting::updateOrCreate(['name' => 'site_email'], ['value' => $request->get('site_email')]);
@@ -151,6 +150,10 @@ class SettingController extends Controller
 
     public function otherBannerUpdate(Request $request){
         $request->validate([
+            'hero_title' => 'nullable|string',
+            'hero_sub_title' => 'nullable|string',
+            'hero_price' => 'nullable',
+            'hero_image' => 'nullable|image',
             'banner_two_title' => 'nullable|string',
             'banner_two_sub_title' => 'nullable|string',
             'banner_two_button_text' => 'nullable|string',
@@ -165,6 +168,20 @@ class SettingController extends Controller
             'banner_four_button_text' => 'nullable|string',
             'banner_four_image' => 'nullable|image',
         ]);
+
+        Setting::updateOrCreate(['name' => 'hero_title'], ['value' => $request->get('hero_title')]);
+        Setting::updateOrCreate(['name' => 'hero_sub_title'], ['value' => $request->get('hero_sub_title')]);
+        Setting::updateOrCreate(['name' => 'hero_price'], ['value' => $request->get('hero_price')]);
+
+        if($request->hasFile('hero_image')){
+            Setting::updateOrCreate(
+                ['name' => 'hero_image'], 
+                [
+                    'value' => Storage::disk('public')->put('banners', $request->file('hero_image'))
+                ]
+            );
+        }
+
 
         Setting::updateOrCreate(['name' => 'banner_two_title'], ['value' => $request->get('banner_two_title')]);
         Setting::updateOrCreate(['name' => 'banner_two_sub_title'], ['value' => $request->get('banner_two_sub_title')]);

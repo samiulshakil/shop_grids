@@ -8,7 +8,6 @@
         .dropify-wrapper .dropify-message p {
             font-size: initial;
         }
-
     </style>
 @endpush
 
@@ -59,21 +58,6 @@
                                 id="banner_image">
                         </div>
                         @error('banner_image')
-                            <p>
-                                <span class="text-danger" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            </p>
-                        @enderror
-
-                        <div class="form-group">
-                            <label for="banner_image_two">Select Image Size Should be (370*250)</label>
-                            <input type="file" id="banner_image_two" data-show-errors="true" data-errors-position="outside"
-                                data-allowed-file-extensions="jpg jpeg png svg webp gif"
-                                class="dropify2 form-control @error('banner_image_two') is-invalid @enderror"
-                                name="banner_image_two" id="banner_image_two">
-                        </div>
-                        @error('banner_image_two')
                             <p>
                                 <span class="text-danger" role="alert">
                                     <strong>{{ $message }}</strong>

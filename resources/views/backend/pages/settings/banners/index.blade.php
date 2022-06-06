@@ -34,7 +34,6 @@
                         <thead>
                             <tr>
                                 <th class="text-center">Banner</th>
-                                <th class="text-center">Image</th>
                                 <th class="text-center">Title</th>
                                 <th class="text-center">Price</th>
                                 <th class="text-center">Status</th>
@@ -46,10 +45,6 @@
                                 <tr>
                                     <td class="text-center">
                                         <img src="{{ asset($banner->banner_image) }}" alt="Banner" height="100px"
-                                            width="100px">
-                                    </td>
-                                    <td class="text-center">
-                                        <img src="{{ asset($banner->banner_image_two) }}" alt="" height="100px"
                                             width="100px">
                                     </td>
                                     <td class="text-center">{{ $banner->banner_title }}</td>

@@ -8,7 +8,6 @@
         .dropify-wrapper .dropify-message p {
             font-size: initial;
         }
-
     </style>
 @endpush
 
@@ -46,7 +45,7 @@
                     </p>
                 </div>
             </div>
-            <form action="{{ route('admin.settings.website.update') }}" method="post">
+            <form action="{{ route('admin.settings.website.update') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('put')
                 <div class="main-card mb-3 card">
@@ -71,7 +70,7 @@
                             <label for="website_title">Webite title <code>{ key: website_title }</code></label>
                             <input type="text" id="website_title" name="website_title" placeholder="Website Title"
                                 class="form-control @error('website_title') is-invalid @enderror"
-                                value="{{ setting('website_title') }}" required>
+                                value="{{ setting('website_title') }}">
                         </div>
                         @error('website_title')
                             <p>
@@ -85,7 +84,7 @@
                             <label for="site_phone_num">Site Phone Number <code>{ key: site_phone_num }</code></label>
                             <input type="number" id="site_phone_num" name="site_phone_num" placeholder="Site Phone Number"
                                 class="form-control @error('site_phone_num') is-invalid @enderror"
-                                value="{{ setting('site_phone_num') }}" required>
+                                value="{{ setting('site_phone_num') }}">
                         </div>
                         @error('site_phone_num')
                             <p>
@@ -98,7 +97,7 @@
                         <div class="form-group">
                             <label for="site_email">Site Email <code>{ key: site_email }</code></label>
                             <input type="text" id="site_email" name="site_email" placeholder="Site Email"
-                                class="form-control @error('site_email') is-invalid @enderror" required
+                                class="form-control @error('site_email') is-invalid @enderror"
                                 value="{{ setting('site_email') }}">
                         </div>
                         @error('site_email')

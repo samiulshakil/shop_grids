@@ -5,37 +5,23 @@
                 <div class="slider-head">
 
                     <div class="hero-slider">
-
-                        <div class="single-slider"
-                            style="background-image: url({{asset('frontend/assets/images/hero/slider-bg1.jpg')}});">
-                            <div class="content">
-                                <h2><span>No restocking fee ($35 savings)</span>
-                                    M75 Sport Watch
-                                </h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut
-                                    labore dolore magna aliqua.</p>
-                                <h3><span>Now Only</span> $320.99</h3>
-                                <div class="button">
-                                    <a href="product-grids.html" class="btn">Shop Now</a>
+                        @forelse ($banners as $banner)
+                            <div class="single-slider"
+                                style="background-image: url({{ asset($banner->banner_image) }});">
+                                <div class="content">
+                                    <h2><span>{{ $banner->banner_sub_title }}</span>
+                                        {{ $banner->banner_title }}
+                                    </h2>
+                                    <p>{{ $banner->banner_description }}</p>
+                                    <h3><span>Now Only</span> ${{ $banner->banner_price }}</h3>
+                                    <div class="button">
+                                        <a href="product-grids.html"
+                                            class="btn">{{ $banner->banner_button_text }}</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-
-                        <div class="single-slider"
-                            style="background-image: url({{asset('frontend/assets/images/hero/slider-bg2.jpg')}});">
-                            <div class="content">
-                                <h2><span>Big Sale Offer</span>
-                                    Get the Best Deal on CCTV Camera
-                                </h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut
-                                    labore dolore magna aliqua.</p>
-                                <h3><span>Combo Only:</span> $590.00</h3>
-                                <div class="button">
-                                    <a href="product-grids.html" class="btn">Shop Now</a>
-                                </div>
-                            </div>
-                        </div>
+                        @empty
+                        @endforelse
 
                     </div>
 
@@ -46,7 +32,7 @@
                     <div class="col-lg-12 col-md-6 col-12 md-custom-padding">
 
                         <div class="hero-small-banner"
-                            style="background-image: url('{{asset('frontend/assets/images/hero/slider-bnr.jpg')}}');">
+                            style="background-image: url('{{ asset('frontend/assets/images/hero/slider-bnr.jpg') }}');">
                             <div class="content">
                                 <h2>
                                     <span>New line required</span>

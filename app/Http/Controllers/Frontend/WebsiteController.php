@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Banner;
 
 class WebsiteController extends Controller
 {
     public function index(){
         $products = Product::where('product_status',1)->orderBy('id','DESC')->get();
-        return view('frontend.home.home');
+        $banners = Banner::where('status',1)->get();
+        return view('frontend.home.home', compact('products', 'banners'));
     }
 }

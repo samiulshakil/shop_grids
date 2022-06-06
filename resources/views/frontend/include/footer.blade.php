@@ -122,7 +122,8 @@
                     </div>
                     <div class="col-lg-4 col-12">
                         <div class="copyright">
-                            <p>Designed and Developed by<a href="#" rel="nofollow" target="_blank">Samiul Shakil</a></p>
+                            <p>Designed and Developed by<a href="#" rel="nofollow"
+                                    target="_blank">{{ setting('site_footer_text') }}</a></p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-12">
