@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Banner;
+use App\Models\Category;
 
 class WebsiteController extends Controller
 {
