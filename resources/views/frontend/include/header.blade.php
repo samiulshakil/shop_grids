@@ -261,18 +261,13 @@
                 <div class="nav-social">
                     <h5 class="title">Follow Us:</h5>
                     <ul>
-                        <li>
-                            <a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)"><i class="lni lni-twitter-original"></i></a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)"><i class="lni lni-instagram"></i></a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)"><i class="lni lni-skype"></i></a>
-                        </li>
+                        @forelse (socialmedias() as $social)
+                            <li>
+                                <a target="_blank" href="{{ $social->url }}"><i
+                                        class="{{ $social->icon }}"></i></a>
+                            </li>
+                        @empty
+                        @endforelse
                     </ul>
                 </div>
 
