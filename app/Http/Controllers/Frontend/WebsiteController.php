@@ -11,7 +11,7 @@ use App\Models\Category;
 class WebsiteController extends Controller
 {
     public function index(){
-        $products = Product::where('product_status',1)->orderBy('id','DESC')->get();
+        $products = Product::with('category')->where('product_status',1)->orderBy('id','DESC')->get();
         $banners = Banner::where('status',1)->get();
         return view('frontend.home.home', compact('products', 'banners'));
     }
