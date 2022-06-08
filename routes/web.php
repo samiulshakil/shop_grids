@@ -19,6 +19,7 @@ use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
+use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\SocialMediaController;
@@ -175,6 +176,7 @@ Route::middleware(['auth'])->group(function () {
                 Route::resource('brands', BrandController::class);
                 Route::resource('categories', CategoryController::class);
                 Route::resource('subcategories', SubCategoryController::class);
+                Route::resource('blogs', BlogController::class);
 
                 //Products Route
                 Route::get('products', [ProductController::class, 'index'])->name('products.index');

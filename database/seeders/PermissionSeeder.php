@@ -350,6 +350,33 @@ class PermissionSeeder extends Seeder
                     'name' => 'Edit Banner',
                     'slug' => 'admin.settings.banners.edit',
                 ]);
+
+                //Blog Management
+                $moduleBlogs = Module::updateOrCreate(['name'=> 'Blog Management']);
+
+                Permission::updateOrCreate([
+                    'module_id' => $moduleBlogs->id,
+                    'name' => 'Access Blog',
+                    'slug' => 'admin.blogs.index',
+                ]);
+        
+                Permission::updateOrCreate([
+                    'module_id' => $moduleBlogs->id,
+                    'name' => 'Create Blog',
+                    'slug' => 'admin.blogs.create',
+                ]);
+        
+                Permission::updateOrCreate([
+                    'module_id' => $moduleBlogs->id,
+                    'name' => 'Edit Blog',
+                    'slug' => 'admin.blogs.edit',
+                ]);
+        
+                Permission::updateOrCreate([
+                    'module_id' => $moduleBlogs->id,
+                    'name' => 'Delete Blog',
+                    'slug' => 'admin.blogs.destroy',
+                ]);
         
         
 
