@@ -8,7 +8,6 @@ use App\Models\Category;
 use App\Models\SubCategory;
 use App\Models\Brand;
 use App\Models\User;
-use App\Models\MultiImage;
 
 class Product extends Model
 {
@@ -33,8 +32,4 @@ class Product extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function images()
-    {
-     return $this->hasMany(MultiImage::class);
-    }
 }

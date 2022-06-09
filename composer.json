@@ -9,6 +9,7 @@
         "appslabke/lara-izitoast": "^1.1",
         "brian2694/laravel-toastr": "^5.57",
         "browner12/helpers": "^3.4",
+        "bumbummen99/shoppingcart": "^4.2",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.2",
         "laravel/sanctum": "^2.14.1",

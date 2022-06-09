@@ -15,12 +15,13 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('frontend/assets/images/favicon.svg') }}" />
 
     @stack('css')
-    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/LineIcons.3.0.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/tiny-slider.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/glightbox.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/main.css') }}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    {{-- <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css"> --}}
 
 
 </head>
@@ -48,32 +49,7 @@
     {{-- Header section --}}
     @include('frontend.include.header')
 
-    {{-- Hero Area and Banner section --}}
-    @include('frontend.include.heroarea')
-
-    {{-- Featured Category section --}}
-    @include('frontend.include.featured_category')
-
-    {{-- Ttending Product section --}}
-    @include('frontend.include.trending_product')
-
-    {{-- Banner section --}}
-    @include('frontend.include.banner')
-
-    {{-- Special Offer section --}}
-    @include('frontend.include.special_offer')
-
-    {{-- Best Seller, New Arrival and Top Rated section --}}
-    @include('frontend.include.product_list')
-
-    {{-- Brands section --}}
-    @include('frontend.include.brands')
-
-    {{-- Blog section --}}
-    @include('frontend.include.blog')
-
-    {{-- Shipping section --}}
-    @include('frontend.include.shipping')
+    @yield('mainContent')
 
     {{-- Footer section --}}
     @include('frontend.include.footer')
@@ -81,19 +57,15 @@
     <a href="#" class="scroll-top">
         <i class="lni lni-chevron-up"></i>
     </a>
-    <script>
-        src = "https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity = "sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-        crossorigin = "anonymous" >
-    </script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript" src="{{ asset('backend/assets/scripts/script.js') }}"></script>
-    <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
-    {!! Toastr::message() !!}
-    @stack('js')
-    <script>
-        let _token = "{{ csrf_token() }}";
-    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    {{-- <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    {{-- {!! Toastr::message() !!} --}}
+
+
     <script src="{{ asset('frontend/assets/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/tiny-slider.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/glightbox.min.js') }}"></script>
@@ -168,6 +140,10 @@
         }
         timer();
         setInterval(timer, 1000);
+    </script>
+    @stack('js')
+    <script>
+        let _token = "{{ csrf_token() }}";
     </script>
 </body>
 

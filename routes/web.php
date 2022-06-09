@@ -25,6 +25,7 @@ use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\SocialMediaController;
 use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\Frontend\WebsiteController;
+use App\Http\Controllers\Frontend\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,10 @@ use App\Http\Controllers\Frontend\WebsiteController;
 
 //Frontend Routes Start
 Route::get('/', [WebsiteController::class, 'index'])->name('website.home');
+Route::post('/add/cart', [CartController::class, 'AddCart'])->name('cart.add');
+Route::get('/show/cart', [CartController::class, 'index'])->name('cart.show');
+Route::post('/product/info', [CartController::class, 'ProductInfo'])->name('product.info');
+
 
 
 //email verified route start
