@@ -104,12 +104,14 @@
                 let id = $('#product_id').val();
                 let product_size = $('#product_size').val();
                 let product_color = $('#product_color').val();
+                let qty = $('#qty').val();
                 if (id) {
                     $.ajax({
                         url: "{{ route('cart.add') }}",
                         type: "POST",
                         data: {
                             id: id,
+                            qty: qty,
                             product_size: product_size,
                             product_color: product_color,
                             _token: _token
@@ -117,7 +119,7 @@
                         dataType: "JSON",
                         success: function(data) {
                             flashMessage(data.status, data.message);
-
+                            $('.cart-items').html(data.cart_popup);
                         },
                         error: function(xhr, ajaxOption, thrownError) {
                             console.log(thrownError + '\r\n' + xhr.statusText + '\r\n' + xhr

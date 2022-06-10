@@ -44,13 +44,19 @@ class CartController extends Controller
         Cart::add([
             'id' => $request->id, 
             'name' => $product->product_name, 
-            'qty' => 1, 
+            'qty' => $request->qty, 
             'price' => $product->discount_price, 
             'weight' => 1, 
             'options' => ['image' => $product->product_thumbnail, 'size' => $request->product_size, 'color' => $request->product_color],
         ]);
 
-        return response()->json(['message' => 'Product successfully added cart', 'status' => 'success']);
+        $cartcount = cartcount();
+        $contents = Cart::content();
+        $view = view('frontend.partials.cart_popup', compact('contents'));
+
+        $cart_popup = $view->render();
+
+        return response()->json(['message' => 'Product successfully added cart', 'status' => 'success', 'cartcount' => $cartcount, 'cart_popup' => $cart_popup,]);
     }
 
     /**

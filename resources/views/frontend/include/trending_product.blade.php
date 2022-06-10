@@ -57,7 +57,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Product Info</h5>
+                    <h5 class="modal-title text-center" id="staticBackdropLabel">Product Info</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -117,8 +117,8 @@
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label for="qty">Quantity</label>
-                                            <input type="number" value="1" id="qty" class="form-control  mt-2 mb-2"
-                                                max="5" min="0">
+                                            <input type="number" value="1" id="qty" name="qty"
+                                                class="form-control  mt-2 mb-2" max="5" min="1">
                                         </div>
                                         <div class="form-group sizeof">
 
