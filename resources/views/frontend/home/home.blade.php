@@ -49,12 +49,15 @@
                                 src: data.product.product_thumbnail
                             });
                             $('#product_id').val(data.product.id);
+                            $('#orginal_qty').val(data.product.product_qty);
+                            $('#qty').val(1);
                             $('.product_name').text(data.product.product_name)
                             $('.product_code').text(data.product.product_code)
                             $('.category').text(data.product.category.category_name)
                             $('.brand').text(data.product.brand.brand_name)
+
                             let stock = data.product.product_qty
-                            if (stock !== 0) {
+                            if (stock != 0) {
                                 $('.stock').text("In Stock")
                                 $('.stock').addClass('text-success');
                             } else {
@@ -105,64 +108,35 @@
                 let product_size = $('#product_size').val();
                 let product_color = $('#product_color').val();
                 let qty = $('#qty').val();
+                let orginal_qty = $('#orginal_qty').val();
                 if (id) {
-                    $.ajax({
-                        url: "{{ route('cart.add') }}",
-                        type: "POST",
-                        data: {
-                            id: id,
-                            qty: qty,
-                            product_size: product_size,
-                            product_color: product_color,
-                            _token: _token
-                        },
-                        dataType: "JSON",
-                        success: function(data) {
-                            flashMessage(data.status, data.message);
-                            $('.cart-items').html(data.cart_popup);
-                        },
-                        error: function(xhr, ajaxOption, thrownError) {
-                            console.log(thrownError + '\r\n' + xhr.statusText + '\r\n' + xhr
-                                .responseText);
-                        }
-                    });
+                    if (parseInt(orginal_qty) < parseInt(qty) || parseInt(qty) > 5) {
+                        flashMessage('error', 'Qty must less than P qty and Max 5');
+                    } else {
+                        $.ajax({
+                            url: "{{ route('cart.add') }}",
+                            type: "POST",
+                            data: {
+                                id: id,
+                                qty: qty,
+                                product_size: product_size,
+                                product_color: product_color,
+                                _token: _token
+                            },
+                            dataType: "JSON",
+                            success: function(data) {
+                                flashMessage(data.status, data.message);
+                                $('.cart-items').html(data.cart_popup);
+                            },
+                            error: function(xhr, ajaxOption, thrownError) {
+                                console.log(thrownError + '\r\n' + xhr.statusText + '\r\n' + xhr
+                                    .responseText);
+                            }
+                        });
+                    }
                 }
+
             });
         });
-
-        //toaster notification 
-        function flashMessage(status, message) {
-            toastr.options = {
-                "closeButton": true,
-                "debug": false,
-                "newestOnTop": true,
-                "progressBar": true,
-                "positionClass": "toast-top-right",
-                "preventDuplicates": false,
-                "onclick": null,
-                "showDuration": "300",
-                "hideDuration": "1000",
-                "timeOut": "5000",
-                "extendedTimeOut": "1000",
-                "showEasing": "swing",
-                "hideEasing": "linear",
-                "showMethod": "fadeIn",
-                "hideMethod": "fadeOut"
-            }
-            switch (status) {
-                case 'success':
-                    toastr.success(message, 'SUCCESS');
-                    break;
-                case 'error':
-                    toastr.error(message, 'ERROR');
-                    break;
-                case 'info':
-                    toastr.info(message, 'INFORMARTION');
-                    break;
-                case 'warning':
-                    toastr.warning(message, 'WARNING');
-                    break;
-            }
-        }
     </script>
 @endpush

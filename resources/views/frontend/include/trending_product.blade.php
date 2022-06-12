@@ -16,18 +16,29 @@
                     <div class="single-product">
                         <div class="product-image">
                             <img src="{{ asset($product->product_thumbnail) }}" alt="#">
-                            <div class="button">
-                                <button type="button" data-id="{{ $product->id }}" id="cartBtn" class="btn getcart"
-                                    data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i
-                                        class="lni lni-cart"></i>
-                                    Add
-                                    to Cart</button>
-                            </div>
+                            @if ($product->product_qty != 0)
+                                <div class="button">
+                                    <button type="button" data-id="{{ $product->id }}" id="cartBtn"
+                                        class="btn getcart" data-bs-toggle="modal"
+                                        data-bs-target="#staticBackdrop"><i class="lni lni-cart"></i>
+                                        Add
+                                        to Cart</button>
+                                </div>
+                            @else
+                                <div class="button">
+                                    <button type="button" style="padding: 12px 20px;" class="btn"><i
+                                            class="lni lni-cart"></i>
+                                        Stock Out</button>
+                                </div>
+                            @endif
+
+
                         </div>
                         <div class="product-info">
                             <span class="category">{{ $product->category->category_name }}</span>
                             <h4 class="title">
-                                <a href="product-grids.html">{{ $product->product_name }}</a>
+                                <a
+                                    href="{{ route('website.product.details', $product->product_slug) }}">{{ $product->product_name }}</a>
                             </h4>
                             <ul class="review">
                                 <li><i class="lni lni-star-filled"></i></li>
@@ -38,7 +49,7 @@
                                 <li><span>4.0 Review(s)</span></li>
                             </ul>
                             <div class="price">
-                                <span>$199.00</span>
+                                <span>${{ $product->discount_price }}</span>
                             </div>
                         </div>
                     </div>
@@ -127,6 +138,7 @@
 
                                         </div>
                                         <input type="hidden" id="product_id" name="product_id">
+                                        <input type="hidden" name="orginal_qty" id="orginal_qty">
                                     </div>
                                 </div>
                             </div>
@@ -135,7 +147,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">X</button>
-                    <button type="button" class="btn btn-primary addcart" data-id="">Add To Cart</button>
+                    <button type="button" class="btn btn-primary addcart">Add To Cart</button>
                 </div>
             </div>
         </div>

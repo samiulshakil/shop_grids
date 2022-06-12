@@ -1,5 +1,62 @@
 @extends('frontend.layouts.master')
 
+@push('css')
+    <style>
+        button.value-button.increase {
+            border: 1px solid #fcfcfc;
+            padding: 10px;
+            background: #fff;
+        }
+
+        button.value-button.decrease {
+            border: 1px solid #fcfcfc;
+            padding: 10px;
+            background: #fff;
+        }
+
+        .increase {
+            display: inline-block;
+        }
+
+        .decrease {
+            display: inline-block;
+        }
+
+        .value-button:hover {
+            cursor: pointer;
+        }
+
+        input#number {
+            text-align: center;
+            border: 1px solid #ddd;
+            margin: 0px;
+            width: 60px;
+            height: 40px;
+            background: white;
+        }
+
+        i.lni.lni-circle-plus {
+            margin-left: 10px;
+            font-size: 18px;
+        }
+
+        i.lni.lni-circle-minus {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .lni.lni-cog:hover {
+            cursor: pointer;
+        }
+    </style>
+@endpush
+
 @section('mainContent')
     <div class="breadcrumbs">
         <div class="container">
@@ -22,103 +79,138 @@
 
 
     <div class="shopping-cart section">
-        <div class="container">
-            <div class="cart-list-head">
-
-                <div class="cart-list-title  text-center">
-                    <div class="row">
-                        <div class="col-lg-2 col-md-3 col-12">
-                            <p>Image</p>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-12">
-                            <p>Name</p>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-12">
-                            <p>Quantity</p>
-                        </div>
-                        <div class="col-lg-1 col-md-2 col-12">
-                            <p>Update</p>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-12">
-                            <p>Subtotal</p>
-                        </div>
-                        <div class="col-lg-1 col-md-2 col-12">
-                            <p>Remove</p>
-                        </div>
-                    </div>
-                </div>
-                @php
-                    $total = 0;
-                @endphp
-                @foreach ($contents as $content)
-                    <div class="cart-single-list text-center">
-                        <div class="row align-items-center">
-                            <div class="col-lg-2 col-md-2 col-12">
-                                <a href="#!"><img src="{{ asset($content->options['image']) }}" alt="#"></a>
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-12">
-                                <h5 class="product-name"><a href="#!">{{ $content->name }}</a>
-                                </h5>
-                            </div>
-                            <div class="col-lg-2 col-md-2 col-12">
-                                <div class="form-group">
-                                    <input type="number" value="{{ $content->qty }}" name="qty" min="0" max="5"
-                                        class="form-control" id="qty" placeholder="Quantity">
-                                </div>
-                            </div>
-                            <div class="col-lg-1 col-md-2 col-12">
-                                <i class="lni lni-cog"></i>
-                            </div>
-                            <div class="col-lg-2 col-md-2 col-12">
-                                <p>{{ $content->price }}</p>
-                                @php
-                                    $total += $content->price;
-                                @endphp
-                            </div>
-                            <div class="col-lg-1 col-md-2 col-12">
-                                <a class="remove-item" href="javascript:void(0)"><i class="lni lni-close"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-
-            </div>
-            <div class="row">
-                <div class="col-12">
-
-                    <div class="total-amount">
-                        <div class="row">
-                            <div class="col-lg-8 col-md-6 col-12">
-                                <div class="left">
-                                    <div class="coupon">
-                                        <form action="#" target="_blank">
-                                            <input name="Coupon" placeholder="Enter Your Coupon">
-                                            <div class="button">
-                                                <button class="btn">Apply Coupon</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-12">
-                                <div class="right">
-                                    <ul>
-                                        <li>Cart Subtotal<span>{{ $total }}</span></li>
-                                        <li>Shipping<span>Free</span></li>
-                                        <li>You Save<span>$29.00</span></li>
-                                        <li class="last">You Pay<span>$2531.00</span></li>
-                                    </ul>
-                                    <div class="button">
-                                        <a href="checkout.html" class="btn">Checkout</a>
-                                        <a href="product-grids.html" class="btn btn-alt">Continue shopping</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
+        <div class="show_carts">
+            @include('frontend.partials.show_cart')
         </div>
     </div>
 @endsection
+
+@push('js')
+    <script>
+        function increaseValue(id) {
+            let qty = parseInt($('.number' + id).val())
+            var value = parseInt($('.number' + id).val());
+            value = isNaN(value) ? 0 : value;
+            value++;
+            $('.number' + id).val(value);
+            if (value == 6) {
+                alert('Sorry, Maximum 5 Product You can Add');
+                parseInt($('.number' + id).val(5))
+                $('.increase-button' + id).attr('disabled', true);
+            } else {
+                $('.decrease-button' + id).attr('disabled', false);
+            }
+        }
+
+        function decreaseValue(id) {
+            var value = parseInt($('.number' + id).val());
+            value = isNaN(value) ? 0 : value;
+            value < 1 ? value = 1 : '';
+            value--;
+            $('.number' + id).val(value);
+
+            if (value == 0) {
+                alert('Sorry, Quantity Must at least one');
+                parseInt($('.number' + id).val(1))
+                $('.decrease-button' + id).attr('disabled', true);
+            } else {
+                $('.increase-button' + id).attr('disabled', false);
+            }
+        }
+
+        $(document).ready(function() {
+            //plus button
+            $('body').on('click', '#plus', function(e) {
+                e.preventDefault();
+                let id = $(this).attr('data-id');
+                let qty = parseInt($('.number' + id).val());
+                if (qty > 0) {
+                    let price = parseInt($('.price' + id).val());
+                    let total_price = qty * price;
+                    $('.total_price' + id).text('$' + total_price);
+                    let sub_total_old = $('.sub_total_input').val();
+                    let sub_total = parseFloat(sub_total_old) + price
+
+                    $('.sub_total_old' + id).text('$' + sub_total);
+                    $('.sub_total').text('$' + sub_total);
+                    $('.sub_total_input').val(sub_total);
+                }
+            });
+
+            //minus button
+            $('body').on('click', '#minus', function(e) {
+                e.preventDefault();
+                let id = $(this).attr('data-id');
+                let qty = parseInt($('.number' + id).val());
+                if (qty > 0) {
+                    let price = parseInt($('.price' + id).val());
+                    let total_price = qty * price;
+                    $('.total_price' + id).text('$' + total_price);
+                    let sub_total_old = parseFloat($('.sub_total_input').val());
+                    let sub_total = parseFloat(sub_total_old) - price
+
+                    $('.sub_total_old' + id).text('$' + sub_total);
+                    $('.sub_total').text('$' + sub_total);
+                    $('.sub_total_input').val(sub_total);
+                }
+            });
+
+            //update cart 
+            $('body').on('click', '.updateCart', function(e) {
+                e.preventDefault();
+                let id = $('#plus').attr('data-id');
+                let rowId = $(this).attr('row-id');
+                let qty = parseInt($('.number' + id).val());
+                if (rowId) {
+                    $.ajax({
+                        url: "{{ route('cart.update') }}",
+                        type: "POST",
+                        data: {
+                            rowId: rowId,
+                            qty: qty,
+                            _token: _token
+                        },
+                        dataType: "JSON",
+                        success: function(data) {
+                            flashMessage(data.status, data.message);
+                        },
+                        error: function(xhr, ajaxOption, thrownError) {
+                            console.log(thrownError + '\r\n' + xhr.statusText + '\r\n' + xhr
+                                .responseText);
+                        }
+                    });
+                }
+
+            });
+
+            //Delete cart 
+            $('body').on('click', '.deleteCart', function(e) {
+                e.preventDefault();
+                let rowId = $(this).attr('row-id');
+                if (rowId) {
+                    $.ajax({
+                        url: "{{ route('cart.delete') }}",
+                        type: "POST",
+                        data: {
+                            rowId: rowId,
+                            _token: _token
+                        },
+                        dataType: "JSON",
+                        success: function(data) {
+                            flashMessage(data.status, data.message);
+                            // $('.hide-' + rowId).hide();
+                            $('.show_carts').html(data.cart_show);
+                            $('.total-items').html(data.cartcount);
+                            $('.cart-items').html(data.cart_popup);
+                        },
+                        error: function(xhr, ajaxOption, thrownError) {
+                            console.log(thrownError + '\r\n' + xhr.statusText + '\r\n' + xhr
+                                .responseText);
+                        }
+                    });
+                }
+
+            });
+        });
+    </script>
+@endpush

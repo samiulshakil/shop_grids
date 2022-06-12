@@ -114,7 +114,7 @@
                             <div class="wishlist">
                                 <a href="javascript:void(0)">
                                     <i class="lni lni-heart"></i>
-                                    <span class="total-items">0</span>
+                                    <span class="total-items wish_numbers">{{ wishlists() }}</span>
                                 </a>
                             </div>
                             <div class="cart-items">
@@ -212,7 +212,8 @@
                     <ul>
                         @forelse (socialmedias() as $social)
                             <li>
-                                <a target="_blank" href="{{ $social->url }}"><i class="{{ $social->icon }}"></i></a>
+                                <a target="_blank" href="{{ $social->url }}"><i
+                                        class="{{ $social->icon }}"></i></a>
                             </li>
                         @empty
                         @endforelse

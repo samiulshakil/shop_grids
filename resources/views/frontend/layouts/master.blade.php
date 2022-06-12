@@ -145,6 +145,42 @@
     <script>
         let _token = "{{ csrf_token() }}";
     </script>
+    <script>
+        //toaster notification 
+        function flashMessage(status, message) {
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": true,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+            switch (status) {
+                case 'success':
+                    toastr.success(message, 'SUCCESS');
+                    break;
+                case 'error':
+                    toastr.error(message, 'ERROR');
+                    break;
+                case 'info':
+                    toastr.info(message, 'INFORMARTION');
+                    break;
+                case 'warning':
+                    toastr.warning(message, 'WARNING');
+                    break;
+            }
+        }
+    </script>
 </body>
 
 </html>

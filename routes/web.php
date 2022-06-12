@@ -26,6 +26,7 @@ use App\Http\Controllers\Backend\SocialMediaController;
 use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\Frontend\WebsiteController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\WishlistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,10 +41,17 @@ use App\Http\Controllers\Frontend\CartController;
 
 //Frontend Routes Start
 Route::get('/', [WebsiteController::class, 'index'])->name('website.home');
+Route::get('/product/{slug}', [WebsiteController::class, 'productDetails'])->name('website.product.details');
+
+//carts
 Route::post('/add/cart', [CartController::class, 'AddCart'])->name('cart.add');
 Route::get('/show/cart', [CartController::class, 'index'])->name('cart.show');
+Route::post('/update/cart', [CartController::class, 'update'])->name('cart.update');
+Route::post('/delete/cart', [CartController::class, 'destroy'])->name('cart.delete');
 Route::post('/product/info', [CartController::class, 'ProductInfo'])->name('product.info');
 
+//wishlists
+Route::post('/add/wish', [WishlistController::class, 'addToWishlist'])->name('wish.add');
 
 
 //email verified route start

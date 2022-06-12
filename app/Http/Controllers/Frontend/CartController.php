@@ -60,48 +60,18 @@ class CartController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $rowId = $request->rowId;
+        $qty = $request->qty;
+        Cart::update($rowId, ['qty' => $qty]);
+        return response()->json(['message' => 'Successfully updated cart', 'status' => 'success',]);
     }
 
     /**
@@ -110,8 +80,19 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $rowId = $request->rowId;
+        Cart::remove($rowId);
+
+        $contents = Cart::content();
+        $cartcount = cartcount();
+        $view = view('frontend.partials.show_cart', compact('contents'));
+        $cart_popup = view('frontend.partials.cart_popup', compact('contents'));
+
+        $cart_show = $view->render();
+        $cart_popup = $cart_popup->render();
+
+        return response()->json(['message' => 'Product successfully removed', 'status' => 'success', 'cartcount' => $cartcount, 'cart_show' => $cart_show, 'cart_popup' => $cart_popup]);
     }
 }
