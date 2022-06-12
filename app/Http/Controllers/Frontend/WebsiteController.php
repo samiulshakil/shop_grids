@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Banner;
 use App\Models\Category;
+use App\Models\Brand;
 
 class WebsiteController extends Controller
 {
@@ -19,5 +20,12 @@ class WebsiteController extends Controller
     public function productDetails($slug){
         $product = Product::where('product_status',1)->where('product_slug',$slug)->orderBy('id','DESC')->first();
         return view('frontend.products.product_details', compact('product'));
+    }
+
+    public function shop(){
+        $products = Product::with('category')->where('product_status',1)->orderBy('id','DESC')->get();
+        $category_products = Category::with('products')->withCount('products')->get();
+        $brands = Brand::with('products')->withCount('products')->get();
+        return view('frontend.products.shop', compact('brands', 'products', 'category_products'));
     }
 }

@@ -42,6 +42,7 @@ use App\Http\Controllers\Frontend\WishlistController;
 //Frontend Routes Start
 Route::get('/', [WebsiteController::class, 'index'])->name('website.home');
 Route::get('/product/{slug}', [WebsiteController::class, 'productDetails'])->name('website.product.details');
+Route::get('/shop', [WebsiteController::class, 'shop'])->name('website.shop');
 
 //carts
 Route::post('/add/cart', [CartController::class, 'AddCart'])->name('cart.add');
