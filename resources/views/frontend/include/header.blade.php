@@ -112,7 +112,7 @@
                         </div>
                         <div class="navbar-cart">
                             <div class="wishlist">
-                                <a href="javascript:void(0)">
+                                <a href="{{ route('wish.show') }}">
                                     <i class="lni lni-heart"></i>
                                     <span class="total-items wish_numbers">{{ wishlists() }}</span>
                                 </a>

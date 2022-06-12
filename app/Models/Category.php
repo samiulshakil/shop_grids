@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\SubCategory;
 use App\Models\Product;
+use App\Models\Blog;
 
 class Category extends Model
 {
@@ -25,5 +26,9 @@ class Category extends Model
 
         public function products(){
             return $this->hasMany(Product::class);
+        }
+
+        public function blogs(){
+            return $this->hasMany(Blog::class);
         }
 }

@@ -8,13 +8,15 @@ use App\Models\Product;
 use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Brand;
+use App\Models\Blog;
 
 class WebsiteController extends Controller
 {
     public function index(){
         $products = Product::with('category')->where('product_status',1)->orderBy('id','DESC')->get();
         $banners = Banner::where('status',1)->get();
-        return view('frontend.home.home', compact('products', 'banners'));
+        $blogs = Blog::with('category')->where('status',1)->get();
+        return view('frontend.home.home', compact('products', 'banners', 'blogs'));
     }
 
     public function productDetails($slug){
@@ -28,4 +30,5 @@ class WebsiteController extends Controller
         $brands = Brand::with('products')->withCount('products')->get();
         return view('frontend.products.shop', compact('brands', 'products', 'category_products'));
     }
+
 }

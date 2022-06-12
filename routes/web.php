@@ -53,6 +53,8 @@ Route::post('/product/info', [CartController::class, 'ProductInfo'])->name('prod
 
 //wishlists
 Route::post('/add/wish', [WishlistController::class, 'addToWishlist'])->name('wish.add');
+Route::get('/show/wish', [WishlistController::class, 'index'])->name('wish.show');
+Route::delete('/destory/wish/{id}', [WishlistController::class, 'destroy'])->name('wish.destory');
 
 
 //email verified route start
