@@ -24,6 +24,7 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\SocialMediaController;
 use App\Http\Controllers\Backend\BannerController;
+use App\Http\Controllers\Backend\ContactUsController;
 use App\Http\Controllers\Frontend\WebsiteController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\WishlistController;
@@ -43,6 +44,11 @@ use App\Http\Controllers\Frontend\WishlistController;
 Route::get('/', [WebsiteController::class, 'index'])->name('website.home');
 Route::get('/product/{slug}', [WebsiteController::class, 'productDetails'])->name('website.product.details');
 Route::get('/shop', [WebsiteController::class, 'shop'])->name('website.shop');
+Route::get('/blog/details/{id}', [WebsiteController::class, 'blogDetails'])->name('blog.details');
+
+//Contact us or message
+Route::get('contact/us', [ContactUsController::class, 'contactUs'])->name('contact.us');
+Route::post('/message/store', [ContactUsController::class, 'messageStore'])->name('message.store');
 
 //carts
 Route::post('/add/cart', [CartController::class, 'AddCart'])->name('cart.add');

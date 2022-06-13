@@ -195,7 +195,7 @@
                                     </ul>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="contact.html" aria-label="Toggle navigation">Contact Us</a>
+                                    <a href="{{ route('contact.us') }}" aria-label="Toggle navigation">Contact Us</a>
                                 </li>
                             </ul>
                         </div>

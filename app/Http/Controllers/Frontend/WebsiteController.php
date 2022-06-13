@@ -31,4 +31,9 @@ class WebsiteController extends Controller
         return view('frontend.products.shop', compact('brands', 'products', 'category_products'));
     }
 
+    public function blogDetails($id){
+        $blog = Blog::where('id', $id)->where('status',1)->first();
+        return view('frontend.blogs.blog_details', compact('blog'));
+    }
+
 }

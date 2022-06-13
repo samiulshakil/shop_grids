@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Wishlist;
+use Illuminate\Support\Facades\Auth;
 
 if (!function_exists('wishlists')) {
 
@@ -12,6 +13,6 @@ if (!function_exists('wishlists')) {
      */
     function wishlists()
     {
-        return Wishlist::all()->count();
+        return Wishlist::where('user_id', Auth::id())->count();
     }
 }

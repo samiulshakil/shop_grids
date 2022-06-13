@@ -15,14 +15,15 @@
 
                     <div class="single-blog">
                         <div class="blog-img">
-                            <a href="blog-single-sidebar.html">
+                            <a href="{{ route('blog.details', $blog->id) }}">
                                 <img src="{{ asset($blog->image) }}" alt="#">
                             </a>
                         </div>
                         <div class="blog-content">
-                            <a class="category" href="javascript:void(0)">{{ $blog->category->category_name }}</a>
+                            <a class="category"
+                                href="javascript:void(0)">{{ $blog->category->category_name }}</a>
                             <h4>
-                                <a href="blog-single-sidebar.html">{{ $blog->title }}</a>
+                                <a href="{{ route('blog.details', $blog->id) }}">{{ $blog->title }}</a>
                             </h4>
                             <p>{{ $blog->description }}</p>
                             <div class="button">
