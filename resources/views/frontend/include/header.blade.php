@@ -37,9 +37,9 @@
                 <div class="col-lg-4 col-md-4 col-12">
                     <div class="top-middle">
                         <ul class="useful-links">
-                            <li><a href="index.html">Home</a></li>
+                            <li><a href="{{ route('website.home') }}">Home</a></li>
                             <li><a href="about-us.html">About Us</a></li>
-                            <li><a href="contact.html">Contact Us</a></li>
+                            <li><a href="{{ route('contact.us') }}">Contact Us</a></li>
                         </ul>
                     </div>
                 </div>
@@ -141,7 +141,8 @@
 
                                     <ul class="inner-sub-category">
                                         @foreach ($category->subCategories as $subcategory)
-                                            <li><a href="product-grids.html">{{ $subcategory->sub_category_name }}</a>
+                                            <li><a
+                                                    href="product-grids.html">{{ $subcategory->sub_category_name }}</a>
                                             </li>
                                         @endforeach
                                     </ul>
@@ -163,7 +164,8 @@
                         <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                             <ul id="nav" class="navbar-nav ms-auto">
                                 <li class="nav-item">
-                                    <a href="index.html" class="active" aria-label="Toggle navigation">Home</a>
+                                    <a href="{{ route('website.home') }}" class="active"
+                                        aria-label="Toggle navigation">Home</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="dd-menu collapsed" href="javascript:void(0)" data-bs-toggle="collapse"

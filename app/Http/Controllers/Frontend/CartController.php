@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Cart;
+use Brian2694\Toastr\Facades\Toastr;
+use Auth;
 
 class CartController extends Controller
 {
@@ -94,5 +96,13 @@ class CartController extends Controller
         $cart_popup = $cart_popup->render();
 
         return response()->json(['message' => 'Product successfully removed', 'status' => 'success', 'cartcount' => $cartcount, 'cart_show' => $cart_show, 'cart_popup' => $cart_popup]);
+    }
+
+    public function checkout(){
+        if (Auth::check()) {
+            
+        }else{
+            return redirect()->route('login');
+        }
     }
 }

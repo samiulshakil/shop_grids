@@ -56,6 +56,7 @@ Route::get('/show/cart', [CartController::class, 'index'])->name('cart.show');
 Route::post('/update/cart', [CartController::class, 'update'])->name('cart.update');
 Route::post('/delete/cart', [CartController::class, 'destroy'])->name('cart.delete');
 Route::post('/product/info', [CartController::class, 'ProductInfo'])->name('product.info');
+Route::get('/user/checkout', [CartController::class, 'checkout'])->name('user.checkout');
 
 //wishlists
 Route::post('/add/wish', [WishlistController::class, 'addToWishlist'])->name('wish.add');
@@ -194,11 +195,15 @@ Route::middleware(['auth'])->group(function () {
             Route::name('admin.')->group(function () {
                 Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
-                //Backend route
+                //Backend route start
                 Route::resource('brands', BrandController::class);
                 Route::resource('categories', CategoryController::class);
                 Route::resource('subcategories', SubCategoryController::class);
                 Route::resource('blogs', BlogController::class);
+
+                //message route
+                Route::get('/messages', [ContactUsController::class, 'showMessage'])->name('message.show');
+                Route::delete('messages/destroy/{id}', [ContactUsController::class, 'destroy'])->name('message.destroy');
 
                 //Products Route
                 Route::get('products', [ProductController::class, 'index'])->name('products.index');

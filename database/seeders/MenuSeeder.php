@@ -179,5 +179,15 @@ class MenuSeeder extends Seeder
             'icon_class' => 'pe-7s-note2',
             'url' => "/admin/blogs", 
         ]);
+
+        MenuItem::updateOrCreate([
+            'menu_id' => $menu->id, 
+            'type' => 'item', 
+            'parent_id' => null, 
+            'order' => 18, 
+            'title' => 'Message', 
+            'icon_class' => 'pe-7s-note',
+            'url' => "/admin/messages", 
+        ]);
     }
 }
