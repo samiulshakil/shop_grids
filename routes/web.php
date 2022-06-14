@@ -58,6 +58,11 @@ Route::post('/delete/cart', [CartController::class, 'destroy'])->name('cart.dele
 Route::post('/product/info', [CartController::class, 'ProductInfo'])->name('product.info');
 Route::get('/user/checkout', [CartController::class, 'checkout'])->name('user.checkout');
 
+//coupon
+route::post('/coupon/apply',[CartController::class,'couponApply'])->name('coupon.apply');
+route::get('/coupo/calculation',[CartController::class,'couponCalcaultion'])->name('couponCalcaultion');
+route::get('/coupon/remove',[CartController::class,'removeCoupon'])->name('removeCoupon');
+
 //wishlists
 Route::post('/add/wish', [WishlistController::class, 'addToWishlist'])->name('wish.add');
 Route::get('/show/wish', [WishlistController::class, 'index'])->name('wish.show');

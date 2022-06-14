@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('code')->unique();
             $table->string('type');
-            $table->string('value');
+            $table->integer('value');
             $table->date('expire');
             $table->integer('status')->default(1);
             $table->timestamps();

@@ -88,22 +88,29 @@
                             <div class="row">
                                 <div class="col-lg-8 col-md-6 col-12">
                                     <div class="left">
-                                        <div class="coupon">
-                                            <form action="#" target="_blank">
-                                                <input name="Coupon" placeholder="Enter Your Coupon">
-                                                <div class="button">
-                                                    <button class="btn">Apply Coupon</button>
-                                                </div>
-                                            </form>
-                                        </div>
+                                        @if (Session::has('coupon'))
+                                        @else
+                                            <div class="coupon">
+                                                <form action="#" class="couponApply" target="_blank" method="post">
+                                                    @csrf
+                                                    <input name="code" id="code" placeholder="Enter Your Coupon"
+                                                        required>
+                                                    <div class="button">
+                                                        <button class="btn">Apply Coupon</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-md-6 col-12">
                                     <div class="right">
                                         <ul>
-                                            <li>Cart Subtotal<span class="sub_total">${{ $total }}</span>
+                                            <li>Cart Subtotal<span
+                                                    class="sub_total">${{ Cart::subtotal() }}</span>
                                             </li>
-                                            <input type="hidden" value="{{ $total }}" class="sub_total_input">
+                                            <input type="hidden" value="{{ Cart::subtotal() }}"
+                                                class="sub_total_input">
                                             <li>Shipping<span>Free</span></li>
                                             <li>You Save<span>$29.00</span></li>
                                             <li class="last">You Pay<span>$2531.00</span></li>

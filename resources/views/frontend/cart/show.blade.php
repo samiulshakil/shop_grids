@@ -128,12 +128,6 @@
                     let price = parseInt($('.price' + id).val());
                     let total_price = qty * price;
                     $('.total_price' + id).text('$' + total_price);
-                    let sub_total_old = $('.sub_total_input').val();
-                    let sub_total = parseFloat(sub_total_old) + price
-
-                    $('.sub_total_old' + id).text('$' + sub_total);
-                    $('.sub_total').text('$' + sub_total);
-                    $('.sub_total_input').val(sub_total);
                 }
             });
 
@@ -146,12 +140,6 @@
                     let price = parseInt($('.price' + id).val());
                     let total_price = qty * price;
                     $('.total_price' + id).text('$' + total_price);
-                    let sub_total_old = parseFloat($('.sub_total_input').val());
-                    let sub_total = parseFloat(sub_total_old) - price
-
-                    $('.sub_total_old' + id).text('$' + sub_total);
-                    $('.sub_total').text('$' + sub_total);
-                    $('.sub_total_input').val(sub_total);
                 }
             });
 
@@ -173,6 +161,8 @@
                         dataType: "JSON",
                         success: function(data) {
                             flashMessage(data.status, data.message);
+                            $('.sub_total').text('$' + data.subtotal);
+                            $('.sub_total_input').val(data.subtotal);
                         },
                         error: function(xhr, ajaxOption, thrownError) {
                             console.log(thrownError + '\r\n' + xhr.statusText + '\r\n' + xhr
@@ -180,6 +170,32 @@
                         }
                     });
                 }
+
+            });
+
+            //Coupon Apply
+            $('body').on('submit', '.couponApply', function(e) {
+                e.preventDefault();
+                let code = $('#code').val();
+                $.ajax({
+                    url: "{{ route('coupon.apply') }}",
+                    type: "POST",
+                    data: {
+                        code: code,
+                        _token: _token
+                    },
+                    dataType: "JSON",
+                    success: function(data) {
+                        flashMessage(data.status, data.message);
+                        if (data.status == 'success') {
+                            $('.coupon').hide();
+                        }
+                    },
+                    error: function(xhr, ajaxOption, thrownError) {
+                        console.log(thrownError + '\r\n' + xhr.statusText + '\r\n' + xhr
+                            .responseText);
+                    }
+                });
 
             });
 

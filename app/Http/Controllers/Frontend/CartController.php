@@ -5,50 +5,46 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
-use Cart;
+use App\Models\Coupon;
 use Brian2694\Toastr\Facades\Toastr;
+use Carbon\Carbon;
+use Session;
+use Cart;
 use Auth;
 
 class CartController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $contents = Cart::content();
-         return view('frontend.cart.show', compact('contents'));
+        return view('frontend.cart.show', compact('contents'));
     }
 
-    public function ProductInfo(Request $request){
-        $product = Product::with(['category', 'brand'])->where('id', $request->id)->first();
+    public function ProductInfo(Request $request)
+    {
+        $product = Product::with(['category', 'brand'])
+            ->where('id', $request->id)
+            ->first();
 
         $product_size = $product->product_size;
-        $size = explode(",",$product_size);
+        $size = explode(',', $product_size);
 
         $product_color = $product->product_color;
-        $color = explode(",",$product_color);
+        $color = explode(',', $product_color);
 
         return response()->json(['product' => $product, 'size' => $size, 'color' => $color]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function AddCart(Request $request)
     {
         $product = Product::findOrFail($request->id);
 
         Cart::add([
-            'id' => $request->id, 
-            'name' => $product->product_name, 
-            'qty' => $request->qty, 
-            'price' => $product->discount_price, 
-            'weight' => 1, 
+            'id' => $request->id,
+            'name' => $product->product_name,
+            'qty' => $request->qty,
+            'price' => $product->discount_price,
+            'weight' => 1,
             'options' => ['image' => $product->product_thumbnail, 'size' => $request->product_size, 'color' => $request->product_color],
         ]);
 
@@ -58,34 +54,42 @@ class CartController extends Controller
 
         $cart_popup = $view->render();
 
-        return response()->json(['message' => 'Product successfully added cart', 'status' => 'success', 'cartcount' => $cartcount, 'cart_popup' => $cart_popup,]);
+        return response()->json(['message' => 'Product successfully added cart', 'status' => 'success', 'cartcount' => $cartcount, 'cart_popup' => $cart_popup]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request)
     {
         $rowId = $request->rowId;
         $qty = $request->qty;
         Cart::update($rowId, ['qty' => $qty]);
-        return response()->json(['message' => 'Successfully updated cart', 'status' => 'success',]);
+
+        if (Session::has('coupon')) {
+            $sub_total = str_replace(',', '', Cart::subtotal());
+
+            $code = Session::get('coupon')['code'];
+            $coupon = Coupon::where('code', $code)
+                ->where('expire', '>=', strtotime(Carbon::now()->format('Y-m-d')))
+                ->first();
+
+            Session::put('coupon', [
+                'code' => $coupon->code,
+                'value' => $coupon->value,
+                'discount_amount' => $coupon->type == 'percent' ? round(($sub_total * $coupon->value) / 100) : round($coupon->value),
+                'total_amount' => round($sub_total - ($coupon->type == 'percent' ? round(($sub_total * $coupon->value) / 100) : round($coupon->value))),
+            ]);
+        }
+        $subtotal = Cart::subtotal();
+        return response()->json(['message' => 'Successfully updated cart', 'status' => 'success', 'subtotal' => $subtotal]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Request $request)
     {
         $rowId = $request->rowId;
         Cart::remove($rowId);
+
+        if (Session::has('coupon')) {
+            Session::forget('coupon');
+        }
 
         $contents = Cart::content();
         $cartcount = cartcount();
@@ -98,10 +102,37 @@ class CartController extends Controller
         return response()->json(['message' => 'Product successfully removed', 'status' => 'success', 'cartcount' => $cartcount, 'cart_show' => $cart_show, 'cart_popup' => $cart_popup]);
     }
 
-    public function checkout(){
+    public function couponApply(Request $request)
+    {
+        $coupon = Coupon::where('code', $request->code)
+            ->where('expire', '>=', strtotime(Carbon::now()->format('Y-m-d')))
+            ->first();
+
+        $sub_total = str_replace(',', '', Cart::subtotal());
+
+        if ($coupon) {
+            Session::put('coupon', [
+                'code' => $coupon->code,
+                'value' => $coupon->value,
+                'discount_amount' => $coupon->type == 'percent' ? round(($sub_total * $coupon->value) / 100) : round($coupon->value),
+                'total_amount' => round($sub_total - ($coupon->type == 'percent' ? round(($sub_total * $coupon->value) / 100) : round($coupon->value))),
+            ]);
+            return response()->json([
+                'message' => 'Coupon Applied Success',
+                'status' => 'success',
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'Invalid Coupon',
+                'status' => 'error',
+            ]);
+        }
+    }
+
+    public function checkout()
+    {
         if (Auth::check()) {
-            
-        }else{
+        } else {
             return redirect()->route('login');
         }
     }
