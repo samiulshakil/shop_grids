@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Location;
 use App\Models\Coupon;
 use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
@@ -16,8 +17,9 @@ class CartController extends Controller
 {
     public function index()
     {
-        $contents = Cart::content();
-        return view('frontend.cart.show', compact('contents'));
+        return Session::get('coupon');
+        // $contents = Cart::content();
+        // return view('frontend.cart.show', compact('contents'));
     }
 
     public function ProductInfo(Request $request)
@@ -64,7 +66,7 @@ class CartController extends Controller
         Cart::update($rowId, ['qty' => $qty]);
 
         if (Session::has('coupon')) {
-            $sub_total = str_replace(',', '', Cart::subtotal());
+            // $sub_total = str_replace(',', '', Cart::subtotal());
 
             $code = Session::get('coupon')['code'];
             $coupon = Coupon::where('code', $code)
@@ -74,8 +76,9 @@ class CartController extends Controller
             Session::put('coupon', [
                 'code' => $coupon->code,
                 'value' => $coupon->value,
-                'discount_amount' => $coupon->type == 'percent' ? round(($sub_total * $coupon->value) / 100) : round($coupon->value),
-                'total_amount' => round($sub_total - ($coupon->type == 'percent' ? round(($sub_total * $coupon->value) / 100) : round($coupon->value))),
+                'type' => $coupon->type,
+                'discount_amount' => $coupon->type == 'percent' ? round((Cart::subtotal() * $coupon->value) / 100) : round($coupon->value),
+                'total_amount' => round(Cart::subtotal() - ($coupon->type == 'percent' ? round((Cart::subtotal() * $coupon->value) / 100) : round($coupon->value))),
             ]);
         }
         $subtotal = Cart::subtotal();
@@ -108,14 +111,15 @@ class CartController extends Controller
             ->where('expire', '>=', strtotime(Carbon::now()->format('Y-m-d')))
             ->first();
 
-        $sub_total = str_replace(',', '', Cart::subtotal());
+        // $sub_total = str_replace(',', '', Cart::subtotal());
 
         if ($coupon) {
             Session::put('coupon', [
                 'code' => $coupon->code,
                 'value' => $coupon->value,
-                'discount_amount' => $coupon->type == 'percent' ? round(($sub_total * $coupon->value) / 100) : round($coupon->value),
-                'total_amount' => round($sub_total - ($coupon->type == 'percent' ? round(($sub_total * $coupon->value) / 100) : round($coupon->value))),
+                'type' => $coupon->type,
+                'discount_amount' => $coupon->type == 'percent' ? round((Cart::subtotal() * $coupon->value) / 100) : round($coupon->value),
+                'total_amount' => round(Cart::subtotal() - ($coupon->type == 'percent' ? round((Cart::subtotal() * $coupon->value) / 100) : round($coupon->value))),
             ]);
             return response()->json([
                 'message' => 'Coupon Applied Success',
@@ -132,8 +136,34 @@ class CartController extends Controller
     public function checkout()
     {
         if (Auth::check()) {
+
+            if (Cart::subtotal() > 0) {
+                $carts = Cart::content();
+                $cartQty = Cart::count();
+                $cartTotal = Cart::subtotal();
+                $districts = Location::where('parent_id', 0)->orderBy('location_name', 'asc')->get();
+                return view('frontend.checkout.checkout', compact('carts', 'cartQty', 'cartTotal', 'districts'));
+           }else {
+                return redirect()->route('website.home');
+           }
         } else {
             return redirect()->route('login');
+        }
+    }
+
+    public function upazilaList(Request $request)
+    {
+        if ($request->ajax()) {
+            if ($request->district_id) {
+                $output = '<option value="">Select Please</option>';
+                $upazilas = Location::where('parent_id', $request->district_id)->orderBy('location_name', 'asc')->get();
+                if (!$upazilas->isEmpty()) {
+                    foreach ($upazilas as $value) {
+                        $output .= '<option value="' . $value->id . '">' . $value->location_name . '</option>';
+                    }
+                }
+                return response()->json($output);
+            }
         }
     }
 }

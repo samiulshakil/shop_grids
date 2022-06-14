@@ -57,6 +57,7 @@ Route::post('/update/cart', [CartController::class, 'update'])->name('cart.updat
 Route::post('/delete/cart', [CartController::class, 'destroy'])->name('cart.delete');
 Route::post('/product/info', [CartController::class, 'ProductInfo'])->name('product.info');
 Route::get('/user/checkout', [CartController::class, 'checkout'])->name('user.checkout');
+Route::post('upazila/list', [CartController::class, 'upazilaList'])->name('upazila.list');
 
 //coupon
 route::post('/coupon/apply',[CartController::class,'couponApply'])->name('coupon.apply');
