@@ -224,9 +224,9 @@
                     <div class="checkout-sidebar">
                         @if (Session::has('coupon'))
                         @else
-                            <div class="checkout-sidebar-coupon">
+                            <div class="checkout-sidebar-coupon" id="coupon">
                                 <p>Appy Coupon to get discount!</p>
-                                <div class="coupon">
+                                <div>
                                     <form action="#" class="couponApply" method="post">
                                         @csrf
                                         <input name="code" id="code" placeholder="Enter Your Coupon" required>
@@ -237,44 +237,8 @@
                                 </div>
                         @endif
                     </div>
-                    <div class="checkout-sidebar-price-table mt-30">
-                        <h5 class="title">Pricing Table</h5>
-                        @if (Session::has('coupon'))
-                            <div class="sub-total-price">
-                                <div class="total-price">
-                                    <p class="value">Subotal Price:</p>
-                                    <p class="price">${{ $cartTotal }}</p>
-                                </div>
-                                <div class="total-price shipping">
-                                    <p class="value">Coupon Code:</p>
-                                    <p class="price">{{ session()->get('coupon')['code'] }}
-                                        ({{ session()->get('coupon')['value'] }})</p>
-                                </div>
-                                <div class="total-price discount">
-                                    <p class="value">Discount Amount:</p>
-                                    <p class="price">${{ session()->get('coupon')['discount_amount'] }}</p>
-                                </div>
-                            </div>
-                            <div class="total-payable">
-                                <div class="payable-price">
-                                    <p class="value">Grand Total:</p>
-                                    <p class="price">${{ session()->get('coupon')['total_amount'] }}</p>
-                                </div>
-                            </div>
-                        @else
-                            <div class="sub-total-price">
-                                <div class="total-price">
-                                    <p class="value">Subotal Price:</p>
-                                    <p class="price">${{ $cartTotal }}</p>
-                                </div>
-                            </div>
-                            <div class="total-payable">
-                                <div class="payable-price">
-                                    <p class="value">Grand Total:</p>
-                                    <p class="price">${{ $cartTotal }}</p>
-                                </div>
-                            </div>
-                        @endif
+                    <div class="checkout-sidebar-price-table mt-30" id="couponCalField">
+
                     </div>
                     <div class="checkout-sidebar-price-table mt-30">
                         <h5 class="title">Select Payment Method</h5>
@@ -339,6 +303,62 @@
         }
 
         $(document).ready(function() {
+            //coupon calculation start
+            function couponCalculation() {
+                $.ajax({
+                    type: 'GET',
+                    url: "{{ route('coupon.calculation') }}",
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.total) {
+                            $('#couponCalField').html(`
+                        <h5 class="title">Pricing Table</h5>
+                            <div class="sub-total-price without_coupon">
+                                <div class="total-price">
+                                    <p class="value">Subotal Price:</p>
+                                    <p class="price">${data.total}</p>
+                                </div>
+                            </div>
+                            <div class="total-payable">
+                                <div class="payable-price">
+                                    <p class="value">Grand Total:</p>
+                                    <p class="price">${data.total}</p>
+                                </div>
+                            </div>
+							`)
+                        } else {
+                            $('#couponCalField').html(`
+                        <h5 class="title">Pricing Table</h5>
+                            <div class="sub-total-price with_coupon">
+                                <div class="total-price">
+                                    <p class="value">Subotal Price:</p>
+                                    <p class="price subtotal">${data.subtotal}</p>
+                                </div>
+                                <div class="total-price shipping">
+                                    <p class="value">Coupon Code:</p>
+                                    <p class="price"><span
+                                            class="code">${data.code}</span>
+                                        <span class="code_value">(${ data.coupon_discount })</span>
+                                    </p>
+                                </div>
+                                <div class="total-price discount">
+                                    <p class="value">Discount Amount:</p>
+                                    <p class="price discount_amount">${data.discount_amount}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="total-payable">
+                                <div class="payable-price">
+                                    <p class="value">Grand Total:</p>
+                                    <p class="price total_amount">${data.total_amount}</p>
+                                </div>
+                            </div>
+						`)
+                        }
+                    }
+                });
+            }
+
             //Coupon Apply
             $('body').on('submit', '.couponApply', function(e) {
                 e.preventDefault();
@@ -354,7 +374,8 @@
                     success: function(data) {
                         flashMessage(data.status, data.message);
                         if (data.status == 'success') {
-                            $('.coupon').hide();
+                            couponCalculation();
+                            $('#coupon').hide();
                         }
                     },
                     error: function(xhr, ajaxOption, thrownError) {
@@ -364,6 +385,7 @@
                 });
 
             });
+            couponCalculation();
         });
     </script>
 @endpush

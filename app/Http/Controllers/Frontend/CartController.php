@@ -124,6 +124,11 @@ class CartController extends Controller
             return response()->json([
                 'message' => 'Coupon Applied Success',
                 'status' => 'success',
+                'subtotal' => Cart::subtotal(),
+                'code' => session()->get('coupon')['code'],
+                'value' => session()->get('coupon')['value'],
+                'discount_amount' => session()->get('coupon')['discount_amount'],
+                'total_amount' => session()->get('coupon')['total_amount'],
             ]);
         } else {
             return response()->json([
@@ -132,5 +137,23 @@ class CartController extends Controller
             ]);
         }
     }
+
+    //coupon calculation
+    public function couponCalcaultion(){
+        if (Session::has('coupon')) {
+            return response()->json(array(
+                'subtotal' => Cart::total(),
+                'code' => session()->get('coupon')['code'],
+                'coupon_discount' => session()->get('coupon')['value'],
+                'discount_amount' => session()->get('coupon')['discount_amount'],
+                'total_amount' => session()->get('coupon')['total_amount'],
+            ));
+        }else {
+            return response()->json(array(
+                'total' => Cart::subtotal(),
+            ));
+        }
+    }
+
 
 }
