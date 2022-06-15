@@ -28,6 +28,7 @@ use App\Http\Controllers\Backend\ContactUsController;
 use App\Http\Controllers\Frontend\WebsiteController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\WishlistController;
+use App\Http\Controllers\Frontend\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,12 +57,14 @@ Route::get('/show/cart', [CartController::class, 'index'])->name('cart.show');
 Route::post('/update/cart', [CartController::class, 'update'])->name('cart.update');
 Route::post('/delete/cart', [CartController::class, 'destroy'])->name('cart.delete');
 Route::post('/product/info', [CartController::class, 'ProductInfo'])->name('product.info');
-Route::get('/user/checkout', [CartController::class, 'checkout'])->name('user.checkout');
-Route::post('upazila/list', [CartController::class, 'upazilaList'])->name('upazila.list');
+
+//checkout
+Route::post('upazila/list', [CheckoutController::class, 'upazilaList'])->name('upazila.list');
+Route::get('/user/checkout', [CheckoutController::class, 'checkout'])->name('user.checkout');
 
 //coupon
 route::post('/coupon/apply',[CartController::class,'couponApply'])->name('coupon.apply');
-route::get('/coupo/calculation',[CartController::class,'couponCalcaultion'])->name('couponCalcaultion');
+route::get('/coupon/calculation',[CartController::class,'couponCalcaultion'])->name('coupon.calculation');
 route::get('/coupon/remove',[CartController::class,'removeCoupon'])->name('removeCoupon');
 
 //wishlists

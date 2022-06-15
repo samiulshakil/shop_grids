@@ -118,7 +118,8 @@
                                         <div class="button">
                                             <a href="{{ route('user.checkout') }}"
                                                 class="btn">Checkout</a>
-                                            <a href="product-grids.html" class="btn btn-alt">Continue shopping</a>
+                                            <a href="{{ route('website.home') }}" class="btn btn-alt">Continue
+                                                shopping</a>
                                         </div>
                                     </div>
                                 </div>
