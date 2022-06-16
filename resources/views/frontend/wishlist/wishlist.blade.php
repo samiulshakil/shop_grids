@@ -85,66 +85,75 @@
     <div class="shopping-cart section">
         <div class="show_carts">
             <div class="container">
-                <div class="cart-list-head">
+                <div class="row">
+                    <div class="col-lg-3">
+                        @include('frontend.include.user_sidebar')
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="cart-list-head">
 
-                    <div class="cart-list-title  text-center">
-                        <div class="row">
-                            <div class="col-lg-3 col-md-3 col-12">
-                                <p>Image</p>
+                            <div class="cart-list-title  text-center">
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-3 col-12">
+                                        <p>Image</p>
+                                    </div>
+                                    <div class="col-lg-2 col-md-3 col-12">
+                                        <p>Name</p>
+                                    </div>
+                                    <div class="col-lg-2 col-md-3 col-12">
+                                        <p>Quantity</p>
+                                    </div>
+                                    <div class="col-lg-2 col-md-3 col-12">
+                                        <p>Price</p>
+                                    </div>
+                                    <div class="col-lg-1 col-md-2 col-12">
+                                        <p>Delete</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-lg-2 col-md-3 col-12">
-                                <p>Name</p>
-                            </div>
-                            <div class="col-lg-2 col-md-3 col-12">
-                                <p>Quantity</p>
-                            </div>
-                            <div class="col-lg-2 col-md-3 col-12">
-                                <p>Price</p>
-                            </div>
-                            <div class="col-lg-1 col-md-2 col-12">
-                                <p>Delete</p>
-                            </div>
+
+                            @forelse ($wishlists as $wishlist)
+                                <div class="cart-single-list">
+                                    <div class="row align-items-center">
+                                        <div class="col-lg-3 col-md-3 col-12">
+                                            <a href="#!"><img style="max-width: 150px; max-height:150px"
+                                                    src="{{ asset($wishlist->product->product_thumbnail) }}"
+                                                    alt="#"></a>
+                                        </div>
+                                        <div class="col-lg-2 col-md-3 col-12">
+                                            <h5 class="product-name text-center"><a
+                                                    href="#!">{{ $wishlist->product->product_name }}</a>
+                                            </h5>
+                                        </div>
+                                        <div class="col-lg-2 col-md-3 col-12">
+                                            <h5 class="product-name text-center"><a
+                                                    href="#!">{{ $wishlist->product->product_qty }}</a>
+                                            </h5>
+                                        </div>
+                                        <div class="col-lg-2 col-md-3 col-12">
+                                            <h5 class="product-name text-center"><a
+                                                    href="#!">{{ $wishlist->product->discount_price }}</a>
+                                            </h5>
+                                        </div>
+                                        <div class="col-lg-1 col-md-2 col-12 text-center">
+                                            <a onclick="deleteData({{ $wishlist->id }})" class="remove-item text-center"
+                                                href="javascript:void(0)"><i class="lni lni-close "></i></a>
+                                            <form id="delete-form-{{ $wishlist->id }}" method="post"
+                                                action="{{ route('wish.destory', $wishlist->id) }}">
+                                                @csrf
+                                                <input type="hidden" value="{{ $wishlist->product->id }}"
+                                                    name="product_id">
+                                                @method('DELETE')
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            @empty
+                            @endforelse
+
+
                         </div>
                     </div>
-
-                    @forelse ($wishlists as $wishlist)
-                        <div class="cart-single-list">
-                            <div class="row align-items-center">
-                                <div class="col-lg-3 col-md-3 col-12">
-                                    <a href="#!"><img style="max-width: 150px; max-height:150px"
-                                            src="{{ asset($wishlist->product->product_thumbnail) }}" alt="#"></a>
-                                </div>
-                                <div class="col-lg-2 col-md-3 col-12">
-                                    <h5 class="product-name text-center"><a
-                                            href="#!">{{ $wishlist->product->product_name }}</a>
-                                    </h5>
-                                </div>
-                                <div class="col-lg-2 col-md-3 col-12">
-                                    <h5 class="product-name text-center"><a
-                                            href="#!">{{ $wishlist->product->product_qty }}</a>
-                                    </h5>
-                                </div>
-                                <div class="col-lg-2 col-md-3 col-12">
-                                    <h5 class="product-name text-center"><a
-                                            href="#!">{{ $wishlist->product->discount_price }}</a>
-                                    </h5>
-                                </div>
-                                <div class="col-lg-1 col-md-2 col-12 text-center">
-                                    <a onclick="deleteData({{ $wishlist->id }})" class="remove-item text-center"
-                                        href="javascript:void(0)"><i class="lni lni-close "></i></a>
-                                    <form id="delete-form-{{ $wishlist->id }}" method="post"
-                                        action="{{ route('wish.destory', $wishlist->id) }}">
-                                        @csrf
-                                        <input type="hidden" value="{{ $wishlist->product->id }}" name="product_id">
-                                        @method('DELETE')
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    @empty
-                    @endforelse
-
-
                 </div>
             </div>
 

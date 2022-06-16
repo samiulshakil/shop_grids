@@ -31,6 +31,8 @@ use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Frontend\StripeController;
+use App\Http\Controllers\Frontend\NormalUserController;
+use App\Http\Controllers\Frontend\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +50,17 @@ Route::get('/', [WebsiteController::class, 'index'])->name('website.home');
 Route::get('/product/{slug}', [WebsiteController::class, 'productDetails'])->name('website.product.details');
 Route::get('/shop', [WebsiteController::class, 'shop'])->name('website.shop');
 Route::get('/blog/details/{id}', [WebsiteController::class, 'blogDetails'])->name('blog.details');
+
+//profile route 
+Route::get('user/profile', [NormalUserController::class, 'editProfile'])->name('user.profile.edit');
+Route::put('user/profile', [NormalUserController::class, 'updateProfile'])->name('user.profile.update');
+
+//user dashboard
+Route::get('user/dashboard', [NormalUserController::class, 'dashboard'])->name('user.dashboard');
+
+//profile change Password 
+Route::get('user/password/edit', [NormalUserController::class, 'editPassword'])->name('user.password.edit');
+Route::put('user/password/update', [NormalUserController::class, 'updatePassword'])->name('user.password.update');
 
 //Contact us or message
 Route::get('contact/us', [ContactUsController::class, 'contactUs'])->name('contact.us');
@@ -70,6 +83,8 @@ Route::get('/user/checkout', [CheckoutController::class, 'checkout'])->name('use
 //stripe payment
 route::post('stripe/order/complete',[StripeController::class,'store'])->name('stripe.order');
 
+//orders
+Route::get('/orders/show', [OrderController::class, 'index'])->name('orders.show');
 
 //coupon
 route::post('/coupon/apply',[CartController::class,'couponApply'])->name('coupon.apply');
@@ -110,7 +125,7 @@ Route::get('/login/{provider}/callback', [LoginController::class, 'handleProvide
 
 
 // Backend Routes Start
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified', 'isAdmin'])->group(function () {
     Route::prefix('admin')->group(function () {
             Route::name('admin.')->group(function () {
                 Route::get('/dashboard', DashboardController::class)->name('dashboard');
@@ -141,7 +156,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 //Menu Route Group
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::prefix('admin/menus/{id}')->group(function () {
             Route::name('admin.menus.')->group(function () {
                  Route::get('builder', [MenuBuilderController::class, 'index'])->name('builder');
@@ -164,7 +179,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 //Route for Settings
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::prefix('admin/settings')->group(function () {
             Route::name('admin.settings.')->group(function () {
                  Route::get('general', [SettingController::class, 'general'])->name('general');
@@ -208,7 +223,7 @@ Route::middleware(['auth'])->group(function () {
 
 
 //Backend Route Group
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::prefix('admin')->group(function () {
             Route::name('admin.')->group(function () {
                 Route::get('/dashboard', DashboardController::class)->name('dashboard');

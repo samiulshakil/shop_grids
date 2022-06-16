@@ -18,7 +18,7 @@ class isAdmin
     public function handle(Request $request, Closure $next)
     {
         if(Auth::user()->role_id != 1){
-            return redirect()->route('home');
+            return redirect()->route('user.dashboard');
         }
         return $next($request);
     }

@@ -45,10 +45,13 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-12">
                     <div class="top-end">
-                        <div class="user">
-                            <i class="lni lni-user"></i>
-                            Hello
-                        </div>
+                        @auth
+                            <div class="user">
+                                <i class="lni lni-user"></i>
+                                {{ Auth::user()->name }}
+                            </div>
+                        @else
+                        @endauth
                         <ul class="user-login">
                             <li>
                                 <a href="{{ route('login') }}">Sign In</a>
@@ -197,7 +200,8 @@
                                     </ul>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('contact.us') }}" aria-label="Toggle navigation">Contact Us</a>
+                                    <a href="{{ route('contact.us') }}" aria-label="Toggle navigation">Contact
+                                        Us</a>
                                 </li>
                             </ul>
                         </div>
