@@ -29,6 +29,8 @@ use App\Http\Controllers\Frontend\WebsiteController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\Frontend\CheckoutController;
+use App\Http\Controllers\Frontend\PaymentController;
+use App\Http\Controllers\Frontend\StripeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,9 +60,16 @@ Route::post('/update/cart', [CartController::class, 'update'])->name('cart.updat
 Route::post('/delete/cart', [CartController::class, 'destroy'])->name('cart.delete');
 Route::post('/product/info', [CartController::class, 'ProductInfo'])->name('product.info');
 
+//payment
+Route::post('/payment/process', [PaymentController::class, 'paymentProcess'])->name('payment.process');
+
 //checkout
 Route::post('upazila/list', [CheckoutController::class, 'upazilaList'])->name('upazila.list');
 Route::get('/user/checkout', [CheckoutController::class, 'checkout'])->name('user.checkout');
+
+//stripe payment
+route::post('stripe/order/complete',[StripeController::class,'store'])->name('stripe.order');
+
 
 //coupon
 route::post('/coupon/apply',[CartController::class,'couponApply'])->name('coupon.apply');

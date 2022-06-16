@@ -104,28 +104,28 @@
 
                                     </div>
                                 </div>
-                                <h6 class="title mt-3">Shipping
-                                    Address</h6>
-                                <section class="checkout-steps-form-content collapse show" id="collapseThree"
-                                    aria-labelledby="headingThree" data-bs-parent="">
+                                <h6 class="title mt-3">Shipping Address</h6>
+                                <section class="checkout-steps-form-content collapse show" id="collapseThree">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="single-form form-default">
-                                                <label>Name</label>
-                                                <div class="row">
-                                                    <div class="col-md-12 form-input form">
-                                                        <input type="text" value="{{ Auth::user()->name }}" readonly
-                                                            placeholder="First Name">
+                                                <form action="{{ route('payment.process') }}" method="POST">
+                                                    @csrf
+                                                    <label>Name</label>
+                                                    <div class="row">
+                                                        <div class="col-md-12 form-input form">
+                                                            <input type="text" name="name"
+                                                                value="{{ Auth::user()->name }}" placeholder="Your Name">
+                                                        </div>
                                                     </div>
-                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="single-form form-default">
                                                 <label>Email Address</label>
                                                 <div class="form-input form">
-                                                    <input type="text" value="{{ Auth::user()->email }}" readonly
-                                                        placeholder="Email Address">
+                                                    <input type="text" name="email" value="{{ Auth::user()->email }}"
+                                                        readonly placeholder="Email Address">
                                                 </div>
                                             </div>
                                         </div>
@@ -133,15 +133,15 @@
                                             <div class="single-form form-default">
                                                 <label>Phone Number</label>
                                                 <div class="form-input form">
-                                                    <input type="text" placeholder="Phone Number">
+                                                    <input type="text" name="phone" placeholder="Phone Number">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="single-form form-default">
-                                                <label>Note</label>
+                                                <label>Address</label>
                                                 <div class="form-input form">
-                                                    <input type="text" placeholder="Note">
+                                                    <input type="text" name="address" placeholder="Address">
                                                 </div>
                                             </div>
                                         </div>
@@ -174,7 +174,7 @@
                                             <div class="single-form form-default">
                                                 <label>State/Region</label>
                                                 <div class="form-input form">
-                                                    <input type="text" placeholder="State">
+                                                    <input type="text" name="state" placeholder="State">
                                                 </div>
                                             </div>
                                         </div>
@@ -182,35 +182,42 @@
                                             <div class="single-form form-default">
                                                 <label>Postal Code</label>
                                                 <div class="form-input form">
-                                                    <input type="number" placeholder="Postal Code">
+                                                    <input type="number" name="postal_code" placeholder="Postal Code">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
-                                            <div class="checkout-payment-option">
-                                                <h6 class="heading-6 font-weight-400 payment-title">Select Delivery
-                                                    Option</h6>
-                                                <div class="payment-option-wrapper">
-                                                    <div class="single-payment-option">
-                                                        <input type="radio" name="shipping" checked id="shipping-1">
-                                                        <label for="shipping-1">
-                                                            <img src="{{ asset('frontend/assets/images/shipping/shipping-1.png') }}"
-                                                                alt="Sipping">
-                                                            <p>Inside Dhaka</p>
-                                                            <span class="price">$1</span>
-                                                        </label>
-                                                    </div>
-                                                    <div class="single-payment-option">
-                                                        <input type="radio" name="shipping" id="shipping-2">
-                                                        <label for="shipping-2">
-                                                            <img src="{{ asset('frontend/assets/images/shipping/shipping-2.png') }}"
-                                                                alt="Sipping">
-                                                            <p>Outside Dhaka</p>
-                                                            <span class="price">$3</span>
-                                                        </label>
-                                                    </div>
-                                                </div>
+                                    </div>
+                                    <div class="mt-30">
+                                        <h5 class="title">Select Payment Method</h5>
+                                        <div class="payment_radio mt-5">
+                                            <p class="payment_type">
+                                                <input type="radio" id="test1" name="payment" value="stripe"
+                                                    name="radio-group">
+                                                <label for="test1"><img class="payment_img"
+                                                        src="{{ asset('frontend/assets/images/payment/master.png') }}"
+                                                        for="test1" alt=""></label>
+                                            </p>
+                                            <p class="payment_type">
+                                                <input type="radio" id="test2" name="payment" value="paypal"
+                                                    name="radio-group">
+                                                <label for="test2"><img class="payment_img"
+                                                        src="{{ asset('frontend/assets/images/payment/paypal.png') }}"
+                                                        alt="">
+                                                </label>
+                                            </p>
+                                            <p class="payment_type">
+                                                <input type="radio" id="test3" name="payment" value="visa"
+                                                    name="radio-group">
+                                                <label for="test3"><img class="payment_img"
+                                                        src="{{ asset('frontend/assets/images/payment/visa.png') }}"
+                                                        for="test3" alt="">
+                                                </label>
+                                            </p>
+
+                                            <div class="single-form form-default button mt-4">
+                                                <button type="submit" class="btn">pay now</button>
                                             </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </section>
@@ -239,36 +246,6 @@
                     </div>
                     <div class="checkout-sidebar-price-table mt-30" id="couponCalField">
 
-                    </div>
-                    <div class="checkout-sidebar-price-table mt-30">
-                        <h5 class="title">Select Payment Method</h5>
-                        <div class="payment_radio mt-5">
-                            <form action="#">
-                                <p class="payment_type">
-                                    <input type="radio" id="test1" name="radio-group" checked>
-                                    <label for="test1"><img class="payment_img"
-                                            src="{{ asset('frontend/assets/images/payment/master.png') }}" for="test1"
-                                            alt=""></label>
-                                </p>
-                                <p class="payment_type">
-                                    <input type="radio" id="test2" name="radio-group">
-                                    <label for="test2"><img class="payment_img"
-                                            src="{{ asset('frontend/assets/images/payment/paypal.png') }}" alt="">
-                                    </label>
-                                </p>
-                                <p class="payment_type">
-                                    <input type="radio" id="test3" name="radio-group">
-                                    <label for="test3"><img class="payment_img"
-                                            src="{{ asset('frontend/assets/images/payment/visa.png') }}" for="test3"
-                                            alt="">
-                                    </label>
-                                </p>
-
-                                <div class="single-form form-default button mt-4">
-                                    <button class="btn">pay now</button>
-                                </div>
-                            </form>
-                        </div>
                     </div>
                 </div>
             </div>

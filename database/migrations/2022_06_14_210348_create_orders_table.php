@@ -16,13 +16,6 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('district_id');
-            $table->unsignedBigInteger('upazila_id');
-            $table->string('name');
-            $table->string('email');
-            $table->string('phone');
-            $table->integer('post_code');
-            $table->string('notes')->nullable();
             $table->string('payment_type')->nullable();
             $table->string('payment_method')->nullable();
             $table->string('transaction_id');
