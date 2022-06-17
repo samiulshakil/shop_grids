@@ -77,6 +77,7 @@ class StripeController extends Controller
                 'size' => $cart->options->size,
                 'qty' => $cart->qty,
                 'price' => $cart->price,
+                'total' => $cart->price * $cart->qty,
             ]);
         }
 
@@ -92,7 +93,7 @@ class StripeController extends Controller
 
         Cart::destroy();
 
-        return Redirect()->route('admin.dashboard');
+        return Redirect()->route('admin.all.orders');
 
     }
 }

@@ -14,7 +14,9 @@ class OrderController extends Controller
         return view('backend.pages.orders.orders', compact('orders'));
     }
 
-    public function viewOrder(){
+    public function viewOrder($id){
+        $order = Order::where('id', $id)->with('shipping', 'orderItems', 'user')->firstOrFail();
 
+        return view('backend.pages.orders.view_orders', compact('order'));
     }
 }
