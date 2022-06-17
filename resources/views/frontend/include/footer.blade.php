@@ -21,8 +21,7 @@
                                 <form action="#" method="get" target="_blank" class="newsletter-form">
                                     <input name="EMAIL" placeholder="Email address here..." type="email">
                                     <div class="button">
-                                        <button class="btn">Subscribe<span
-                                                class="dir-part"></span></button>
+                                        <button class="btn">Subscribe<span class="dir-part"></span></button>
                                     </div>
                                 </form>
                             </div>
@@ -95,11 +94,10 @@
                         <div class="single-footer f-link">
                             <h3>Shop Departments</h3>
                             <ul>
-                                <li><a href="javascript:void(0)">Computers & Accessories</a></li>
-                                <li><a href="javascript:void(0)">Smartphones & Tablets</a></li>
-                                <li><a href="javascript:void(0)">TV, Video & Audio</a></li>
-                                <li><a href="javascript:void(0)">Cameras, Photo & Video</a></li>
-                                <li><a href="javascript:void(0)">Headphones</a></li>
+                                @forelse (onlyCategories() as $category)
+                                    <li><a href="javascript:void(0)">{{ $category->category_name }}</a></li>
+                                @empty
+                                @endforelse
                             </ul>
                         </div>
 
@@ -117,7 +115,8 @@
                     <div class="col-lg-4 col-12">
                         <div class="payment-gateway">
                             <span>We Accept:</span>
-                            <img src="{{ asset('frontend/assets/images/footer/credit-cards-footer.png') }}" alt="#">
+                            <img src="{{ asset('frontend/assets/images/footer/credit-cards-footer.png') }}"
+                                alt="#">
                         </div>
                     </div>
                     <div class="col-lg-4 col-12">
