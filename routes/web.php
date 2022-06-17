@@ -25,6 +25,7 @@ use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\SocialMediaController;
 use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\Backend\ContactUsController;
+use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Frontend\WebsiteController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\WishlistController;
@@ -32,7 +33,6 @@ use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Frontend\StripeController;
 use App\Http\Controllers\Frontend\NormalUserController;
-use App\Http\Controllers\Frontend\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -84,7 +84,7 @@ Route::get('/user/checkout', [CheckoutController::class, 'checkout'])->name('use
 route::post('stripe/order/complete',[StripeController::class,'store'])->name('stripe.order');
 
 //orders
-Route::get('/orders/show', [OrderController::class, 'index'])->name('orders.show');
+Route::get('/orders/show', [NormalUserController::class, 'userOrder'])->name('user.order.show');
 
 //coupon
 route::post('/coupon/apply',[CartController::class,'couponApply'])->name('coupon.apply');
@@ -258,6 +258,10 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
                 Route::get('coupons/{slug}/edit', [CouponController::class, 'edit'])->name('coupons.edit');
                 Route::post('coupons/update', [CouponController::class, 'update'])->name('coupons.update');
                 Route::delete('coupons/destroy/{id}', [CouponController::class, 'destroy'])->name('coupons.destroy');
+
+                //orders
+                Route::get('/orders', [OrderController::class, 'order'])->name('all.orders');
+                Route::get('/view/order/{id}', [OrderController::class, 'viewOrder'])->name('view.orders');
                                 
         });
     });

@@ -11,7 +11,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-12">
                     <ul class="breadcrumb-nav">
-                        <li><a href="index.html"><i class="lni lni-home"></i> Home</a></li>
+                        <li><a href="{{ route('website.home') }}"><i class="lni lni-home"></i> Home</a></li>
                         <li>Dashboard</li>
                     </ul>
                 </div>
@@ -26,7 +26,7 @@
                     @include('frontend.include.user_sidebar')
                 </div>
                 <div class="col-lg-9">
-                    <h4 class="text-center">Hello <code>({{ Auth::user()->name }})</code> Welcome to Dashboard</h4>
+                    <h4 class="text-center">Hello <code>({{ Auth::user()->name }})</code> Welcome to User Dashboard</h4>
                 </div>
             </div>
         </div>

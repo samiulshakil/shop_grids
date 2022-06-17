@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Order;
+use App\Models\OrderItem;
 use Auth;
 
 class NormalUserController extends Controller
@@ -72,5 +74,9 @@ class NormalUserController extends Controller
             Toastr::warning('Current password not match', '', ["positionClass" => "toast-top-right"]);
         }
         return redirect()->back();
+    }
+
+    public function userOrder(){
+
     }
 }
