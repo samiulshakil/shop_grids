@@ -41,17 +41,19 @@
     </div>
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-lg-3">
+            @include('backend.pages.orders.include.sidebar')
+        </div>
+        <div class="col-lg-9">
             <div class="main-card mb-3 card">
                 <div class="table-responsive">
                     <table id="datatable" class="align-middle mb-0 table table-borderless table-striped table-hover">
                         <thead>
                             <tr>
-                                <th class="text-center">#</th>
-                                <th class="text-center">Payment Type</th>
-                                <th class="text-center">Transaction Id</th>
+                                <th class="text-center">Payment</th>
+                                <th class="text-center">Transaction</th>
                                 <th class="text-center">Amount</th>
-                                <th class="text-center">Order Date </th>
+                                <th class="text-center">Date</th>
                                 <th class="text-center">Status</th>
                                 <th class="text-center">Actions</th>
                             </tr>
@@ -59,7 +61,6 @@
                         <tbody>
                             @foreach ($orders as $key => $order)
                                 <tr>
-                                    <td class="text-center text-muted">#{{ $key + 1 }}</td>
                                     <td>
                                         <div class="widget-content p-0">
                                             <div class="widget-content-wrapper">
@@ -81,9 +82,21 @@
                                     <td class="text-center">
                                         {{ $order->order_date }}
                                     </td>
-                                    <td class="text-center">
-                                        <div class="badge badge-warning">{{ $order->status }}</div>
-                                    </td>
+                                    @if ($order->status == 'Pending')
+                                        <td><span class="badge badge-warning">Pending</span></td>
+                                    @endif
+                                    @if ($order->status == 'Accept Payment')
+                                        <td><span class="badge badge-info">Accept Payment</span></td>
+                                    @endif
+                                    @if ($order->status == 'Progress')
+                                        <td><span class="badge badge-info">Progress</span></td>
+                                    @endif
+                                    @if ($order->status == 'Delivered')
+                                        <td><span class="badge badge-success">Delivered</span></td>
+                                    @endif
+                                    @if ($order->status == 'Cancel')
+                                        <td><span class="badge badge-danger">Cancel</span></td>
+                                    @endif
                                     <td class="text-center">
                                         <a href="{{ route('admin.view.orders', $order->id) }}"
                                             class="btn btn-success btn-sm">

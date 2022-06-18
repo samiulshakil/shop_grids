@@ -261,6 +261,18 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
 
                 //orders
                 Route::get('/orders', [OrderController::class, 'order'])->name('all.orders');
+                Route::get('/orders/payment/accept', [OrderController::class, 'payment'])->name('payment.orders');
+                Route::get('/orders/progress', [OrderController::class, 'progress'])->name('progress.orders');
+                Route::get('/orders/delivered', [OrderController::class, 'delivered'])->name('delivered.orders');
+                Route::get('/orders/cancel', [OrderController::class, 'cancel'])->name('cancel.orders');
+
+                //update order status
+                Route::get('/pending/order/{id}', [OrderController::class, 'pendingOrder'])->name('pendingorders');
+                Route::get('/payment/order/{id}', [OrderController::class, 'paymentOrder'])->name('paymentorders');
+                Route::get('/progress/order/{id}', [OrderController::class, 'progressOrder'])->name('progressorders');
+                Route::get('/delivered/order/{id}', [OrderController::class, 'deliveredOrder'])->name('deliveredorders');
+                Route::get('/cancel/order/{id}', [OrderController::class, 'cancelOrder'])->name('cancelorders');
+
                 Route::get('/view/order/{id}', [OrderController::class, 'viewOrder'])->name('view.orders');
                                 
         });

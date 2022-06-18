@@ -53,8 +53,8 @@
                                 @if ($order->status == 'Pending')
                                     <td><span class="badge badge-warning">Pending</span></td>
                                 @endif
-                                @if ($order->status == 'Payment Accept')
-                                    <td><span class="badge badge-info">Payment Accept</span></td>
+                                @if ($order->status == 'Accept Payment')
+                                    <td><span class="badge badge-info">Accept Payment</span></td>
                                 @endif
                                 @if ($order->status == 'Progress')
                                     <td><span class="badge badge-info">Progress</span></td>
@@ -63,7 +63,7 @@
                                     <td><span class="badge badge-success">Delivered</span></td>
                                 @endif
                                 @if ($order->status == 'Cancel')
-                                    <td><span class="badge badge-danger">Delivered</span></td>
+                                    <td><span class="badge badge-danger">Cancel</span></td>
                                 @endif
                             </tr>
                         </tbody>
@@ -115,7 +115,46 @@
     </div>
 
     <div class="row mt-5">
-        <div class="col-lg-12">
+        @if ($order->status == 'Pending')
+            <div class="col-lg-3 mt-4">
+                <div class="list-group">
+                    <a href="{{ route('admin.paymentorders', $order->id) }}" class="btn btn-info">
+                        Accept Payment
+                    </a>
+                </div>
+                <div class="list-group mt-2">
+                    <a href="{{ route('admin.cancelorders', $order->id) }}" class="btn btn-danger">
+                        Cancel
+                    </a>
+                </div>
+            </div>
+        @elseif ($order->status == 'Accept Payment')
+            <div class="col-lg-3 mt-4">
+                <div class="list-group">
+                    <a href="{{ route('admin.progressorders', $order->id) }}" class="btn btn-info">
+                        Progress
+                    </a>
+                </div>
+            </div>
+        @elseif ($order->status == 'Progress')
+            <div class="col-lg-3 mt-4">
+                <div class="list-group">
+                    <a href="{{ route('admin.deliveredorders', $order->id) }}" class="btn btn-info">
+                        Delivered
+                    </a>
+                </div>
+            </div>
+        @elseif ($order->status == 'Cancel')
+            <div class="col-lg-3 mt-4">
+                <div class="list-group">
+                    <button class="btn btn-danger">
+                        Something Wrong
+                    </button>
+                </div>
+            </div>
+        @else
+        @endif
+        <div class="col-lg-9">
             <div class="card-title text-center text-success">
                 <h6>Product Info</h6>
             </div>
