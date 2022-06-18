@@ -70,5 +70,20 @@ class WebsiteController extends Controller
         return view('frontend.products.shop', compact('brands', 'products', 'category_products'));
     }
 
+    public function priceRange(Request $request){
+        $min_price = 10;
+        $max_price = $request->price_value;
+
+        $products = Product::with('category')->where('product_status',1)->whereBetween('discount_price', [$min_price, $max_price])->orderBy('id','DESC')->get();
+        $category_products = Category::with('products')->withCount('products')->get();
+        $brands = Brand::with('products')->withCount('products')->get();
+
+        $view = view('frontend.partials.shop_tab_product', compact('products', 'category_products', 'brands'));
+
+        $tab_product = $view->render();
+
+        return response()->json(['status' => 'success', 'tab_product' => $tab_product]);
+    }
+
 
 }
