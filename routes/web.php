@@ -51,6 +51,9 @@ Route::get('/product/{slug}', [WebsiteController::class, 'productDetails'])->nam
 Route::get('/shop', [WebsiteController::class, 'shop'])->name('website.shop');
 Route::get('/blog/details/{id}', [WebsiteController::class, 'blogDetails'])->name('blog.details');
 
+//shop page search
+Route::post('/shop/search', [WebsiteController::class, 'shopSearch'])->name('website.shop.search');
+
 //track order
 Route::post('/track/order', [WebsiteController::class, 'trackOrders'])->name('track.orders');
 

@@ -34,8 +34,9 @@
 
                         <div class="single-widget search">
                             <h3>Search Product</h3>
-                            <form action="#">
-                                <input type="text" placeholder="Search Here...">
+                            <form action="{{ route('website.shop.search') }}" method="post">
+                                @csrf
+                                <input type="text" name="product_search" placeholder="Search Here..." required>
                                 <button type="submit"><i class="lni lni-search-alt"></i></button>
                             </form>
                         </div>
@@ -57,8 +58,8 @@
 
                         <div class="single-widget range">
                             <h3>Price Range</h3>
-                            <input type="range" class="form-range" name="range" step="1" min="100" max="10000"
-                                value="10" onchange="rangePrimary.value=value">
+                            <input type="range" class="form-range" name="range" step="1" min="100"
+                                max="10000" value="10" onchange="rangePrimary.value=value">
                             <div class="range-inner">
                                 <label>$</label>
                                 <input type="text" id="rangePrimary" placeholder="100" />
@@ -133,11 +134,13 @@
                                     <nav>
                                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                             <button class="nav-link active" id="nav-grid-tab" data-bs-toggle="tab"
-                                                data-bs-target="#nav-grid" type="button" role="tab" aria-controls="nav-grid"
-                                                aria-selected="true"><i class="lni lni-grid-alt"></i></button>
+                                                data-bs-target="#nav-grid" type="button" role="tab"
+                                                aria-controls="nav-grid" aria-selected="true"><i
+                                                    class="lni lni-grid-alt"></i></button>
                                             <button class="nav-link" id="nav-list-tab" data-bs-toggle="tab"
-                                                data-bs-target="#nav-list" type="button" role="tab" aria-controls="nav-list"
-                                                aria-selected="false"><i class="lni lni-list"></i></button>
+                                                data-bs-target="#nav-list" type="button" role="tab"
+                                                aria-controls="nav-list" aria-selected="false"><i
+                                                    class="lni lni-list"></i></button>
                                         </div>
                                     </nav>
                                 </div>
@@ -159,8 +162,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="product-info">
-                                                    <span
-                                                        class="category">{{ $product->category->category_name }}</span>
+                                                    <span class="category">{{ $product->category->category_name }}</span>
                                                     <h4 class="title">
                                                         <a href="product-grids.html">{{ $product->product_name }}</a>
                                                     </h4>
