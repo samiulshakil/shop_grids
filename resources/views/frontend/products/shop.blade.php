@@ -47,7 +47,7 @@
                             <ul class="list">
                                 @forelse ($category_products as $category)
                                     <li>
-                                        <a href="#!">{{ $category->category_name }}
+                                        <a href="{{ route('website.product.category', $category->id) }}">{{ $category->category_name }}
                                         </a><span>({{ $category->products_count }})</span>
                                     </li>
                                 @empty
@@ -99,12 +99,13 @@
                         <div class="single-widget condition">
                             <h3>Filter by Brand</h3>
                             @forelse ($brands as $brand)
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault11">
-                                    <label class="form-check-label" for="flexCheckDefault11">
-                                        {{ $brand->brand_name }} ({{ $brand->products_count }})
-                                    </label>
-                                </div>
+                                <ul class="list">
+                                    <li class="mt-2">
+                                        <a href="{{ route('website.product.brand', $brand->id) }}">
+                                            {{ $brand->brand_name }} ({{ $brand->products_count }})
+                                        </a>
+                                    </li>
+                                </ul>
                             @empty
                             @endforelse
                         </div>
