@@ -358,6 +358,65 @@
 
                         </div>
                     </div>
+                    <div class="col-lg-6 mt-5">
+                        <div class="container">
+                            <div class="card">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Payment Type:
+                                        <h6 class="d-inline">{{ $order->payment_type }}</h6>
+                                    </li>
+                                    <li class="list-group-item">Transaction Id: <h6 class="d-inline">
+                                            {{ $order->transaction_id }}</h6>
+                                    </li>
+                                    <li class="list-group-item">Order Amount: <h6 class="d-inline">{{ $order->amount }}
+                                        </h6>
+                                    </li>
+                                    <li class="list-group-item">Order Date: <h6 class="d-inline">
+                                            {{ $order->order_date }}
+                                        </h6>
+                                    </li>
+                                    <li class="list-group-item">Order Date: <h6 class="d-inline">
+                                            {{ $order->status }}
+                                        </h6>
+                                    </li>
+                                    <li class="list-group-item">Order Number: <h6 class="d-inline">
+                                            {{ $order->order_number }}
+                                        </h6>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mt-5">
+                        <div class="container">
+                            <div class="card">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Name:
+                                        <h6 class="d-inline">{{ $order->shipping->name }}</h6>
+                                    </li>
+                                    <li class="list-group-item">Email: <h6 class="d-inline">
+                                            {{ $order->shipping->email }}</h6>
+                                    </li>
+                                    <li class="list-group-item">Phone: <h6 class="d-inline">
+                                            {{ $order->shipping->phone }}
+                                        </h6>
+                                    </li>
+                                    <li class="list-group-item">District: <h6 class="d-inline">
+                                            {{ $order->shipping->district->location_name }}
+                                        </h6>
+                                    </li>
+                                    <li class="list-group-item">Upazila: <h6 class="d-inline">
+                                            {{ $order->shipping->upazila->location_name }}
+                                        </h6>
+                                    </li>
+                                    <li class="list-group-item">Address: <h6 class="d-inline">
+                                            {{ $order->shipping->address }}
+                                        </h6>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 

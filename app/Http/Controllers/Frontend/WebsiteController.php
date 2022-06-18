@@ -39,7 +39,7 @@ class WebsiteController extends Controller
     }
 
     public function trackOrders(Request $request){
-        $order = Order::where('order_number', $request->order_number)->first();
+        $order = Order::where('order_number', $request->order_number)->with('shipping')->first();
         if ($order) {
             return view('frontend.track.track_order', compact('order'));
         } else {
