@@ -51,6 +51,9 @@ Route::get('/product/{slug}', [WebsiteController::class, 'productDetails'])->nam
 Route::get('/shop', [WebsiteController::class, 'shop'])->name('website.shop');
 Route::get('/blog/details/{id}', [WebsiteController::class, 'blogDetails'])->name('blog.details');
 
+//track order
+Route::post('/track/order', [WebsiteController::class, 'trackOrders'])->name('track.orders');
+
 //profile route 
 Route::get('user/profile', [NormalUserController::class, 'editProfile'])->name('user.profile.edit');
 Route::put('user/profile', [NormalUserController::class, 'updateProfile'])->name('user.profile.update');

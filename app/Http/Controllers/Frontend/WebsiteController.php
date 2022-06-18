@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Brand;
 use App\Models\Blog;
+use App\Models\Order;
 
 class WebsiteController extends Controller
 {
@@ -34,6 +36,17 @@ class WebsiteController extends Controller
     public function blogDetails($id){
         $blog = Blog::where('id', $id)->where('status',1)->first();
         return view('frontend.blogs.blog_details', compact('blog'));
+    }
+
+    public function trackOrders(Request $request){
+        $order = Order::where('order_number', $request->order_number)->first();
+        if ($order) {
+            return view('frontend.track.track_order', compact('order'));
+        } else {
+            Toastr::warning('Order not found', '', ["positionClass" => "toast-top-right"]);
+            return redirect()->route('website.home');
+        }
+
     }
 
 }

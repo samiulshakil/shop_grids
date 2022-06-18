@@ -10,11 +10,6 @@
                                 <div class="select-position">
                                     <select id="select4">
                                         <option value="0" selected>$ USD</option>
-                                        <option value="1">€ EURO</option>
-                                        <option value="2">$ CAD</option>
-                                        <option value="3">₹ INR</option>
-                                        <option value="4">¥ CNY</option>
-                                        <option value="5">৳ BDT</option>
                                     </select>
                                 </div>
                             </li>
@@ -22,11 +17,6 @@
                                 <div class="select-position">
                                     <select id="select5">
                                         <option value="0" selected>English</option>
-                                        <option value="1">Español</option>
-                                        <option value="2">Filipino</option>
-                                        <option value="3">Français</option>
-                                        <option value="4">العربية</option>
-                                        <option value="5">हिन्दी</option>
                                         <option value="6">বাংলা</option>
                                     </select>
                                 </div>
@@ -53,6 +43,10 @@
                         @else
                         @endauth
                         <ul class="user-login">
+                            <li>
+                                <a type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Track
+                                    Order</a>
+                            </li>
                             <li>
                                 <a href="{{ route('login') }}">Sign In</a>
                             </li>
@@ -224,6 +218,41 @@
                     </ul>
                 </div>
 
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Track Your Order</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('track.orders') }}" method="post">
+                        @csrf
+                        <div class="col-lg-12">
+                            <label for="order_number">Enter Order Number</label>
+                            <input id="order_number" type="text"
+                                class="form-control mt-2 @error('order_number') is-invalid @enderror"
+                                name="order_number" value="{{ old('order_number') }}" required
+                                autocomplete="order_number" autofocus>
+
+                            @error('order_number')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">X</button>
+                    <button type="submit" class="btn btn-primary">Track</button>
+                </div>
+                </form>
             </div>
         </div>
     </div>

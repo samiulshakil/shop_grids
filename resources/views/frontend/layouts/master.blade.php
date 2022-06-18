@@ -22,7 +22,12 @@
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/main.css') }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     {{-- <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css"> --}}
-
+    <style>
+        .modal-backdrop.show {
+            opacity: .5;
+            z-index: 9;
+        }
+    </style>
 
 </head>
 
