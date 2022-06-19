@@ -30,8 +30,8 @@ return new class extends Migration
             $table->string('product_tags',100);
             $table->string('product_size',100)->nullable();
             $table->string('product_color',100);
-            $table->string('selling_price');
-            $table->string('discount_price');
+            $table->integer('selling_price');
+            $table->integer('discount_price');
             $table->string('product_thumbnail');
             $table->string('image_one');
             $table->string('image_two');

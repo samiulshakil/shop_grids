@@ -120,15 +120,14 @@
                                 <div class="col-lg-7 col-md-8 col-12">
                                     <div class="product-sorting">
                                         <label for="sorting">Sort by:</label>
-                                        <select class="form-control" id="sorting">
-                                            <option>Popularity</option>
-                                            <option>Low - High Price</option>
-                                            <option>High - Low Price</option>
-                                            <option>Average Rating</option>
-                                            <option>A - Z Order</option>
-                                            <option>Z - A Order</option>
+                                        <select class="form-control" name="sorting" id="sorting">
+                                            <option value="lth">Low - High Price</option>
+                                            <option value="htl">High - Low Price</option>
+                                            <option value="atoz">A - Z Order</option>
+                                            <option value="ztoa">Z - A Order</option>
                                         </select>
-                                        <h3 class="total-show-product">Showing: <span>1 - 12 items</span></h3>
+                                        <h3 class="total-show-product">Showing: <span>1 - {{ $products->count() }}
+                                                items</span></h3>
                                     </div>
                                 </div>
                                 <div class="col-lg-5 col-md-4 col-12">
@@ -165,6 +164,29 @@
                     type: "POST",
                     data: {
                         price_value: price_value,
+                        _token: _token
+                    },
+                    dataType: "JSON",
+                    success: function(data) {
+                        $('#nav-tabContent').html(data.tab_product);
+                    },
+                    error: function(xhr, ajaxOption, thrownError) {
+                        console.log(thrownError + '\r\n' + xhr.statusText + '\r\n' + xhr
+                            .responseText);
+                    }
+                });
+
+            });
+
+            //select box 
+            $('body').on('change', '#sorting', function(e) {
+                e.preventDefault();
+                let sorting = $(this).val();
+                $.ajax({
+                    url: "{{ route('website.product.sorting') }}",
+                    type: "POST",
+                    data: {
+                        sorting: sorting,
                         _token: _token
                     },
                     dataType: "JSON",

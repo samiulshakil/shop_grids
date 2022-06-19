@@ -84,6 +84,27 @@ class WebsiteController extends Controller
 
         return response()->json(['status' => 'success', 'tab_product' => $tab_product]);
     }
+    public function productSorting(Request $request){
+        $sorting = $request->sorting;  
+        if ($sorting == 'lth') {
+            $products = Product::with('category')->where('product_status',1)->orderBy('discount_price','ASC')->get();
+        }elseif ($sorting == 'htl') {
+            $products = Product::with('category')->where('product_status',1)->orderBy('discount_price','DESC')->get();
+        }elseif ($sorting == 'atoz') {
+            $products = Product::with('category')->where('product_status',1)->orderBy('product_name','ASC')->get();
+        }else{
+            $products = Product::with('category')->where('product_status',1)->orderBy('product_name','DESC')->get();
+        }
+        
 
+        $category_products = Category::with('products')->withCount('products')->get();
+        $brands = Brand::with('products')->withCount('products')->get();
 
+        $view = view('frontend.partials.shop_tab_product', compact('products', 'category_products', 'brands'));
+
+        $tab_product = $view->render();
+
+        return response()->json(['status' => 'success', 'tab_product' => $tab_product]);
+    }
+ 
 }

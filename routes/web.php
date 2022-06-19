@@ -58,7 +58,7 @@ Route::get('/product/brand/{id}', [WebsiteController::class, 'brandProduct'])->n
 
 //price range product show
 Route::post('/price/range', [WebsiteController::class, 'priceRange'])->name('website.price.range');
-
+Route::post('/product/sorting', [WebsiteController::class, 'productSorting'])->name('website.product.sorting');
 //track order
 Route::post('/track/order', [WebsiteController::class, 'trackOrders'])->name('track.orders');
 
