@@ -63,6 +63,13 @@ class WebsiteController extends Controller
         return view('frontend.products.shop', compact('brands', 'products', 'category_products'));
     }
 
+    public function subCategoryProduct($id){
+        $products = Product::with('category')->where('product_status',1)->where('subcategory_id', $id)->orderBy('id','DESC')->get();
+        $category_products = Category::with('products')->withCount('products')->get();
+        $brands = Brand::with('products')->withCount('products')->get();
+        return view('frontend.products.shop', compact('brands', 'products', 'category_products'));
+    }
+
     public function brandProduct($id){
         $products = Product::with('category')->where('product_status',1)->where('brand_id', $id)->orderBy('id','DESC')->get();
         $category_products = Category::with('products')->withCount('products')->get();

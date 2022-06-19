@@ -134,12 +134,13 @@
                         <span class="cat-button"><i class="lni lni-menu"></i>All Categories</span>
                         <ul class="sub-category">
                             @forelse (categories() as $category)
-                                <li><a href="!#">{{ $category->category_name }}</a>
+                                <li><a
+                                        href="{{ route('website.product.category', $category->id) }}">{{ $category->category_name }}</a>
 
                                     <ul class="inner-sub-category">
                                         @foreach ($category->subCategories as $subcategory)
                                             <li><a
-                                                    href="product-grids.html">{{ $subcategory->sub_category_name }}</a>
+                                                    href="{{ route('website.product.subcategory', $subcategory->id) }}">{{ $subcategory->sub_category_name }}</a>
                                             </li>
                                         @endforeach
                                     </ul>

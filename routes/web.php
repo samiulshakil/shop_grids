@@ -54,6 +54,7 @@ Route::get('/blog/details/{id}', [WebsiteController::class, 'blogDetails'])->nam
 //shop page search
 Route::post('/shop/search', [WebsiteController::class, 'shopSearch'])->name('website.shop.search');
 Route::get('/product/category/{id}', [WebsiteController::class, 'categoryProduct'])->name('website.product.category');
+Route::get('/product/subcategory/{id}', [WebsiteController::class, 'subCategoryProduct'])->name('website.product.subcategory');
 Route::get('/product/brand/{id}', [WebsiteController::class, 'brandProduct'])->name('website.product.brand');
 
 //price range product show
