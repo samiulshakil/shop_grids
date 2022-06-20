@@ -44,7 +44,7 @@
                         @endauth
                         <ul class="user-login">
                             <li>
-                                <a type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Track
+                                <a type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrops">Track
                                     Order</a>
                             </li>
                             <li>
@@ -224,7 +224,7 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <div class="modal fade" id="staticBackdrops" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

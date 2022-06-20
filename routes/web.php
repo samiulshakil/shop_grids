@@ -26,6 +26,7 @@ use App\Http\Controllers\Backend\SocialMediaController;
 use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\Backend\ContactUsController;
 use App\Http\Controllers\Backend\OrderController;
+use App\Http\Controllers\Backend\ReportController;
 use App\Http\Controllers\Frontend\WebsiteController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\WishlistController;
@@ -277,6 +278,15 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
                 Route::get('/orders/progress', [OrderController::class, 'progress'])->name('progress.orders');
                 Route::get('/orders/delivered', [OrderController::class, 'delivered'])->name('delivered.orders');
                 Route::get('/orders/cancel', [OrderController::class, 'cancel'])->name('cancel.orders');
+
+                //Reports 
+                Route::get('/reports', [ReportController::class, 'report'])->name('reports');
+                Route::get('/reports/today/delivered', [ReportController::class, 'todayDelivered'])->name('today.delivered');
+                Route::get('/reports/this/month', [ReportController::class, 'thisMonth'])->name('this.month');
+                Route::get('/search/reports', [ReportController::class, 'searchReport'])->name('search.reports');
+                Route::post('/search/date/reports', [ReportController::class, 'reportByDate'])->name('search.date.reports');
+                Route::post('/search/month/reports', [ReportController::class, 'reportByMonth'])->name('search.month.reports');
+                Route::post('/search/year/reports', [ReportController::class, 'reportByYear'])->name('search.year.reports');
 
                 //update order status
                 Route::get('/pending/order/{id}', [OrderController::class, 'pendingOrder'])->name('pendingorders');
