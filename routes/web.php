@@ -99,6 +99,10 @@ route::post('stripe/order/complete',[StripeController::class,'store'])->name('st
 //orders
 Route::get('/orders/show', [NormalUserController::class, 'userOrder'])->name('user.order.show');
 
+//Return orders
+Route::get('/orders/return', [NormalUserController::class, 'returnOrder'])->name('user.return.order');
+Route::post('/orders/return/request/{id}', [NormalUserController::class, 'returnOrderRequest'])->name('order.return.request');
+
 //coupon
 route::post('/coupon/apply',[CartController::class,'couponApply'])->name('coupon.apply');
 route::get('/coupon/calculation',[CartController::class,'couponCalcaultion'])->name('coupon.calculation');

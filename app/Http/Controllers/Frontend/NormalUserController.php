@@ -80,4 +80,21 @@ class NormalUserController extends Controller
         $orders = Order::where('user_id', Auth::id())->limit(10)->get();
         return view('frontend.users.show_order', compact('orders'));
     }
+
+    public function returnOrder(){
+        $orders = Order::where('status', 'Delivered')->where('user_id', Auth::id())->limit(10)->get();
+        return view('frontend.users.return_order', compact('orders'));
+    }
+
+    public function returnOrderRequest(Request $request, $id){
+        $order = Order::where('status', 'Delivered')->where('user_id', Auth::id())->first();
+
+        $order->update([
+            'return_order' => 1,
+            'return_reason' => $request->return_reason,
+        ]);
+
+        Toastr::success('Successfully Order Return Request', '', ["positionClass" => "toast-top-right"]);
+        return redirect()->route('user.return.order');
+    }
 }

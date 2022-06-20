@@ -15,6 +15,10 @@
         class="list-group-item list-group-item-action {{ Route::is('user.order.show') ? 'active' : '' }}">
         Orders
     </a>
+    <a href="{{ route('user.return.order') }}"
+        class="list-group-item list-group-item-action {{ Route::is('user.return.order') ? 'active' : '' }}">
+        Order Return
+    </a>
     <a href="{{ route('wish.show') }}"
         class="list-group-item list-group-item-action {{ Route::is('wish.show') ? 'active' : '' }}">
         Wishlists
