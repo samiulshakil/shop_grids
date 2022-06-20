@@ -35,7 +35,7 @@
                     <i class="pe-7s-gift icon-gradient bg-mean-fruit">
                     </i>
                 </div>
-                <div>Orders</div>
+                <div>Reports</div>
             </div>
         </div>
     </div>

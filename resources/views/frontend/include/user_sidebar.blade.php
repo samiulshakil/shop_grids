@@ -11,8 +11,8 @@
         class="list-group-item list-group-item-action {{ Route::is('user.password.edit') ? 'active' : '' }}">
         Change Password
     </a>
-    <a href="{{ route('orders.show') }}"
-        class="list-group-item list-group-item-action {{ Route::is('orders.show') ? 'active' : '' }}">
+    <a href="{{ route('user.order.show') }}"
+        class="list-group-item list-group-item-action {{ Route::is('user.order.show') ? 'active' : '' }}">
         Orders
     </a>
     <a href="{{ route('wish.show') }}"

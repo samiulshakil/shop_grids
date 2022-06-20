@@ -77,6 +77,7 @@ class NormalUserController extends Controller
     }
 
     public function userOrder(){
-
+        $orders = Order::where('user_id', Auth::id())->limit(10)->get();
+        return view('frontend.users.show_order', compact('orders'));
     }
 }
