@@ -87,7 +87,7 @@ class NormalUserController extends Controller
     }
 
     public function returnOrderRequest(Request $request, $id){
-        $order = Order::where('status', 'Delivered')->where('user_id', Auth::id())->first();
+        $order = Order::where('id', $id)->where('status', 'Delivered')->where('user_id', Auth::id())->first();
 
         $order->update([
             'return_order' => 1,

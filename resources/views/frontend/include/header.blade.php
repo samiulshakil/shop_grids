@@ -40,20 +40,36 @@
                                 <i class="lni lni-user"></i>
                                 {{ Auth::user()->name }}
                             </div>
+
+                            <ul class="user-login">
+                                <li>
+                                    <a type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrops">Track
+                                        Order</a>
+                                </li>
+                                <li>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <a href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                        this.closest('form').submit();"
+                                            tabindex="0" class="dropdown-item">Log Out</a>
+                                    </form>
+                                </li>
+                            </ul>
                         @else
+                            <ul class="user-login">
+                                <li>
+                                    <a type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrops">Track
+                                        Order</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('login') }}">Sign In</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('register') }}">Register</a>
+                                </li>
+                            </ul>
                         @endauth
-                        <ul class="user-login">
-                            <li>
-                                <a type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrops">Track
-                                    Order</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('login') }}">Sign In</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('register') }}">Register</a>
-                            </li>
-                        </ul>
                     </div>
                 </div>
             </div>

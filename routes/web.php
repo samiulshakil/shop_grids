@@ -27,6 +27,7 @@ use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\Backend\ContactUsController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\ReportController;
+use App\Http\Controllers\Backend\ReturnController;
 use App\Http\Controllers\Frontend\WebsiteController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\WishlistController;
@@ -282,6 +283,11 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
                 Route::get('/orders/progress', [OrderController::class, 'progress'])->name('progress.orders');
                 Route::get('/orders/delivered', [OrderController::class, 'delivered'])->name('delivered.orders');
                 Route::get('/orders/cancel', [OrderController::class, 'cancel'])->name('cancel.orders');
+
+                //return order
+                Route::get('/orders/return', [ReturnController::class, 'returnOrder'])->name('return.orders');
+                Route::get('/orders/return/approved', [ReturnController::class, 'approvedOrder'])->name('return.orders.approved');
+                Route::get('/orders/return/{id}', [ReturnController::class, 'returnOrderApprove'])->name('return.orders.approve');
 
                 //Reports 
                 Route::get('/reports', [ReportController::class, 'report'])->name('reports');
