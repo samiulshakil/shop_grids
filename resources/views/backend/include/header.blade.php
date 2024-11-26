@@ -56,8 +56,7 @@
                     <div class="widget-content-wrapper">
                         <div class="widget-content-left">
                             <div class="btn-group">
-                                <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                    class="p-0 btn">
+                                <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
                                     <img width="40" height="40" class="rounded-circle"
                                         src="{{ Auth::user()->getFirstMediaUrl('avatar') }}" alt="">
                                 </a>
@@ -68,10 +67,12 @@
                                     <a href="{{ route('admin.password.edit') }}" tabindex="0"
                                         class="dropdown-item">Change Password</a>
                                     <a href="" tabindex="0" class="dropdown-item">Settings</a>
-                                    <form method="POST" action="{{ route('logout') }}">
+                                    <form method="POST" action="{{ route('admin.logout') }}">
                                         @csrf
-                                        <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                        this.closest('form').submit();" tabindex="0" class="dropdown-item">Log Out</a>
+                                        <a href="{{ route('admin.logout') }}"
+                                            onclick="event.preventDefault();
+                                        this.closest('form').submit();"
+                                            tabindex="0" class="dropdown-item">Log Out</a>
                                     </form>
                                 </div>
                             </div>

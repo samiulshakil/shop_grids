@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Backend\Auth\LoginController as AdminLoginController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -143,6 +144,12 @@ Route::get('/login/{provider}/callback', [LoginController::class, 'handleProvide
 
 
 // Backend Routes Start
+
+    Route::get('admin/login', [AdminLoginController::class, 'custom_login_page'])->name('admin.login');
+    Route::post('admin/store-login', [AdminLoginController::class, 'store_login'])->name('admin.store-login');
+    Route::post('admin/logout', [AdminLoginController::class, 'admin_logout'])->name('admin.logout');
+
+
 Route::middleware(['auth', 'verified', 'isAdmin'])->group(function () {
     Route::prefix('admin')->group(function () {
             Route::name('admin.')->group(function () {

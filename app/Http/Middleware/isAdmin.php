@@ -17,9 +17,9 @@ class isAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::user()->role_id != 1){
-            return redirect()->route('user.dashboard');
+        if(Auth::user()->role_id == 1){
+            return $next($request);
         }
-        return $next($request);
+        return redirect()->route('admin.login');
     }
 }
