@@ -209,5 +209,15 @@ class MenuSeeder extends Seeder
             'icon_class' => 'pe-7s-paper-plane',
             'url' => "/admin/reports", 
         ]);
+
+        MenuItem::updateOrCreate([
+            'menu_id' => $menu->id, 
+            'type' => 'item', 
+            'parent_id' => null, 
+            'order' => 21, 
+            'title' => 'Divisions', 
+            'icon_class' => 'pe-7s-box1',
+            'url' => "/admin/divisions", 
+        ]);
     }
 }

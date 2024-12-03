@@ -20,6 +20,7 @@ use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
+use App\Http\Controllers\Backend\DivisionController;
 use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\CouponController;
@@ -258,6 +259,8 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
                 Route::resource('categories', CategoryController::class);
                 Route::resource('subcategories', SubCategoryController::class);
                 Route::resource('blogs', BlogController::class);
+                Route::resource('divisions', DivisionController::class);
+
 
                 //message route
                 Route::get('/messages', [ContactUsController::class, 'showMessage'])->name('message.show');

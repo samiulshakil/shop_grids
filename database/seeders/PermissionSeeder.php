@@ -377,6 +377,33 @@ class PermissionSeeder extends Seeder
                     'name' => 'Delete Blog',
                     'slug' => 'admin.blogs.destroy',
                 ]);
+
+                //Division Management
+                $moduleDivisions = Module::updateOrCreate(['name'=> 'Division Management']);
+
+                Permission::updateOrCreate([
+                    'module_id' => $moduleDivisions->id,
+                    'name' => 'Access Division',
+                    'slug' => 'admin.divisions.index',
+                ]);
+        
+                Permission::updateOrCreate([
+                    'module_id' => $moduleDivisions->id,
+                    'name' => 'Create Division',
+                    'slug' => 'admin.divisions.create',
+                ]);
+        
+                Permission::updateOrCreate([
+                    'module_id' => $moduleDivisions->id,
+                    'name' => 'Edit Division',
+                    'slug' => 'admin.divisions.edit',
+                ]);
+        
+                Permission::updateOrCreate([
+                    'module_id' => $moduleDivisions->id,
+                    'name' => 'Delete Division',
+                    'slug' => 'admin.divisions.destroy',
+                ]);
         
         
 
