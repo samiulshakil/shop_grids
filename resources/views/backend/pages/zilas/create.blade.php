@@ -2,15 +2,6 @@
 
 @section('title', 'Division')
 
-@push('css')
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css" rel="stylesheet" />
-    <style>
-        .dropify-wrapper .dropify-message p {
-            font-size: initial;
-        }
-    </style>
-@endpush
-
 @section('content')
     <div class="app-page-title">
         <div class="page-title-wrapper">
@@ -19,14 +10,14 @@
                     <i class="pe-7s-box1 icon-gradient bg-mean-fruit">
                     </i>
                 </div>
-                <div>Divisions
+                <div>Zilas
 
                 </div>
             </div>
             <div class="page-title-actions">
-                <a href="{{ route('admin.divisions.index') }}" class="mr-3 btn btn-primary">
+                <a href="{{ route('admin.zilas.index') }}" class="mr-3 btn btn-primary">
                     <i class="fas fa-plus-circle"></i>
-                    All Divisions
+                    All Zilas
                 </a>
             </div>
         </div>
@@ -34,16 +25,37 @@
 
     <div class="row">
         <div class="col-12">
-            <form action="{{ route('admin.divisions.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('admin.zilas.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-md-12">
                         <div class="main-card mb-3 card">
                             <div class="card-body">
-                                <h5 class="card-title text-center">Division Info</h5>
+                                <h5 class="card-title text-center">Zila Info</h5>
+
                                 <div class="form-group">
-                                    <label for="name">Division Name</label>
-                                    <input type="text" id="name" name="name" placeholder="Divsion Name"
+                                    <label for="exampleFormControlSelect1">Select Division</label>
+                                    <select
+                                        class="js-example-basic-single form-control @error('division_id') is-invalid @enderror"
+                                        name="division_id" id="exampleFormControlSelect1">
+                                        @forelse ($divisions as $division)
+                                            <option value="{{ $division->id }}">{{ $division->name }}</option>
+                                        @empty
+                                            <p>No division found.</p>
+                                        @endforelse
+                                    </select>
+                                </div>
+                                @error('division_id')
+                                    <p>
+                                        <span class="text-danger" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    </p>
+                                @enderror
+
+                                <div class="form-group">
+                                    <label for="name">Zila Name</label>
+                                    <input type="text" id="name" name="name" placeholder="Zila Name"
                                         class="form-control 
                               @error('name') is-invalid @enderror"
                                         autofocus required>

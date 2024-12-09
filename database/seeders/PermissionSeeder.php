@@ -404,7 +404,34 @@ class PermissionSeeder extends Seeder
                     'name' => 'Delete Division',
                     'slug' => 'admin.divisions.destroy',
                 ]);
+
+                //Zila Management
+                $moduleZilas = Module::updateOrCreate(['name'=> 'Zila Management']);
+
+                Permission::updateOrCreate([
+                    'module_id' => $moduleZilas->id,
+                    'name' => 'Access Zila',
+                    'slug' => 'admin.zilas.index',
+                ]);
         
+                Permission::updateOrCreate([
+                    'module_id' => $moduleZilas->id,
+                    'name' => 'Create Zila',
+                    'slug' => 'admin.zilas.create',
+                ]);
+        
+                Permission::updateOrCreate([
+                    'module_id' => $moduleZilas->id,
+                    'name' => 'Edit Zila',
+                    'slug' => 'admin.zilas.edit',
+                ]);
+        
+                Permission::updateOrCreate([
+                    'module_id' => $moduleZilas->id,
+                    'name' => 'Delete Zila',
+                    'slug' => 'admin.zilas.destroy',
+                ]);
+
         
 
 

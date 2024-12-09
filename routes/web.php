@@ -21,6 +21,7 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\DivisionController;
+use App\Http\Controllers\Backend\ZilaController;
 use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\CouponController;
@@ -260,6 +261,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
                 Route::resource('subcategories', SubCategoryController::class);
                 Route::resource('blogs', BlogController::class);
                 Route::resource('divisions', DivisionController::class);
+                Route::resource('zilas', ZilaController::class);
 
 
                 //message route

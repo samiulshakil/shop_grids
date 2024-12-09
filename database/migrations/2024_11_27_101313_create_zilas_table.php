@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('zilas', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('division_id');
+            $table->string('name');
+            $table->string('slug')->unique();
+            $table->string('creator')->default('Admin');
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }

@@ -219,5 +219,15 @@ class MenuSeeder extends Seeder
             'icon_class' => 'pe-7s-box1',
             'url' => "/admin/divisions", 
         ]);
+
+        MenuItem::updateOrCreate([
+            'menu_id' => $menu->id, 
+            'type' => 'item', 
+            'parent_id' => null, 
+            'order' => 22, 
+            'title' => 'Zilas', 
+            'icon_class' => 'pe-7s-box1',
+            'url' => "/admin/zilas", 
+        ]);
     }
 }
