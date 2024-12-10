@@ -62,7 +62,7 @@ class UpazilaController extends Controller
         $upazila->creator = Auth::user()->role->name;
         $upazila->save();
 
-        Toastr::success('Successfully Zila Created', '', ["positionClass" => "toast-top-right"]);
+        Toastr::success('Successfully Upazila Created', '', ["positionClass" => "toast-top-right"]);
         return redirect()->route('admin.upazilas.index');
     }
 
@@ -117,7 +117,7 @@ class UpazilaController extends Controller
         $upazila->creator = Auth::user()->role->name;
         $upazila->save();
 
-        Toastr::success('Successfully Zila Updated', '', ["positionClass" => "toast-top-right"]);
+        Toastr::success('Successfully Upazila Updated', '', ["positionClass" => "toast-top-right"]);
         return redirect()->route('admin.upazilas.index');
     }
 
@@ -133,7 +133,7 @@ class UpazilaController extends Controller
         $upazila = Upazila::findOrFail($id);
         if ($upazila) {
             $upazila->delete();
-            Toastr::success('Successfully Zila Deleted', '', ["positionClass" => "toast-top-right"]);
+            Toastr::success('Successfully Upazila Deleted', '', ["positionClass" => "toast-top-right"]);
         }else{
             Toastr::warning('No Row Found on database', '', ["positionClass" => "toast-top-right"]);
         }

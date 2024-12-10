@@ -271,6 +271,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
 
                 Route::post('zila/list', [ZilaController::class, 'zilaList'])->name('zila.list');
                 Route::post('upazila/list', [UpazilaController::class, 'upazilaList'])->name('upazila.list');
+                Route::post('union/list', [UnionController::class, 'unionList'])->name('union.list');
 
 
 

@@ -146,4 +146,20 @@ class UnionController extends Controller
         }
         return redirect()->route('admin.unions.index');
     }
+
+    public function unionList(Request $request)
+    {
+        if ($request->ajax()) {
+            if ($request->upazila_id) {
+                $output = '<option value="">Select Please</option>';
+                $upazilas = Union::where('upazila_id', $request->upazila_id)->orderBy('id', 'asc')->get();
+                if (!$upazilas->isEmpty()) {
+                    foreach ($upazilas as $value) {
+                        $output .= '<option value="' . $value->id . '">' . $value->name . '</option>';
+                    }
+                }
+                return response()->json($output);
+            }
+        }
+    }
 }
