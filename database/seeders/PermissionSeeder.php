@@ -432,6 +432,88 @@ class PermissionSeeder extends Seeder
                     'slug' => 'admin.zilas.destroy',
                 ]);
 
+                //Upazila Management
+                $moduleUpazilas = Module::updateOrCreate(['name'=> 'Upazila Management']);
+
+                Permission::updateOrCreate([
+                    'module_id' => $moduleUpazilas->id,
+                    'name' => 'Access Upazila',
+                    'slug' => 'admin.upazilas.index',
+                ]);
+        
+                Permission::updateOrCreate([
+                    'module_id' => $moduleUpazilas->id,
+                    'name' => 'Create Upazila',
+                    'slug' => 'admin.upazilas.create',
+                ]);
+        
+                Permission::updateOrCreate([
+                    'module_id' => $moduleUpazilas->id,
+                    'name' => 'Edit Upazila',
+                    'slug' => 'admin.upazilas.edit',
+                ]);
+        
+                Permission::updateOrCreate([
+                    'module_id' => $moduleUpazilas->id,
+                    'name' => 'Delete Upazila',
+                    'slug' => 'admin.upazilas.destroy',
+                ]);
+
+                //Union Management
+                $moduleUnion = Module::updateOrCreate(['name'=> 'Union Management']);
+
+                Permission::updateOrCreate([
+                    'module_id' => $moduleUnion->id,
+                    'name' => 'Access Union',
+                    'slug' => 'admin.unions.index',
+                ]);
+        
+                Permission::updateOrCreate([
+                    'module_id' => $moduleUnion->id,
+                    'name' => 'Create Union',
+                    'slug' => 'admin.unions.create',
+                ]);
+        
+                Permission::updateOrCreate([
+                    'module_id' => $moduleUnion->id,
+                    'name' => 'Edit Union',
+                    'slug' => 'admin.unions.edit',
+                ]);
+        
+                Permission::updateOrCreate([
+                    'module_id' => $moduleUnion->id,
+                    'name' => 'Delete Union',
+                    'slug' => 'admin.unions.destroy',
+                ]);
+
+
+            //Wards Management
+                $moduleWard = Module::updateOrCreate(['name'=> 'Ward Management']);
+
+                Permission::updateOrCreate([
+                    'module_id' => $moduleWard->id,
+                    'name' => 'Access Ward',
+                    'slug' => 'admin.wards.index',
+                ]);
+        
+                Permission::updateOrCreate([
+                    'module_id' => $moduleWard->id,
+                    'name' => 'Create Ward',
+                    'slug' => 'admin.wards.create',
+                ]);
+        
+                Permission::updateOrCreate([
+                    'module_id' => $moduleWard->id,
+                    'name' => 'Edit Ward',
+                    'slug' => 'admin.wards.edit',
+                ]);
+        
+                Permission::updateOrCreate([
+                    'module_id' => $moduleWard->id,
+                    'name' => 'Delete Ward',
+                    'slug' => 'admin.wards.destroy',
+                ]);
+        
         
 
 

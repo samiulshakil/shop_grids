@@ -1,6 +1,6 @@
 @extends('backend.layouts.master')
 
-@section('title', 'Zila')
+@section('title', 'Upazila')
 
 @push('css')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
@@ -35,14 +35,14 @@
                     <i class="pe-7s-box1 icon-gradient bg-mean-fruit">
                     </i>
                 </div>
-                <div>Zila
+                <div>Upazila
 
                 </div>
             </div>
             <div class="page-title-actions">
-                <a href="{{ route('admin.zilas.create') }}" class="mr-3 btn btn-primary">
+                <a href="{{ route('admin.upazilas.create') }}" class="mr-3 btn btn-primary">
                     <i class="fas fa-plus-circle"></i>
-                    Create Zila
+                    Create Upazila
                 </a>
             </div>
         </div>
@@ -58,16 +58,18 @@
                                 <th class="text-center">#</th>
                                 <th class="text-center">Division Name</th>
                                 <th class="text-center">Zila Name</th>
+                                <th class="text-center">Upazila Name</th>
                                 <th class="text-center">Creator</th>
                                 <th class="text-center">Status</th>
                                 <th class="text-center">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($zilas as $key => $zila)
+                            @foreach ($upazilas as $key => $zila)
                                 <tr>
                                     <td class="text-center text-muted">#{{ $key + 1 }}</td>
                                     <td class="text-center">{{ $zila?->division?->name }}</td>
+                                    <td class="text-center">{{ $zila?->zila?->name }}</td>
                                     <td class="text-center">{{ $zila->name }}</td>
                                     <td class="text-center">{{ $zila->creator }}</td>
                                     <td class="text-center">
@@ -78,7 +80,7 @@
                                         @endif
                                     </td>
                                     <td class="text-center">
-                                        <a href="{{ route('admin.zilas.edit', $zila->id) }}" class="btn btn-info btn-sm">
+                                        <a href="{{ route('admin.upazilas.edit', $zila->id) }}" class="btn btn-info btn-sm">
                                             <i class="fas fa-edit"></i>
                                             <span>Edit</span>
                                         </a>
@@ -88,7 +90,7 @@
                                             <span>Delete</span>
                                         </button>
                                         <form id="delete-form-{{ $zila->id }}" method="post"
-                                            action="{{ route('admin.zilas.destroy', $zila->id) }}">
+                                            action="{{ route('admin.upazilas.destroy', $zila->id) }}">
                                             @csrf
                                             @method('DELETE')
                                         </form>

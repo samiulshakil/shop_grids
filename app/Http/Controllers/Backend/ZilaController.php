@@ -132,4 +132,20 @@ class ZilaController extends Controller
         }
         return redirect()->route('admin.zilas.index');
     }
+
+    public function zilaList(Request $request)
+    {
+        if ($request->ajax()) {
+            if ($request->division_id) {
+                $output = '<option value="">Select Please</option>';
+                $zilas = Zila::where('division_id', $request->division_id)->orderBy('id', 'asc')->get();
+                if (!$zilas->isEmpty()) {
+                    foreach ($zilas as $value) {
+                        $output .= '<option value="' . $value->id . '">' . $value->name . '</option>';
+                    }
+                }
+                return response()->json($output);
+            }
+        }
+    }
 }

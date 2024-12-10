@@ -229,5 +229,35 @@ class MenuSeeder extends Seeder
             'icon_class' => 'pe-7s-box1',
             'url' => "/admin/zilas", 
         ]);
+
+        MenuItem::updateOrCreate([
+            'menu_id' => $menu->id, 
+            'type' => 'item', 
+            'parent_id' => null, 
+            'order' => 23, 
+            'title' => 'Upazila', 
+            'icon_class' => 'pe-7s-box1',
+            'url' => "/admin/upazilas", 
+        ]);
+
+        MenuItem::updateOrCreate([
+            'menu_id' => $menu->id, 
+            'type' => 'item', 
+            'parent_id' => null, 
+            'order' => 24, 
+            'title' => 'Union', 
+            'icon_class' => 'pe-7s-box1',
+            'url' => "/admin/unions", 
+        ]);
+
+        MenuItem::updateOrCreate([
+            'menu_id' => $menu->id, 
+            'type' => 'item', 
+            'parent_id' => null, 
+            'order' => 25, 
+            'title' => 'Word', 
+            'icon_class' => 'pe-7s-box1',
+            'url' => "/admin/words", 
+        ]);
     }
 }

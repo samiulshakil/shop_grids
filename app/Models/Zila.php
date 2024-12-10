@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Zila extends Model
 {
     use HasFactory;
+
+    public function division()
+    {
+        return $this->belongsTo(Division::class);
+    }
 }

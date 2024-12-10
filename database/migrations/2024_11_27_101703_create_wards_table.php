@@ -13,10 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('upazilas', function (Blueprint $table) {
+        Schema::create('wards', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('division_id');
             $table->unsignedBigInteger('zila_id');
+            $table->unsignedBigInteger('upazila_id');
+            $table->unsignedBigInteger('union_id');
             $table->string('name');
             $table->string('slug')->unique();
             $table->string('creator')->default('Admin');
@@ -32,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('upazilas');
+        Schema::dropIfExists('wards');
     }
 };
