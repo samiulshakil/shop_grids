@@ -270,6 +270,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
                 Route::resource('wards', WardController::class);
 
                 Route::post('zila/list', [ZilaController::class, 'zilaList'])->name('zila.list');
+                Route::post('upazila/list', [UpazilaController::class, 'upazilaList'])->name('upazila.list');
 
 
 

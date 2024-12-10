@@ -139,4 +139,20 @@ class UpazilaController extends Controller
         }
         return redirect()->route('admin.upazilas.index');
     }
+
+    public function upazilaList(Request $request)
+    {
+        if ($request->ajax()) {
+            if ($request->zila_id) {
+                $output = '<option value="">Select Please</option>';
+                $upazilas = Upazila::where('zila_id', $request->zila_id)->orderBy('id', 'asc')->get();
+                if (!$upazilas->isEmpty()) {
+                    foreach ($upazilas as $value) {
+                        $output .= '<option value="' . $value->id . '">' . $value->name . '</option>';
+                    }
+                }
+                return response()->json($output);
+            }
+        }
+    }
 }

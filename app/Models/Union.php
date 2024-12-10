@@ -8,4 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Union extends Model
 {
     use HasFactory;
+
+    public function division()
+    {
+        return $this->belongsTo(Division::class);
+    }
+
+    public function zila()
+    {
+        return $this->belongsTo(Zila::class);
+    }
+
+    public function upazila()
+    {
+        return $this->belongsTo(Upazila::class);
+    }
 }

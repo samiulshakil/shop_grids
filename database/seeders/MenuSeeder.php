@@ -255,9 +255,9 @@ class MenuSeeder extends Seeder
             'type' => 'item', 
             'parent_id' => null, 
             'order' => 25, 
-            'title' => 'Word', 
+            'title' => 'Ward', 
             'icon_class' => 'pe-7s-box1',
-            'url' => "/admin/words", 
+            'url' => "/admin/wards", 
         ]);
     }
 }
